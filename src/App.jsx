@@ -3,15 +3,17 @@ import "./App.css";
 import Cabecera from "./Cabecera.jsx";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
+import LogIn from "./pages/LogIn.jsx";
+import Explora from "./pages/Explora.jsx";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/iniciarSesion" element={<Home />} />
+        <Route path="/logIn" element={<LogIn />} />
         <Route path="/registro" element={<Home />} />
-        <Route path="/explora" element={<Home />} />
+        <Route path="/explora" element={<Explora />} />
         <Route path="/anuncio" element={<Home />} />
 
         <Route path="/panelControl" element={<Home />}>

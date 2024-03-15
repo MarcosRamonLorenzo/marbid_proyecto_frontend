@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -8,9 +8,19 @@ import {
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+  SignUpButton,
+  useUser,
+} from "@clerk/clerk-react";
 
 const Cabecera = () => {
+  const { isLoaded, user } = useUser();
+
   return (
     <Navbar isBordered>
       <NavbarContent className="sm:hidden" justify="start">
@@ -36,22 +46,31 @@ const Cabecera = () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/" className="text-md">
+          <Link to="/explora" className="text-md">
             Explora
           </Link>
         </NavbarItem>
-        <NavbarItem className="hidden lg:flex">
-          <Link to="/" className="text-md">
-            Log In
-          </Link>
+        {isLoaded && user && (
+          <NavbarItem>
+            <Link to="/" color="foreground" className="text-md">
+              Panel de Control
+            </Link>
+          </NavbarItem>
+        )}
+        <NavbarItem className="text-md">
+          <div>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+          </div>
         </NavbarItem>
         <NavbarItem>
-          <Link
-            to="/"
-            className="bg-blue-400 text-white px-5 py-2 rounded text-xl"
-          >
-            Sign Up
-          </Link>
+          <SignedOut>
+            <SignUpButton className="inline-block py-1 px-6 rounded-l-xl rounded-t-xl bg-[#7747FF] hover:bg-white hover:text-[#7747FF] focus:text-[#7747FF] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200" />
+          </SignedOut>
         </NavbarItem>
       </NavbarContent>
 
@@ -61,10 +80,19 @@ const Cabecera = () => {
             <Link className="w-full">Inicio</Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className="w-full">Explora</Link>
+            <Link to="/explora" className="w-full">
+              Explora
+            </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className="w-full">Log In</Link>
+            <div>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
+            </div>
           </NavbarItem>
         </NavbarMenuItem>
       </NavbarMenu>
