@@ -27,22 +27,22 @@ const Cabecera = () => {
         <NavbarBrand>
           <img src="\src\assets\marbid.svg" className="h-10" />
         </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent justify="end" className="flex gap-8">
         <NavbarItem>
-          <Link to="/" color="foreground" className="text-xl">
+          <Link to="/" color="foreground" className="text-md">
             Inicio
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/" className="text-xl">
+          <Link to="/" className="text-md">
             Explora
           </Link>
         </NavbarItem>
-      </NavbarContent>
-
-      <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link to="/" className="text-xl">
-            Login
+          <Link to="/" className="text-md">
+            Log In
           </Link>
         </NavbarItem>
         <NavbarItem>
@@ -58,13 +58,13 @@ const Cabecera = () => {
       <NavbarMenu>
         <NavbarMenuItem>
           <NavbarItem>
-            <Link className="w-full">Home</Link>
+            <Link className="w-full">Inicio</Link>
           </NavbarItem>
           <NavbarItem>
             <Link className="w-full">Explora</Link>
           </NavbarItem>
           <NavbarItem>
-            <Link className="w-full">Inicio Sesión</Link>
+            <Link className="w-full">Log In</Link>
           </NavbarItem>
         </NavbarMenuItem>
       </NavbarMenu>

@@ -19,7 +19,7 @@ const Home = () => {
             autoPlay={true}
             muted
             loop
-            className=" h-80 rounded-tr-xl rounded-bl-xl"
+            className=" md:h-80 h-60 rounded-tr-xl rounded-bl-5xl"
           >
             <source
               src="https://hpagogvjlwigezymiejy.supabase.co/storage/v1/object/sign/Videos-Inicio/VideoInicio2.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWaWRlb3MtSW5pY2lvL1ZpZGVvSW5pY2lvMi5tcDQiLCJpYXQiOjE3MDgzNTkyNjUsImV4cCI6MTczOTg5NTI2NX0.VixkQFOyFEuCTku8XU9D-4szwstSk7ooMP_4Pmikc7k&t=2024-02-19T16%3A14%3A25.623Z"
@@ -36,7 +36,7 @@ const Home = () => {
             autoPlay={true}
             muted
             loop
-            className="rounded-tr-xl rounded-bl-xl h-80"
+            className="rounded-tr-xl rounded-bl-xl md:h-80 h-60"
           >
             <source
               src="https://hpagogvjlwigezymiejy.supabase.co/storage/v1/object/sign/Videos-Inicio/VideoInicio1.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWaWRlb3MtSW5pY2lvL1ZpZGVvSW5pY2lvMS5tcDQiLCJpYXQiOjE3MDgzNTkyNDgsImV4cCI6MTczOTg5NTI0OH0.cTbxugZO42xN9N9Pq6wnavszVuGFwgfAqylwYJG6zko&t=2024-02-19T16%3A14%3A08.422Z"
@@ -47,10 +47,10 @@ const Home = () => {
       </section>
       <section className="flex flex-col items-center gap-10 mt-20 justify-center mx-5">
         <h2 className="text-2xl">Collaborators</h2>
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row md:gap-20 gap-12  ">
           {/* Imagen AWS. */}
           <svg
-            className="h-10"
+            className="md:h-10 h-6 md:w-10 w-6"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
@@ -69,7 +69,7 @@ const Home = () => {
           </svg>
           {/* Imagen Meta. */}
           <svg
-            className="h-10"
+            className="md:h-10 h-6 md:w-10 w-6"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
@@ -122,7 +122,7 @@ const Home = () => {
           </svg>
           {/* Imagen gitHub. */}
           <svg
-            className="h-10"
+            className="md:h-10 h-6 md:w-10 w-6"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
@@ -161,7 +161,7 @@ const Home = () => {
 
           {/* Imagen Google. */}
           <svg
-            className="h-10"
+            className="md:h-10 h-6 md:w-10 w-6"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
@@ -188,7 +188,7 @@ const Home = () => {
           </svg>
           {/* Imagen Microsoft. */}
           <svg
-            className="h-10"
+            className="md:h-10 h-6 md:w-10 w-6"
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
@@ -458,13 +458,13 @@ const Home = () => {
         </div>
       </section>
 
-      <footer className="bg-gray-800 flex flex-col justify-center items-center py-4 text-white ">
-        <div className="flex gap-20 my-5">
+      <footer className="bg-gray-800 flex flex-col justify-center items-start md:items-center py-4 text-white pl-5 w-100 ">
+        <div className="flex flex-col md:flex-row md:gap-20  gap-5 justify-start items-start my-5">
           <img
             src="/src/assets/marbid.svg"
             loading="lazy"
             alt=""
-            className="mx-auto h-14"
+            className=" md:h-14 h-10"
           />
           <div className="mb-4">
             <h3 className="font-bold mb-2">Freelancers</h3>
