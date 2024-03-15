@@ -9,6 +9,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
+import { Instagram, Facebook } from "lucide-react";
 const Home = () => {
   return (
     <div>
@@ -332,7 +333,7 @@ const Home = () => {
           </Card>
         </div>
       </section>
-      <section className="mt-20 flex flex-col justify-center items-center gap-5 my-2">
+      <section className="mt-20 flex flex-col justify-center items-center gap-5 my-10">
         <h2 className="text-2xl">Ofertas más buscadas</h2>
         <div className="max-w-[1500px] w-[100%] gap-3 grid grid-cols-12  px-8">
           <Card className="col-span-12 sm:col-span-4 h-[300px]">
@@ -467,7 +468,7 @@ const Home = () => {
             className=" md:h-14 h-10"
           />
           <div className="mb-4">
-            <h3 className="font-bold mb-2">Freelancers</h3>
+            <h3 className="font-bold text-xl mb-2">Freelancers</h3>
             <a href="#" className="block hover:text-pink-500">
               Categorías
             </a>
@@ -479,7 +480,7 @@ const Home = () => {
             </a>
           </div>
           <div className="mb-4">
-            <h3 className="font-bold mb-2">Terminos</h3>
+            <h3 className="font-bold text-xl mb-2">Terminos</h3>
             <a href="#" className="block hover:text-pink-500">
               Política de privacidad
             </a>
@@ -491,31 +492,15 @@ const Home = () => {
             </a>
           </div>
           <div className="mb-4">
-            <h3 className="font-bold mb-2">Redes Sociales</h3>
-            <div className="flex justify-center space-x-4">
-              <a href="#">
-                <img
-                  src="src\assets\footer-discord.svg"
-                  alt=""
-                  className="w-6 h-6"
-                />
+            <h3 className="font-bold text-xl mb-2">Redes Sociales</h3>
+            <div className="flex justify-start space-x-4">
+              <a href="#" target="_blank">
+                {" "}
+                <Instagram />
               </a>
               <a href="#" target="_blank">
-                <img
-                  src="src\assets\footer-facebook.svg"
-                  alt=""
-                  className="w-6 h-6"
-                />
-              </a>
-              <a href="#">
-                <img
-                  src="src\assets\footer-insta.svg"
-                  alt=""
-                  className="w-6 h-6"
-                />
-              </a>
-              <a href="#">
-                <img src="src\assets\footer-x.svg" alt="" className="w-6 h-6" />
+                {" "}
+                <Facebook />
               </a>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import { MoreVertical, ChevronLast, ChevronFirst } from "lucide-react";
-import { useContext, createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { UserButton, useUser } from "@clerk/clerk-react";
 const SidebarContext = createContext();
 
@@ -40,11 +40,11 @@ const Sidebar = ({ children }) => {
           >
             <div className="leading-4">
               <h4 className="font-semibold">
-                {/*  {user.externalAccounts[0].firstName} */}
+                {user && user.firstName}
+                {/* Accediendo al nombre del usuario */}
               </h4>
-              {console.log(user)}
               <span className="text-xs text-gray-600">
-                {user.primaryEmailAddress.emailAddress}
+                {user && user.email}
               </span>
             </div>
             <MoreVertical size={20} />

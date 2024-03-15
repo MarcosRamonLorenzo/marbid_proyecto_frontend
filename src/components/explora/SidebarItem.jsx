@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { SidebarContext } from "./Sidebar.jsx";
-const SidebarItem = ({ icon, text, active, alert }) => {
+import { Link } from "react-router-dom";
+const SidebarItem = ({ icon, text, active, alert, path }) => {
   const { expanded } = useContext(SidebarContext);
 
   return (
-    <li
+    <Link
+      to={path}
       className={`
     relative flex items-center py-2 px-3 my-1
     font-medium rounded-md cursor-pointer
@@ -44,7 +46,7 @@ const SidebarItem = ({ icon, text, active, alert }) => {
           {text}
         </div>
       )}
-    </li>
+    </Link>
   );
 };
 

@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import LogIn from "./pages/LogIn.jsx";
 import Explora from "./pages/Explora.jsx";
+import PanelControl from "./pages/PanelControl.jsx";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/explora" element={<Explora />} />
         <Route path="/anuncio" element={<Home />} />
 
-        <Route path="/panelControl" element={<Home />}>
+        <Route path="/panelControl" element={<PanelControl />}>
           <Route path="creacionAnuncio" element={<Home />} />
           <Route path="favoritos" element={<Home />} />
           <Route path="ofertasCreadas" element={<Home />} />

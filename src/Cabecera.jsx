@@ -52,7 +52,7 @@ const Cabecera = () => {
         </NavbarItem>
         {isLoaded && user && (
           <NavbarItem>
-            <Link to="/" color="foreground" className="text-md">
+            <Link to="/panelControl" color="foreground" className="text-md">
               Panel de Control
             </Link>
           </NavbarItem>
