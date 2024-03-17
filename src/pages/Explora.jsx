@@ -61,7 +61,9 @@ const Explora = () => {
     <div>
       <Cabecera />
       <div className="flex flex-col justify-start my-10 mx-10 xl:mx-40 gap-5 ">
-        <h1 className="text-5xl font-bold ">Explora todas los anuncios.</h1>
+        <h1 className="text-3xl md:text-4xl  font-bold ">
+          Explora todas los anuncios.
+        </h1>
         <div className=" flex gap-2 ">
           <Autocomplete label="Select an animal" className="max-w-xs  ">
             {animals.map((animal, i) => (
@@ -101,7 +103,7 @@ const Explora = () => {
           />
         </div>
         <Divider className="my-4" />
-        <div className="gap-x-5 gap-y-10 grid grid-cols-2 sm:grid-cols-3">
+        <div className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((item, index) => (
             <Card
               shadow="sm"

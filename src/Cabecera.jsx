@@ -29,30 +29,38 @@ const Cabecera = () => {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <img src="\src\assets\marbid.svg" className="h-10" />
+          <Link to={"/"}>
+            <img src="\src\assets\marbid.svg" className="h-10" />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
-          <img src="\src\assets\marbid.svg" className="h-10" />
+          <Link to={"/"}>
+            <img src="\src\assets\marbid.svg" className="h-10" />
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent justify="end" className="flex gap-8">
         <NavbarItem>
-          <Link to="/" color="foreground" className="text-md">
+          <Link to="/" color="foreground" className="text-md hidden sm:block">
             Inicio
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link to="/explora" className="text-md">
+          <Link to="/explora" className="text-md hidden sm:block">
             Explora
           </Link>
         </NavbarItem>
         {isLoaded && user && (
           <NavbarItem>
-            <Link to="/panelControl" color="foreground" className="text-md">
+            <Link
+              to="/panelControl"
+              color="foreground"
+              className="text-md hidden sm:block"
+            >
               Panel de Control
             </Link>
           </NavbarItem>
@@ -84,14 +92,19 @@ const Cabecera = () => {
               Explora
             </Link>
           </NavbarItem>
+          {isLoaded && user && (
+            <NavbarItem>
+              <Link to="/panelControl" className="w-full">
+                Panel de Control
+              </Link>
+            </NavbarItem>
+          )}
           <NavbarItem>
             <div>
               <SignedOut>
                 <SignInButton />
               </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
+              <SignedIn />
             </div>
           </NavbarItem>
         </NavbarMenuItem>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const SidebarContext = createContext();
 
 const Sidebar = ({ children }) => {
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
   const { user } = useUser();
 
   return (
