@@ -9,7 +9,11 @@ const PanelControl = () => {
     <div className="flex">
       <div className="">
         <Sidebar>
-          <SidebarItem icon={<BookText />} text="Ofertas Creadas" path="/" />
+          <SidebarItem
+            icon={<BookText />}
+            text="Ofertas Creadas"
+            path="ofertasCreadas"
+          />
           <SidebarItem icon={<Heart />} text="Ofertas Gustadas" path="/" />
           <SidebarItem
             icon={<ScrollText />}

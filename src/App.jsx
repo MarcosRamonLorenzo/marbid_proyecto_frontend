@@ -8,6 +8,7 @@ import Explora from "./pages/Explora.jsx";
 import PanelControl from "./pages/PanelControl.jsx";
 import Ajustes from "./pages/Ajustes.jsx";
 import Anuncio from "./pages/Anuncio.jsx";
+import OfertasCreadas from "./pages/OfertasCreadas.jsx";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Route path="/panelControl" element={<PanelControl />}>
           <Route path="creacionAnuncio" element={<Home />} />
           <Route path="favoritos" element={<Home />} />
-          <Route path="ofertasCreadas" element={<Home />} />
+          <Route path="ofertasCreadas" element={<OfertasCreadas />} />
           <Route path="ofertasAplicadas" element={<Home />} />
           <Route path="ajustes" element={<Ajustes />} />
         </Route>

@@ -104,17 +104,14 @@ const Explora = () => {
           />
         </div>
         <Divider className="my-4" />
-        <div
-          className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
-          onClick={() => {
-            console.log("hola");
-            navigate("/anuncio");
-          }}
-        >
+        <div className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {list.map((item, index) => (
             <Card shadow="sm" key={index} className="flex flex-col items-start">
               <CardBody className="overflow-visible p-0">
                 <Image
+                  onClick={() => {
+                    navigate("/anuncio");
+                  }}
                   isZoomed
                   shadow="sm"
                   radius="xs"

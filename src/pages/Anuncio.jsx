@@ -12,7 +12,7 @@ const Anuncio = () => {
   return (
     <div>
       <Cabecera />
-      <div className="m-10 flex justify-center gap-32">
+      <div className="m-10 flex flex-col lg:flex-row justify-center gap-32">
         <div>
           <Image
             width={600}
