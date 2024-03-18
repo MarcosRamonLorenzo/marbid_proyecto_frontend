@@ -4,13 +4,22 @@ import { UserButton, useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 const SidebarContext = createContext();
 
+/**
+ * Sidebar component that displays a navigation sidebar with expandable functionality.
+ */
 const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
   const { user } = useUser();
 
   return (
     <aside className="h-screen">
-      <nav className="h-full  flex flex-col bg-white border-r shadow-sm">
+      <nav
+        className={
+          expanded
+            ? "h-full  flex flex-col bg-white border-r shadow-sm  absolute md:static z-20"
+            : "h-full  flex flex-col bg-white border-r shadow-sm z-20 "
+        }
+      >
         <div className="p-4 pb-2 flex  items-center">
           <Link to="/">
             <img
@@ -23,14 +32,15 @@ const Sidebar = ({ children }) => {
           </Link>
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100 "
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">{children}</ul>
+          {/* z-index para el hover y que no se quede bajo de los inputs */}
+          <ul className="flex-1 px-3 z-50">{children}</ul>
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3">

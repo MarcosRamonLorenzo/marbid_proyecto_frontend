@@ -12,7 +12,7 @@ import {
   Divider,
 } from "@nextui-org/react";
 import { Search } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 const Explora = () => {
   let animals = ["leon ", "tigre", "elefante", "jirafa", "mono"];
   const list = [
@@ -57,6 +57,7 @@ const Explora = () => {
       price: "$12.20",
     },
   ];
+  const navigate = useNavigate();
   return (
     <div>
       <Cabecera />
@@ -103,15 +104,15 @@ const Explora = () => {
           />
         </div>
         <Divider className="my-4" />
-        <div className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+          onClick={() => {
+            console.log("hola");
+            navigate("/anuncio");
+          }}
+        >
           {list.map((item, index) => (
-            <Card
-              shadow="sm"
-              key={index}
-              isPressable
-              onPress={() => console.log("item pressed")}
-              className="flex flex-col items-start"
-            >
+            <Card shadow="sm" key={index} className="flex flex-col items-start">
               <CardBody className="overflow-visible p-0">
                 <Image
                   isZoomed
@@ -125,6 +126,7 @@ const Explora = () => {
                   }
                 />
               </CardBody>
+
               <CardFooter className="text-small flex flex-col items-start gap-4">
                 <div className="flex justify-start items-start">
                   <User
@@ -136,13 +138,33 @@ const Explora = () => {
                   />
                 </div>
                 <h3 className="font-medium text-2xl">{item.title}</h3>
-                <p className="text-default-500">{item.price}</p>
+                <p className="text-default-500">{item.price}</p>{" "}
                 <p className="text-start">
                   Necesito programador web para desarrollar una página de
                   comercio electrónico. La página debe tener un diseño
-                  atractivo, funcional y seguro.
+                  atractivo, funcional.
                 </p>
               </CardFooter>
+              <label className="ui-like absolute top-4 right-4 z-10 ">
+                <input type="checkbox" />
+                <div className="like">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill=""
+                  >
+                    <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
+                    <g
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                      id="SVGRepo_tracerCarrier"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z"></path>
+                    </g>
+                  </svg>
+                </div>
+              </label>
             </Card>
           ))}
         </div>

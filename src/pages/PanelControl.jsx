@@ -1,6 +1,6 @@
 import React from "react";
-import Sidebar from "../components/explora/Sidebar.jsx";
-import SidebarItem from "../components/explora/SidebarItem.jsx";
+import Sidebar from "../components/panelControl/Sidebar.jsx";
+import SidebarItem from "../components/panelControl/SidebarItem.jsx";
 import { ScrollText, BookText, Heart, Settings } from "lucide-react";
 import { Outlet } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const PanelControl = () => {
             text="Ofertas Aplicadas"
             path="/"
           />
-          <SidebarItem icon={<Settings />} text="Ajustes" path="/" />
+          <SidebarItem icon={<Settings />} text="Ajustes" path="ajustes" />
         </Sidebar>
       </div>
       <div className="">
