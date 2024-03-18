@@ -16,7 +16,7 @@ const Sidebar = ({ children }) => {
       <nav
         className={
           expanded
-            ? "h-full  flex flex-col bg-white border-r shadow-sm  absolute md:static z-20"
+            ? "h-full  flex flex-col bg-white border-r shadow-sm  fixed md:static z-20"
             : "h-full  flex flex-col bg-white border-r shadow-sm z-20 "
         }
       >
