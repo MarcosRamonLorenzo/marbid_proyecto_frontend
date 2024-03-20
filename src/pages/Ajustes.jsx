@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Select, SelectItem, Avatar, Divider } from "@nextui-org/react";
 import { Moon, Sun } from "lucide-react";
 
 const Ajustes = () => {
+  const [tema, setTema] = useState("claro");
+
+  useEffect(() => {
+    if (tema === "oscuro") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [tema]);
+
   return (
     <div className="mx-5 my-10 2xl:mx-24 2xl:my-20">
       <h2 className="text-3xl font-medium">Ajustes Generales</h2>
@@ -129,14 +139,18 @@ const Ajustes = () => {
           <h3 className="text-xl ">Tema</h3>
 
           <Select
+            defaultSelectedKeys={["claro"]}
             className="max-w-xs rounded-none md:w-96 mt-3"
             label="Selecciona un tema"
             radius="sm"
+            onChange={(e) => {
+              setTema(e.target.value);
+            }}
           >
-            <SelectItem key="oscuro" startContent={<Moon />}>
+            <SelectItem key="oscuro" value={"oscuro"} startContent={<Moon />}>
               Oscuro
             </SelectItem>
-            <SelectItem key="claro" startContent={<Sun />}>
+            <SelectItem key="claro" value={"claro"} startContent={<Sun />}>
               Claro
             </SelectItem>
           </Select>

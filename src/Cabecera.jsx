@@ -22,7 +22,7 @@ const Cabecera = () => {
   const { isLoaded, user } = useUser();
 
   return (
-    <Navbar isBordered>
+    <Navbar isBordered className="dark:bg-[#1c1c1c]">
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle />
       </NavbarContent>

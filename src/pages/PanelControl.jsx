@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 const PanelControl = () => {
   return (
-    <div className="flex gap-20">
+    <div className=" panel-control flex gap-20">
       <div className="">
         <Sidebar>
           <SidebarItem

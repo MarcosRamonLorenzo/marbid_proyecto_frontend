@@ -10,10 +10,10 @@ import {
 
 const Anuncio = () => {
   return (
-    <div>
+    <div className="lg:h-screen">
       <Cabecera />
-      <div className="m-10 flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
-        <div>
+      <div className="m-10 mb-0 flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
+        <div className="">
           <Image
             width={600}
             height={200}
@@ -64,7 +64,7 @@ const Anuncio = () => {
           </Button>
           <div className="mt-5 ">
             <h3 className="text-2xl">Comentarios</h3>
-            <div className="bg-[#27272A] lg:w-96 h-96 rounded-xl">
+            <div className="mt-5 bg-[#27272A] lg:w-96 h-96 rounded-xl">
               <p className="p-5 text-white">Sin Comentarios</p>
             </div>
             <Divider className="my-4" />
@@ -73,9 +73,8 @@ const Anuncio = () => {
               <Input type="email" label="Añade un cometario" color="primary" />
               <SendHorizontal
                 size={16}
-                color="#000"
                 strokeWidth={1}
-                className=" absolute right-4 top-3 cursor-pointer"
+                className=" absolute right-4 top-3 cursor-pointer text-black dark:text-white"
               />
             </div>
           </div>

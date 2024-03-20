@@ -61,7 +61,7 @@ const Explora = () => {
   return (
     <div>
       <Cabecera />
-      <div className="flex flex-col justify-start my-10 mx-10 xl:mx-40 gap-5 ">
+      <div className="flex flex-col justify-start mt-10 pb-10 mx-10 xl:mx-40 gap-5 ">
         <h1 className="text-3xl md:text-4xl  font-bold ">
           Explora todas los anuncios.
         </h1>
@@ -104,13 +104,17 @@ const Explora = () => {
               ],
             }}
             placeholder="Type to search..."
-            startContent={<Search size={20} />}
+            startContent={<Search className="dark:text-white" size={20} />}
           />
         </div>
         <Divider className="my-4" />
-        <div className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ">
           {list.map((item, index) => (
-            <Card shadow="sm" key={index} className="flex flex-col items-start">
+            <Card
+              shadow="sm"
+              key={index}
+              className="flex flex-col items-start card"
+            >
               <CardBody className="overflow-visible p-0">
                 <Image
                   onClick={() => {

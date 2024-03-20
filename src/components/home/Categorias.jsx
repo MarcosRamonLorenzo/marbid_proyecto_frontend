@@ -9,6 +9,7 @@ const Categorias = () => {
           shadow="sm"
           isPressable
           onPress={() => console.log("item pressed")}
+          className="card"
         >
           <CardBody className="overflow-visible p-0">
             <Image
@@ -27,6 +28,7 @@ const Categorias = () => {
           shadow="sm"
           isPressable
           onPress={() => console.log("item pressed")}
+          className="card"
         >
           <CardBody className="overflow-visible p-0">
             <Image
@@ -45,6 +47,7 @@ const Categorias = () => {
           shadow="sm"
           isPressable
           onPress={() => console.log("item pressed")}
+          className="card"
         >
           <CardBody className="overflow-visible p-0">
             <Image
@@ -63,6 +66,7 @@ const Categorias = () => {
           shadow="sm"
           isPressable
           onPress={() => console.log("item pressed")}
+          className="card"
         >
           <CardBody className="overflow-visible p-0">
             <Image
@@ -81,6 +85,7 @@ const Categorias = () => {
           shadow="sm"
           isPressable
           onPress={() => console.log("item pressed")}
+          className="card"
         >
           <CardBody className="overflow-visible p-0">
             <Image
@@ -99,6 +104,7 @@ const Categorias = () => {
           shadow="sm"
           isPressable
           onPress={() => console.log("item pressed")}
+          className="card"
         >
           <CardBody className="overflow-visible p-0">
             <Image

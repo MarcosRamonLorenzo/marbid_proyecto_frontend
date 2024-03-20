@@ -13,7 +13,7 @@ const Sidebar = ({ children }) => {
 
   return (
     <aside className="h-screen">
-      <nav className="h-full  flex flex-col bg-white border-r shadow-sm  fixed    z-20">
+      <nav className="h-full  flex flex-col bg-white dark:bg-[#121212] border-r shadow-sm  fixed z-20">
         <div className="p-4 pb-2 flex  items-center ">
           <Link to="/">
             <img
