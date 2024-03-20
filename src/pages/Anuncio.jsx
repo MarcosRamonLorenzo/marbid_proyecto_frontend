@@ -12,7 +12,7 @@ const Anuncio = () => {
   return (
     <div>
       <Cabecera />
-      <div className="m-10 flex flex-col lg:flex-row justify-center gap-32">
+      <div className="m-10 flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
         <div>
           <Image
             width={600}
@@ -64,7 +64,7 @@ const Anuncio = () => {
           </Button>
           <div className="mt-5 ">
             <h3 className="text-2xl">Comentarios</h3>
-            <div className="bg-[#F4F4F5]  w-96 h-96 rounded-xl">
+            <div className="bg-[#F4F4F5] lg:w-96 h-96 rounded-xl">
               <p className="p-5">Sin Comentarios</p>
             </div>
             <Divider className="my-4" />

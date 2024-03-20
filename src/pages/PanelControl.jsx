@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 const PanelControl = () => {
   return (
-    <div className="flex">
+    <div className="flex gap-20">
       <div className="">
         <Sidebar>
           <SidebarItem
@@ -14,7 +14,11 @@ const PanelControl = () => {
             text="Ofertas Creadas"
             path="ofertasCreadas"
           />
-          <SidebarItem icon={<Heart />} text="Ofertas Gustadas" path="/" />
+          <SidebarItem
+            icon={<Heart />}
+            text="Ofertas Gustadas"
+            path="favoritos"
+          />
           <SidebarItem
             icon={<ScrollText />}
             text="Ofertas Aplicadas"
@@ -23,7 +27,8 @@ const PanelControl = () => {
           <SidebarItem icon={<Settings />} text="Ajustes" path="ajustes" />
         </Sidebar>
       </div>
-      <div className="">
+      {/* Pongo padinbg left para que se vea el contenedor de dentro.  */}
+      <div className="w-[100%]">
         <Outlet />
       </div>
     </div>

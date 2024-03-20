@@ -66,7 +66,11 @@ const Explora = () => {
           Explora todas los anuncios.
         </h1>
         <div className=" flex gap-2 ">
-          <Autocomplete label="Select an animal" className="max-w-xs  ">
+          <Autocomplete
+            label="Select an animal"
+            className="max-w-xs "
+            radius="sm"
+          >
             {animals.map((animal, i) => (
               <AutocompleteItem key={i} value={animal}>
                 {animal}
@@ -78,7 +82,7 @@ const Explora = () => {
             className="w-80"
             label="Search"
             isClearable
-            radius="lg"
+            radius="sm"
             classNames={{
               label: "text-black/50 dark:text-white/90",
               input: [

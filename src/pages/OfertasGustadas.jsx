@@ -65,17 +65,10 @@ const list = [
   },
 ];
 
-const OfertasCreadas = () => {
-  const navigate = useNavigate();
+const OfertasGustadas = () => {
   return (
-    <div className="mx-4 my-10 md:mx-24 md:my-20">
-      <Button
-        className="flex items-center bg-blue-400 text-white gap-1 px-4 py-2 cursor-pointer  font-semibold tracking-widest rounded-md hover:bg-blue-400 duration-300 hover:gap-2 hover:translate-x-3 fixed right-5 bottom-5 z-30"
-        endContent={<CirclePlus />}
-      >
-        Crear Anuncio
-      </Button>
-      <h2 className="text-3xl font-medium">Ofertas Creadas</h2>
+    <div className="mx-5 my-10 lg:mx-24 lg:my-20">
+      <h2 className="text-3xl font-medium">Ofertas Gustadas</h2>
       <Divider className="my-4" />
       <h3 className=" text-xl ml-3">Visualización</h3>
       <Tabs aria-label="Options" variant="underlined">
@@ -122,6 +115,26 @@ const OfertasCreadas = () => {
                     atractivo, funcional.
                   </p>
                 </CardFooter>
+                <label className="ui-like absolute top-4 right-4 z-10 ">
+                  <input type="checkbox" />
+                  <div className="like">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill=""
+                    >
+                      <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
+                      <g
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        id="SVGRepo_tracerCarrier"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z"></path>
+                      </g>
+                    </svg>
+                  </div>
+                </label>
               </Card>
             ))}
           </div>
@@ -129,13 +142,13 @@ const OfertasCreadas = () => {
         <Tab key="tabla" title="Tabla">
           <Table
             aria-label="Example static collection table"
-            className="w-[23em] sm:w-[30em] lg:w-[45em] xl:w-[50em] mt-5"
+            className="w-[23em] sm:w-[30em] md:w-[35em] lg:w-[50em] xl:w-[60em] mt-5"
           >
             <TableHeader>
               <TableColumn>Nombre</TableColumn>
               <TableColumn>Precio</TableColumn>
               <TableColumn>Estado</TableColumn>
-              <TableColumn>Acciones</TableColumn>
+              <TableColumn></TableColumn>
             </TableHeader>
             <TableBody>
               {list.map((item, index) => {
@@ -145,18 +158,26 @@ const OfertasCreadas = () => {
                     <TableCell>{item.price}</TableCell>
                     <TableCell>Active</TableCell>
                     <TableCell className="w-20">
-                      <Dropdown>
-                        <DropdownTrigger>
-                          <Button isIconOnly size="sm" variant="light">
-                            <GripVertical />
-                          </Button>
-                        </DropdownTrigger>
-                        <DropdownMenu>
-                          <DropdownItem color="secondary">View</DropdownItem>
-                          <DropdownItem color="primary">Edit</DropdownItem>
-                          <DropdownItem color="danger">Delete</DropdownItem>
-                        </DropdownMenu>
-                      </Dropdown>
+                      <label className="ui-like  ">
+                        <input type="checkbox" />
+                        <div className="like">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill=""
+                          >
+                            <g strokeWidth="0" id="SVGRepo_bgCarrier"></g>
+                            <g
+                              strokeLinejoin="round"
+                              strokeLinecap="round"
+                              id="SVGRepo_tracerCarrier"
+                            ></g>
+                            <g id="SVGRepo_iconCarrier">
+                              <path d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z"></path>
+                            </g>
+                          </svg>
+                        </div>
+                      </label>
                     </TableCell>
                   </TableRow>
                 );
@@ -169,4 +190,4 @@ const OfertasCreadas = () => {
   );
 };
 
-export default OfertasCreadas;
+export default OfertasGustadas;
