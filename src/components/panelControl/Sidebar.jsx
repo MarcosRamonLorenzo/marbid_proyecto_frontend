@@ -13,7 +13,7 @@ const Sidebar = ({ children }) => {
 
   return (
     <aside className="h-screen">
-      <nav className="h-full  flex flex-col bg-white dark:bg-[#121212] border-r shadow-sm  fixed z-20">
+      <nav className="h-full  flex flex-col bg-white dark:bg-[#121212] border-r dark:border-[#353842] shadow-sm  fixed z-20">
         <div className="p-4 pb-2 flex  items-center ">
           <Link to="/">
             <img
@@ -37,7 +37,7 @@ const Sidebar = ({ children }) => {
           <ul className="flex-1 px-3 z-50">{children}</ul>
         </SidebarContext.Provider>
 
-        <div className="border-t flex p-3">
+        <div className="border-t dark:border-[#353842]  flex p-3">
           <UserButton afterSignOutUrl="/" />
           <div
             className={`
@@ -50,7 +50,7 @@ const Sidebar = ({ children }) => {
                 {user && user.firstName}
                 {/* Accediendo al nombre del usuario */}
               </h4>
-              <span className="text-xs text-gray-600">
+              <span className="text-xs text-gray-600 dark:text-white">
                 {user && user.email}
               </span>
             </div>

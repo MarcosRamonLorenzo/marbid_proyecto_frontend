@@ -22,6 +22,7 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import CardAnuncio from "../components/CardAnuncio";
 const list = [
   {
     title: "Orange",
@@ -82,47 +83,7 @@ const OfertasCreadas = () => {
         <Tab key="photos" title="General">
           <div className="gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5">
             {list.map((item, index) => (
-              <Card
-                shadow="sm"
-                key={index}
-                className="flex flex-col items-start"
-              >
-                <CardBody className="overflow-visible p-0">
-                  <Image
-                    onClick={() => {
-                      navigate("/anuncio");
-                    }}
-                    isZoomed
-                    shadow="sm"
-                    radius="xs"
-                    width="100%"
-                    alt={item.title}
-                    className="w-full object-cover h-[240px]"
-                    src={
-                      "https://cdn.pixabay.com/photo/2016/11/23/14/45/coding-1853305_640.jpg"
-                    }
-                  />
-                </CardBody>
-
-                <CardFooter className="text-small flex flex-col items-start gap-4">
-                  <div className="flex justify-start items-start">
-                    <User
-                      name="Jane Doe"
-                      description="Product Designer"
-                      avatarProps={{
-                        src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                      }}
-                    />
-                  </div>
-                  <h3 className="font-medium text-2xl">{item.title}</h3>
-                  <p className="text-default-500">{item.price}</p>{" "}
-                  <p className="text-start">
-                    Necesito programador web para desarrollar una página de
-                    comercio electrónico. La página debe tener un diseño
-                    atractivo, funcional.
-                  </p>
-                </CardFooter>
-              </Card>
+              <CardAnuncio item={item} key={index} />
             ))}
           </div>
         </Tab>
