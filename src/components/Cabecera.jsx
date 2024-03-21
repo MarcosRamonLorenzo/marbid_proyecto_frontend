@@ -38,7 +38,7 @@ const Cabecera = () => {
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
           <Link to={"/"}>
-            <img src="\src\assets\marbid.svg" className="h-10" />
+            <img src="\src\assets\logoMarbidWeb.webp" className="h-8" />
           </Link>
         </NavbarBrand>
       </NavbarContent>
@@ -84,29 +84,29 @@ const Cabecera = () => {
 
       <NavbarMenu>
         <NavbarMenuItem>
-          <NavbarItem>
-            <Link className="w-full">Inicio</Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link to="/explora" className="w-full">
-              Explora
+          <Link className="w-full" to="/">
+            Inicio
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem>
+          <Link to="/explora" className="w-full">
+            Explora
+          </Link>
+        </NavbarMenuItem>
+        {isLoaded && user && (
+          <NavbarMenuItem>
+            <Link to="/panelControl" className="w-full">
+              Panel de Control
             </Link>
-          </NavbarItem>
-          {isLoaded && user && (
-            <NavbarItem>
-              <Link to="/panelControl" className="w-full">
-                Panel de Control
-              </Link>
-            </NavbarItem>
-          )}
-          <NavbarItem>
-            <div>
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-              <SignedIn />
-            </div>
-          </NavbarItem>
+          </NavbarMenuItem>
+        )}
+        <NavbarMenuItem>
+          <div>
+            <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn />
+          </div>
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>

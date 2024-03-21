@@ -1,5 +1,4 @@
 import React from "react";
-import Cabecera from "./Cabecera.jsx";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import LogIn from "./pages/LogIn.jsx";

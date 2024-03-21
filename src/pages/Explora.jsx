@@ -1,4 +1,4 @@
-import Cabecera from "../Cabecera.jsx";
+import Cabecera from "../components/Cabecera.jsx";
 import { Divider } from "@nextui-org/react";
 
 import { useNavigate } from "react-router-dom";

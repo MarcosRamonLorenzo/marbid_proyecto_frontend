@@ -1,5 +1,5 @@
 import React from "react";
-import Cabecera from "../Cabecera";
+import Cabecera from "../components/Cabecera.jsx";
 import { Image, User, Button, Input, Divider } from "@nextui-org/react";
 import {
   MessageCircleMore,

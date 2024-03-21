@@ -1,5 +1,5 @@
 import React from "react";
-import Cabecera from "../Cabecera.jsx";
+import Cabecera from "../components/Cabecera.jsx";
 import { Instagram, Facebook } from "lucide-react";
 import HeroSection from "../components/home/HeroSection.jsx";
 import Collaborators from "../components/home/Collaborators.jsx";

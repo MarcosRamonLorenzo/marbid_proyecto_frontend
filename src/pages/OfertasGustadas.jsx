@@ -22,7 +22,7 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import FilaTablaCreada from "../components/panelControl/FilaTablaCreada";
+
 const list = [
   {
     title: "Orange",
