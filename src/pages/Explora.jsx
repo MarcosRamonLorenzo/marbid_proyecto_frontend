@@ -1,7 +1,6 @@
 import Cabecera from "../components/Cabecera.jsx";
 import { Divider } from "@nextui-org/react";
 
-import { useNavigate } from "react-router-dom";
 import FiltroCateogorias from "../components/explora/FiltroCateogorias.jsx";
 import Buscador from "../components/explora/Buscador.jsx";
 import CardAnuncio from "../components/CardAnuncio.jsx";
@@ -48,7 +47,6 @@ const Explora = () => {
       price: "$12.20",
     },
   ];
-  const navigate = useNavigate();
 
   return (
     <div>

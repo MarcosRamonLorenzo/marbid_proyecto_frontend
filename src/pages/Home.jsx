@@ -60,7 +60,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <p className="text-sm">&copy; 2022 My Website. All rights reserved.</p>
+        <p className="text-sm">&copy; 2024 My Website. All rights reserved.</p>
       </footer>
     </div>
   );

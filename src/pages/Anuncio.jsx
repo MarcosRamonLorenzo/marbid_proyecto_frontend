@@ -64,8 +64,8 @@ const Anuncio = () => {
           </Button>
           <div className="mt-5 ">
             <h3 className="text-2xl">Comentarios</h3>
-            <div className="mt-5 bg-[#27272A] lg:w-96 h-96 rounded-xl">
-              <p className="p-5 text-white">Sin Comentarios</p>
+            <div className="mt-5 dark:bg-[#27272A] bg-blue-100 lg:w-96 h-96 rounded-xl">
+              <p className="p-5 dark:text-white text-black">Sin Comentarios</p>
             </div>
             <Divider className="my-4" />
 

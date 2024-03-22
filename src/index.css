@@ -10,7 +10,8 @@
 .dark h2,
 .dark h3,
 .dark h4,
-.dark label {
+.dark label,
+.dark table {
   color: #eee;
 }
 .dark .card {

@@ -8,6 +8,7 @@ import Ajustes from "./pages/Ajustes.jsx";
 import Anuncio from "./pages/Anuncio.jsx";
 import OfertasCreadas from "./pages/OfertasCreadas.jsx";
 import OfertasGustadas from "./pages/OfertasGustadas.jsx";
+import Usuario from "./pages/Usuario.jsx";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/registro" element={<Home />} /> */}
         <Route path="/explora" element={<Explora />} />
         <Route path="/anuncio" element={<Anuncio />} />
+        <Route path="/user" element={<Usuario />} />
 
         <Route path="/panelControl" element={<PanelControl />}>
           <Route path="creacionAnuncio" element={<Home />} />

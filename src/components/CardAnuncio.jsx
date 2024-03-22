@@ -1,6 +1,10 @@
 import React from "react";
 import { Card, CardBody, Image, CardFooter, User } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
+
 const CardAnuncio = ({ item }) => {
+  const navigate = useNavigate();
+
   return (
     <Card shadow="sm" className="flex flex-col items-start card">
       <CardBody className="overflow-visible p-0">
