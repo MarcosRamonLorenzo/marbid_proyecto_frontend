@@ -1,5 +1,5 @@
 import React from "react";
-import Cabecera from "../components/Cabecera.jsx";
+import Header from "../components/shared-componentes/Header";
 import { Image, User, Button, Input, Divider } from "@nextui-org/react";
 import {
   MessageCircleMore,
@@ -8,10 +8,10 @@ import {
   SendHorizontal,
 } from "lucide-react";
 
-const Anuncio = () => {
+const Service = () => {
   return (
     <div className="lg:h-screen">
-      <Cabecera />
+      <Header />
       <div className="m-10 mb-0 flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
         <div className="">
           <Image
@@ -84,4 +84,4 @@ const Anuncio = () => {
   );
 };
 
-export default Anuncio;
+export default Service;

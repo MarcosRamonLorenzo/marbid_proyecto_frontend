@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Select, SelectItem, Avatar, Divider } from "@nextui-org/react";
 import { Moon, Sun } from "lucide-react";
 
-const Ajustes = () => {
+const Settings = () => {
   const [tema, setTema] = useState("claro");
 
   useEffect(() => {
@@ -160,4 +160,4 @@ const Ajustes = () => {
   );
 };
 
-export default Ajustes;
+export default Settings;

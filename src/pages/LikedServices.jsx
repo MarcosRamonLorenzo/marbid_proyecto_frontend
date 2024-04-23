@@ -1,5 +1,4 @@
 import React from "react";
-import { CirclePlus, GripVertical } from "lucide-react";
 import {
   Divider,
   Tabs,
@@ -12,7 +11,7 @@ import {
   TableCell,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import CardAnuncio from "../components/CardAnuncio";
+import ServiceCard from "../components/services/ServiceCard.jsx";
 
 const list = [
   {
@@ -57,7 +56,7 @@ const list = [
   },
 ];
 
-const OfertasGustadas = () => {
+const LikedServices = () => {
   return (
     <div className="mx-5 my-10 lg:mx-24 lg:my-20">
       <h2 className="text-3xl font-medium">Ofertas Gustadas</h2>
@@ -67,7 +66,7 @@ const OfertasGustadas = () => {
         <Tab key="photos" title="General">
           <div className="gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5">
             {list.map((item, index) => (
-              <CardAnuncio item={item} key={index} />
+              <ServiceCard item={item} key={index} />
             ))}
           </div>
         </Tab>
@@ -122,4 +121,4 @@ const OfertasGustadas = () => {
   );
 };
 
-export default OfertasGustadas;
+export default LikedServices;

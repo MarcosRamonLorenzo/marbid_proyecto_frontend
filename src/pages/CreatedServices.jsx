@@ -1,11 +1,6 @@
 import React from "react";
 import { CirclePlus, GripVertical } from "lucide-react";
 import {
-  Card,
-  CardBody,
-  Image,
-  CardFooter,
-  User,
   Divider,
   Tabs,
   Tab,
@@ -22,7 +17,8 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import CardAnuncio from "../components/CardAnuncio";
+import ServiceCard from "../components/services/ServiceCard";
+
 const list = [
   {
     title: "Orange",
@@ -66,7 +62,7 @@ const list = [
   },
 ];
 
-const OfertasCreadas = () => {
+const CreatedServices = () => {
   const navigate = useNavigate();
   return (
     <div className="mx-4 my-10 md:mx-24 md:my-20">
@@ -83,7 +79,7 @@ const OfertasCreadas = () => {
         <Tab key="photos" title="General">
           <div className="gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5">
             {list.map((item, index) => (
-              <CardAnuncio item={item} key={index} />
+              <ServiceCard item={item} key={index} />
             ))}
           </div>
         </Tab>
@@ -130,4 +126,4 @@ const OfertasCreadas = () => {
   );
 };
 
-export default OfertasCreadas;
+export default CreatedServices;

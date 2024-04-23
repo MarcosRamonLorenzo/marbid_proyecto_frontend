@@ -11,7 +11,7 @@ const HeroSection = () => {
           className=" md:h-96 h-60 rounded-tr-xl rounded-bl-xl lg:block hidden"
         >
           <source
-            src="https://hpagogvjlwigezymiejy.supabase.co/storage/v1/object/sign/Videos-Inicio/VideoInicio2.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWaWRlb3MtSW5pY2lvL1ZpZGVvSW5pY2lvMi5tcDQiLCJpYXQiOjE3MDgzNTkyNjUsImV4cCI6MTczOTg5NTI2NX0.VixkQFOyFEuCTku8XU9D-4szwstSk7ooMP_4Pmikc7k&t=2024-02-19T16%3A14%3A25.623Z"
+            src="https://bzbuptkwljynshsmyfgk.supabase.co/storage/v1/object/sign/Videos-Inicio/v1.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWaWRlb3MtSW5pY2lvL3YxLm1wNCIsImlhdCI6MTcxMzc5MjgyOSwiZXhwIjoxNzQ1MzI4ODI5fQ.04R3UViqP2-sl-TeFnAlZ5XSeYhMBqy0JTOJveS2H0Y&t=2024-04-22T13%3A33%3A26.644Z"
             type="video/mp4"
           />
         </video>
@@ -27,7 +27,7 @@ const HeroSection = () => {
           className="rounded-tr-xl rounded-bl-xl md:h-96 h-60"
         >
           <source
-            src="https://hpagogvjlwigezymiejy.supabase.co/storage/v1/object/sign/Videos-Inicio/VideoInicio1.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWaWRlb3MtSW5pY2lvL1ZpZGVvSW5pY2lvMS5tcDQiLCJpYXQiOjE3MDgzNTkyNDgsImV4cCI6MTczOTg5NTI0OH0.cTbxugZO42xN9N9Pq6wnavszVuGFwgfAqylwYJG6zko&t=2024-02-19T16%3A14%3A08.422Z"
+            src="https://bzbuptkwljynshsmyfgk.supabase.co/storage/v1/object/sign/Videos-Inicio/v2.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWaWRlb3MtSW5pY2lvL3YyLm1wNCIsImlhdCI6MTcxMzc5Mjg3MywiZXhwIjoxNzQ1MzI4ODczfQ.211WMKzDY6Q2Si6c8p9AKKSHlr5tK-OQyucPaJIotiM&t=2024-04-22T13%3A34%3A10.723Z"
             type="video/mp4"
           />
         </video>

@@ -1,18 +1,18 @@
 import React from "react";
-import Cabecera from "../components/Cabecera.jsx";
+import Header from "../components/shared-componentes/Header.jsx";
 import { Instagram, Facebook } from "lucide-react";
 import HeroSection from "../components/home/HeroSection.jsx";
 import Collaborators from "../components/home/Collaborators.jsx";
-import Categorias from "../components/home/Categorias.jsx";
-import OfertasBuscadas from "../components/home/OfertasBuscadas.jsx";
+import Categories from "../components/home/Cateogries.jsx";
+import OfertasBuscadas from "../components/home/SearchServices.jsx";
 
 const Home = () => {
   return (
     <div>
-      <Cabecera />
+      <Header />
       <HeroSection />
       <Collaborators />
-      <Categorias />
+      <Categories />
       <OfertasBuscadas />
       <footer className="bg-gray-800 flex flex-col justify-center items-start md:items-center py-4 text-white pl-5 w-100 ">
         <div className="flex flex-col md:flex-row md:gap-20  gap-5 justify-start items-start my-5">

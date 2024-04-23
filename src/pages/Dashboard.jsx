@@ -1,10 +1,10 @@
 import React from "react";
-import Sidebar from "../components/panelControl/Sidebar.jsx";
-import SidebarItem from "../components/panelControl/SidebarItem.jsx";
+import Sidebar from "../components/dashboard/Sidebar.jsx";
+import SidebarItem from "../components/dashboard/SidebarItem.jsx";
 import { ScrollText, BookText, Heart, Settings } from "lucide-react";
 import { Outlet } from "react-router-dom";
 
-const PanelControl = () => {
+const Dashboard = () => {
   return (
     <div className=" panel-control flex gap-20">
       <div className="">
@@ -35,4 +35,4 @@ const PanelControl = () => {
   );
 };
 
-export default PanelControl;
+export default Dashboard;

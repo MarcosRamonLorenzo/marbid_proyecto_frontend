@@ -2,7 +2,7 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 import { Search } from "lucide-react";
 
-const Buscador = () => {
+const SearchComponent = () => {
   return (
     <Input
       className="w-80"
@@ -35,4 +35,4 @@ const Buscador = () => {
   );
 };
 
-export default Buscador;
+export default SearchComponent;

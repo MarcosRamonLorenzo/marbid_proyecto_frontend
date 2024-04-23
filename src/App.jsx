@@ -2,31 +2,30 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import LogIn from "./pages/LogIn.jsx";
-import Explora from "./pages/Explora.jsx";
-import PanelControl from "./pages/PanelControl.jsx";
-import Ajustes from "./pages/Ajustes.jsx";
-import Anuncio from "./pages/Anuncio.jsx";
-import OfertasCreadas from "./pages/OfertasCreadas.jsx";
-import OfertasGustadas from "./pages/OfertasGustadas.jsx";
-import Usuario from "./pages/Usuario.jsx";
+import Explore from "./pages/Explore.jsx";
+import Service from "./pages/Service.jsx";
+import Settings from "./pages/Settings.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import UserProfile from "./pages/UserProfile.jsx";
+import LikedServices from "./pages/LikedServices.jsx";
+import CreatedServices from "./pages/CreatedServices.jsx";
 
 function App() {
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* De momento no lo uso  <Route path="/logIn" element={<LogIn />} />
-        <Route path="/registro" element={<Home />} /> */}
-        <Route path="/explora" element={<Explora />} />
-        <Route path="/anuncio" element={<Anuncio />} />
-        <Route path="/user" element={<Usuario />} />
-
-        <Route path="/panelControl" element={<PanelControl />}>
+        De momento no lo uso <Route path="/logIn" element={<LogIn />} />
+        <Route path="/registro" element={<Home />} />
+        <Route path="/explora" element={<Explore />} />
+        <Route path="/anuncio/:idAnuncio" element={<Service />} />
+        <Route path="/user" element={<UserProfile />} />
+        <Route path="/panelControl" element={<Dashboard />}>
           <Route path="creacionAnuncio" element={<Home />} />
-          <Route path="favoritos" element={<OfertasGustadas />} />
-          <Route path="ofertasCreadas" element={<OfertasCreadas />} />
+          <Route path="favoritos" element={<LikedServices />} />
+          <Route path="ofertasCreadas" element={<CreatedServices />} />
           <Route path="ofertasAplicadas" element={<Home />} />
-          <Route path="ajustes" element={<Ajustes />} />
+          <Route path="ajustes" element={<Settings />} />
         </Route>
       </Routes>
     </>

@@ -9,18 +9,8 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-  SignUpButton,
-  useUser,
-} from "@clerk/clerk-react";
 
-const Cabecera = () => {
-  const { isLoaded, user } = useUser();
-
+const Header = () => {
   return (
     <Navbar isBordered className="dark:bg-[#1c1c1c]">
       <NavbarContent className="sm:hidden" justify="start">
@@ -54,31 +44,15 @@ const Cabecera = () => {
             Explora
           </Link>
         </NavbarItem>
-        {isLoaded && user && (
-          <NavbarItem>
-            <Link
-              to="/panelControl"
-              color="foreground"
-              className="text-md hidden sm:block"
-            >
-              Panel de Control
-            </Link>
-          </NavbarItem>
-        )}
-        <NavbarItem className="text-md">
-          <div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
-          </div>
-        </NavbarItem>
+
         <NavbarItem>
-          <SignedOut>
-            <SignUpButton className="inline-block py-1 px-6 rounded-l-xl rounded-t-xl bg-[#7747FF] hover:bg-white hover:text-[#7747FF] focus:text-[#7747FF] focus:bg-gray-200 text-gray-50 font-bold leading-loose transition duration-200" />
-          </SignedOut>
+          <Link
+            to="/panelControl"
+            color="foreground"
+            className="text-md hidden sm:block"
+          >
+            Panel de Control
+          </Link>
         </NavbarItem>
       </NavbarContent>
 
@@ -93,24 +67,14 @@ const Cabecera = () => {
             Explora
           </Link>
         </NavbarMenuItem>
-        {isLoaded && user && (
-          <NavbarMenuItem>
-            <Link to="/panelControl" className="w-full">
-              Panel de Control
-            </Link>
-          </NavbarMenuItem>
-        )}
         <NavbarMenuItem>
-          <div>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn />
-          </div>
+          <Link to="/panelControl" className="w-full">
+            Panel de Control
+          </Link>
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
 };
 
-export default Cabecera;
+export default Header;

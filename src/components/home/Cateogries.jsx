@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
-const Categorias = () => {
+const Cateogries = () => {
   return (
     <section className="flex flex-col justify-center items-center mt-20 m-5">
       <h2 className="text-2xl">Categorias</h2>
@@ -124,4 +124,4 @@ const Categorias = () => {
   );
 };
 
-export default Categorias;
+export default Cateogries;

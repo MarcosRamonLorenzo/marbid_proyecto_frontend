@@ -1,11 +1,11 @@
 import React from "react";
-import Cabecera from "../components/Cabecera";
+import Header from "../components/shared-componentes/Header";
 import { Tabs, Tab, Divider } from "@nextui-org/react";
 
-const Usuario = () => {
+const UserProfile = () => {
   return (
     <div className="h-screen">
-      <Cabecera />
+      <Header />
 
       <div className="mx-5 my-10 lg:mx-24 lg:my-20 ">
         <h2 className="text-3xl font-medium">Ajustes de Perfil.</h2>
@@ -24,4 +24,4 @@ const Usuario = () => {
   );
 };
 
-export default Usuario;
+export default UserProfile;

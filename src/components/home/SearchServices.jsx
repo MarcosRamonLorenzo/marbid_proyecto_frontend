@@ -8,7 +8,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-const OfertasBuscadas = () => {
+const SearchServices = () => {
   return (
     <section className="mt-20 flex flex-col justify-center items-center gap-5 my-10">
       <h2 className="text-2xl">Ofertas más buscadas</h2>
@@ -107,4 +107,4 @@ const OfertasBuscadas = () => {
   );
 };
 
-export default OfertasBuscadas;
+export default SearchServices;
