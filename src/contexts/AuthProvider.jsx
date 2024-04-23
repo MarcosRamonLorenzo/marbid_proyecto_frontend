@@ -1,5 +1,5 @@
 import React from "react";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -19,8 +19,8 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const initializeUser = async () => {
-    if (user) {
-      setCurrentUser(user);
+    if (currentUser) {
+      setCurrentUser(currentUser);
       setIsLogin(loginDefaultValue);
     } else {
       setCurrentUser(userDefaultValue);

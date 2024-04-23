@@ -4,7 +4,6 @@ import {
   ArrowLeftFromLine,
 } from "lucide-react";
 import { createContext, useState } from "react";
-import { UserButton, useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 const SidebarContext = createContext();
 
@@ -13,8 +12,6 @@ const SidebarContext = createContext();
  */
 const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
-  const { user } = useUser();
-
   return (
     <aside className="h-screen">
       <nav className="h-full  flex flex-col bg-white dark:bg-[#1c1c1c] border-r dark:border-[#353842] shadow-sm  fixed z-20">
@@ -42,7 +39,6 @@ const Sidebar = ({ children }) => {
         </SidebarContext.Provider>
 
         <div className="border-t dark:border-[#353842]  flex p-3">
-          <UserButton afterSignOutUrl="/" />
           <div
             className={`
           flex justify-between items-center
@@ -50,12 +46,9 @@ const Sidebar = ({ children }) => {
       `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">
-                {user && user.firstName}
-                {/* Accediendo al nombre del usuario */}
-              </h4>
+              <h4 className="font-semibold">User</h4>
               <span className="text-xs text-gray-600 dark:text-white">
-                {user && user.email}
+                user@gmail.com
               </span>
             </div>
             <MoreVertical size={20} />
