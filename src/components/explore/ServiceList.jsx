@@ -2,9 +2,11 @@ import React from "react";
 import CardAnuncio from "../services/ServiceCard.jsx";
 import useFetch from "../../hooks/useFetch.js";
 import Loading from "../shared-componentes/Loading.jsx";
+import configUrl from "@/config/apis.config.js";
 
 const ServiceList = () => {
-  const services = useFetch("https://marbid-backed.onrender.com/api/service");
+  const services = useFetch(`${configUrl}/api/service`);
+  console.log(configUrl);
 
   return (
     <>
