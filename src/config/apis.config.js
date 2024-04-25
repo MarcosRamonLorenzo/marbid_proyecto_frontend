@@ -10,6 +10,6 @@ const apisConfig = {
   port: isLocal() ? `:${import.meta.env.VITE_PORT}` : "",
 };
 
-const apiUrl = `${apisConfig.protocol}${apisConfig.url}${apisConfig.port}`;
+const apiUrl = `${apisConfig.protocol}${apisConfig.url}${apisConfig.port}/api`;
 
 export default apiUrl;

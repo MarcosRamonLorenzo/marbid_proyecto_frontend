@@ -17,6 +17,7 @@ const Header = () => {
         <NavbarMenuToggle />
       </NavbarContent>
 
+      {/* desktop menu */}
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           <Link to={"/"}>
@@ -54,8 +55,26 @@ const Header = () => {
             Panel de Control
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link
+            to="/log-in"
+            color="foreground"
+            className="text-md hidden sm:block"
+          >
+            Log In
+          </Link>
+        </NavbarItem>
       </NavbarContent>
 
+      <Link
+        to="/sign-up"
+        color="foreground"
+        className="text-md hidden sm:block"
+      >
+        Sign up
+      </Link>
+
+      {/* mobile menu */}
       <NavbarMenu>
         <NavbarMenuItem>
           <Link className="w-full" to="/">
@@ -72,6 +91,24 @@ const Header = () => {
             Panel de Control
           </Link>
         </NavbarMenuItem>
+        <NavbarItem>
+          <Link
+            to="/panelControl"
+            color="foreground"
+            className="text-md hidden sm:block"
+          >
+            Panel de Control
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link
+            to="/log-in"
+            color="foreground"
+            className="text-md hidden sm:block"
+          >
+            Log In
+          </Link>
+        </NavbarItem>
       </NavbarMenu>
     </Navbar>
   );

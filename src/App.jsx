@@ -15,7 +15,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        De momento no lo uso <Route path="/logIn" element={<LogIn />} />
+        <Route path="/log-in" element={<LogIn />} />
+        <Route path="/sign-up" element={<LogIn />} />
         <Route path="/registro" element={<Home />} />
         <Route path="/explora" element={<Explore />} />
         <Route path="/anuncio/:idAnuncio" element={<Service />} />
