@@ -2,6 +2,7 @@ import React from "react";
 import { createContext, useState, useEffect } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithEmailAndPassword,
@@ -23,6 +24,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const [formUser, setFormUser] = useState(formObject);
+
+  const navigate = useNavigate();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -52,15 +55,18 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const initializeUser = async (user) => {
+    setLoading(true);
     if (user) {
+      setLoading(false);
       console.log(user);
       setCurrentUser(user);
-      setIsLogin(loginDefaultValue);
+      setIsLogin(true);
     } else {
       setCurrentUser(userDefaultValue);
       setIsLogin(loginDefaultValue);
     }
-    setIsLogin(false);
+    setLoading(false);
+    navigate("/");
   };
 
   const provideValues = {

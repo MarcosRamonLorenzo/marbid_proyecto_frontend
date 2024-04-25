@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-const useDataQuery = (queryKey, url) => {
+const useDataFetch = (queryKey, url) => {
   const fetchData = () => fetch(url).then((response) => response.json());
 
   const {
@@ -16,4 +16,4 @@ const useDataQuery = (queryKey, url) => {
   return { data, isLoading, isError, error };
 };
 
-export default useDataQuery;
+export default useDataFetch;

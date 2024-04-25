@@ -1,33 +1,33 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home.jsx";
-import LogIn from "./pages/LogIn.jsx";
-import Explore from "./pages/Explore.jsx";
-import Service from "./pages/Service.jsx";
-import Settings from "./pages/Settings.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import UserProfile from "./pages/UserProfile.jsx";
-import LikedServices from "./pages/LikedServices.jsx";
-import CreatedServices from "./pages/CreatedServices.jsx";
+import useAuth from "@/hooks/useAuth.js";
+import publicRoutes from "@/routes/public.routes";
+import authRoutes from "@/routes/auth.routes";
+import Loading from "@/components/shared-componentes/Loading";
 
 function App() {
+  const { isLogin, loading } = useAuth();
+
+  if (loading) {
+    return <Loading />; // Muestra el componente de carga mientras se verifica el estado de autenticación
+  }
+
+  const routes = isLogin ? [...publicRoutes, ...authRoutes] : publicRoutes;
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/log-in" element={<LogIn />} />
-        <Route path="/sign-up" element={<LogIn />} />
-        <Route path="/registro" element={<Home />} />
-        <Route path="/explora" element={<Explore />} />
-        <Route path="/anuncio/:idAnuncio" element={<Service />} />
-        <Route path="/user" element={<UserProfile />} />
-        <Route path="/panelControl" element={<Dashboard />}>
-          <Route path="creacionAnuncio" element={<Home />} />
-          <Route path="favoritos" element={<LikedServices />} />
-          <Route path="ofertasCreadas" element={<CreatedServices />} />
-          <Route path="ofertasAplicadas" element={<Home />} />
-          <Route path="ajustes" element={<Settings />} />
-        </Route>
+        {routes.map((route, index) => (
+          <Route key={index} path={route.path} element={route.element}>
+            {route.children &&
+              route.children.map((childRoute, childIndex) => (
+                <Route
+                  key={childIndex}
+                  path={childRoute.path}
+                  element={childRoute.element}
+                />
+              ))}
+          </Route>
+        ))}
       </Routes>
     </>
   );

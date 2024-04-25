@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -8,9 +8,29 @@ import {
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
-import { Link, useNavigate } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
+import { Link } from "react-router-dom";
+import { doSignOut } from "@/firebase/authFunc";
+
+const NavItem = ({ to, children }) => (
+  <NavbarItem>
+    <Link to={to} color="foreground" className="text-md hidden sm:block">
+      {children}
+    </Link>
+  </NavbarItem>
+);
+
+const NavMenuItem = ({ to, children }) => (
+  <NavbarMenuItem>
+    <Link to={to} className="w-full">
+      {children}
+    </Link>
+  </NavbarMenuItem>
+);
 
 const Header = () => {
+  const { isLogin, logout } = useAuth();
+
   return (
     <Navbar isBordered className="dark:bg-[#1c1c1c]">
       <NavbarContent className="sm:hidden" justify="start">
@@ -35,80 +55,52 @@ const Header = () => {
       </NavbarContent>
 
       <NavbarContent justify="end" className="flex gap-8">
-        <NavbarItem>
-          <Link to="/" color="foreground" className="text-md hidden sm:block">
-            Inicio
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link to="/explora" className="text-md hidden sm:block">
-            Explora
-          </Link>
-        </NavbarItem>
-
-        <NavbarItem>
-          <Link
-            to="/panelControl"
-            color="foreground"
-            className="text-md hidden sm:block"
-          >
-            Panel de Control
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            to="/log-in"
-            color="foreground"
-            className="text-md hidden sm:block"
-          >
-            Log In
-          </Link>
-        </NavbarItem>
+        <NavItem to="/">Inicio</NavItem>
+        <NavItem to="/explora">Explora</NavItem>
+        {isLogin ? (
+          <>
+            <NavItem to="/panelControl">Panel de Control</NavItem>
+            <NavItem>
+              <p
+                onClick={() => {
+                  doSignOut();
+                }}
+              >
+                Log Out
+              </p>
+            </NavItem>
+          </>
+        ) : (
+          <>
+            <NavItem to="/log-in">Log In</NavItem>
+            <NavItem to="/sign-up">Sign Up</NavItem>
+          </>
+        )}
       </NavbarContent>
-
-      <Link
-        to="/sign-up"
-        color="foreground"
-        className="text-md hidden sm:block"
-      >
-        Sign up
-      </Link>
 
       {/* mobile menu */}
       <NavbarMenu>
-        <NavbarMenuItem>
-          <Link className="w-full" to="/">
-            Inicio
-          </Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <Link to="/explora" className="w-full">
-            Explora
-          </Link>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <Link to="/panelControl" className="w-full">
-            Panel de Control
-          </Link>
-        </NavbarMenuItem>
-        <NavbarItem>
-          <Link
-            to="/panelControl"
-            color="foreground"
-            className="text-md hidden sm:block"
-          >
-            Panel de Control
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            to="/log-in"
-            color="foreground"
-            className="text-md hidden sm:block"
-          >
-            Log In
-          </Link>
-        </NavbarItem>
+        <NavMenuItem to="/">Inicio</NavMenuItem>
+        <NavMenuItem to="/explora">Explora</NavMenuItem>
+        {isLogin ? (
+          <>
+            <NavMenuItem to="/panelControl">Panel de Control</NavMenuItem>
+            <NavMenuItem>
+              <p
+                onClick={() => {
+                  doSignOut();
+                }}
+              >
+                Log Out
+              </p>
+            </NavMenuItem>
+          </>
+        ) : (
+          <>
+            <NavMenuItem to="/log-in">Log In</NavMenuItem>
+            <NavMenuItem to="/sign-up">Sign Up</NavMenuItem>
+          </>
+        )}
       </NavbarMenu>
     </Navbar>
   );

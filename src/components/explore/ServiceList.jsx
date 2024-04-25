@@ -1,16 +1,19 @@
 import React from "react";
 import CardAnuncio from "../services/ServiceCard.jsx";
-import useFetch from "../../hooks/useDataFetch.js";
+import useDataFetch from "@/hooks/useDataFetch.js";
 import Loading from "../shared-componentes/Loading.jsx";
 import configUrl from "@/config/apis.config.js";
 
 const ServiceList = () => {
-  const services = useFetch("categories", `${configUrl}/service`);
+  const { data: services, isLoading } = useDataFetch(
+    "services",
+    `${configUrl}/service`
+  );
 
   return (
     <>
       <div className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ">
-        {services.loading ? (
+        {isLoading ? (
           <Loading />
         ) : services.length ? (
           services.map((item, index) => <CardAnuncio item={item} key={index} />)
