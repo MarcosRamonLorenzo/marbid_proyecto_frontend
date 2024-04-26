@@ -15,7 +15,7 @@ const HeroSection = () => {
             type="video/mp4"
           />
         </video>
-        <p className="md:text-6xl text-4xl flex items-center justify-center gap-4 font-bold y-5">
+        <p className="md:text-6xl text-4xl flex items-center justify-center gap-4 font-bold my-5">
           BE <span> FREELANCER</span>
         </p>
       </div>

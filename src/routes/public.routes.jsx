@@ -8,7 +8,6 @@ const publicRoutes = [
   { path: "/", element: <Home /> },
   { path: "/log-in", element: <LogIn /> },
   { path: "/sign-up", element: <LogIn isRegister={true} /> },
-  { path: "/registro", element: <Home /> },
   { path: "/anuncio/:idAnuncio", element: <Service /> },
   { path: "/explora", element: <Explore /> },
 ];
