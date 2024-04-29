@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { createContext, useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
 const SidebarContext = createContext();
 
 /**
@@ -12,6 +13,7 @@ const SidebarContext = createContext();
  */
 const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
+  const {currentFireBaseUser } = useAuth();
   return (
     <aside className="h-screen">
       <nav className="h-full  flex flex-col bg-white dark:bg-[#1c1c1c] border-r dark:border-[#353842] shadow-sm  fixed z-20">
@@ -35,7 +37,7 @@ const Sidebar = ({ children }) => {
 
         <SidebarContext.Provider value={{ expanded }}>
           {/* z-index para el hover y que no se quede bajo de los inputs */}
-          <ul className="flex-1 px-3 z-50">{children}</ul>
+          <ul className="flex-1 px-3 z-50" onClick={()=>{setExpanded(false)}}>{children}</ul>
         </SidebarContext.Provider>
 
         <div className="border-t dark:border-[#353842]  flex p-3">
@@ -48,7 +50,7 @@ const Sidebar = ({ children }) => {
             <div className="leading-4">
               <h4 className="font-semibold">User</h4>
               <span className="text-xs text-gray-600 dark:text-white">
-                user@gmail.com
+              {currentFireBaseUser.email}
               </span>
             </div>
             <MoreVertical size={20} />

@@ -2,19 +2,18 @@ import React from "react";
 import { createContext, useState, useEffect } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
-import {
-  doCreateUserWithEmailAndPassword,
-  doSignInWithEmailAndPassword,
-} from "@/firebase/authFunc";
+import { redirect, useNavigate } from "react-router-dom";
+import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from "@/firebase/authFunc";
+import apiUrl from "@/config/apis.config"
 
 const authContext = createContext();
+
 
 const AuthProvider = ({ children }) => {
   const userDefaultValue = null;
   const loginDefaultValue = false;
 
-  const [currentUser, setCurrentUser] = useState(userDefaultValue);
+  const [currentFireBaseUser, setCurrentFireBaseUser] = useState(userDefaultValue);
   const [isLogin, setIsLogin] = useState(loginDefaultValue);
   const [loading, setLoading] = useState(true);
 
@@ -27,28 +26,56 @@ const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
+
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormUser({ ...formUser, [name]: value });
-    console.log(formUser);
   };
 
   const handleSubmitUser = async (e, action) => {
     e.preventDefault();
     try {
       if (action === "login") {
-        await doSignInWithEmailAndPassword(formUser.email, formUser.password);
+       await doSignInWithEmailAndPassword(formUser.email, formUser.password);
       } else {
-        await doCreateUserWithEmailAndPassword(
-          formUser.email,
-          formUser.password
-        );
+       await doCreateUserWithEmailAndPassword(formUser.email, formUser.password);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+
+  const getUser = async (uid) => {
+    try {
+      const {data} = await fetch(`${apiUrl}/user/${uid}`).then((res) => res.json());
+      return data;
+
+    } catch (error) {
+      
+      console.log(error);
+    }
+  };
+  
+  const createUser = async (user) => {
+    try {
+      const response = await fetch(`${apiUrl}/user`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user),
+      });
+      console.log(response);
+      return response.json();
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
+  
+
+
+  /* User State Controller*/
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
     return unsubscribe;
@@ -58,19 +85,27 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     if (user) {
       setLoading(false);
-      console.log(user);
-      setCurrentUser(user);
+      setCurrentFireBaseUser(user);
       setIsLogin(true);
+      if (!await getUser(user.uid)) {
+        createUser({
+          id: user.uid,
+          email: user.email
+        });
+      }
+
     } else {
-      setCurrentUser(userDefaultValue);
+      setCurrentFireBaseUser(userDefaultValue);
       setIsLogin(loginDefaultValue);
+      
     }
-    setLoading(false);
     navigate("/");
+    setLoading(false);
+   
   };
 
   const provideValues = {
-    currentUser,
+    currentFireBaseUser,
     isLogin,
     loading,
     handleFormChange,

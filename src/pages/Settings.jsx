@@ -3,15 +3,19 @@ import { Select, SelectItem, Avatar, Divider } from "@nextui-org/react";
 import { Moon, Sun } from "lucide-react";
 
 const Settings = () => {
-  const [tema, setTema] = useState("claro");
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'white');
 
   useEffect(() => {
-    if (tema === "oscuro") {
+    if (theme === "dark") {
       document.body.classList.add("dark");
     } else {
       document.body.classList.remove("dark");
     }
-  }, [tema]);
+  }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
     <div className="mx-5 my-10 2xl:mx-24 2xl:my-20">
@@ -136,21 +140,21 @@ const Settings = () => {
           </Select>
         </div>
         <div className="m-1 mt-10 md:m-5">
-          <h3 className="text-xl ">Tema</h3>
+          <h3 className="text-xl ">theme</h3>
 
           <Select
-            defaultSelectedKeys={["claro"]}
+            defaultSelectedKeys={["white"]}
             className="max-w-xs rounded-none md:w-96 mt-3"
-            label="Selecciona un tema"
+            label="Selecciona un theme"
             radius="sm"
             onChange={(e) => {
-              setTema(e.target.value);
+              setTheme(e.target.value);
             }}
           >
-            <SelectItem key="oscuro" value={"oscuro"} startContent={<Moon />}>
+            <SelectItem key="dark" value={"dark"} startContent={<Moon />}>
               Oscuro
             </SelectItem>
-            <SelectItem key="claro" value={"claro"} startContent={<Sun />}>
+            <SelectItem key="white" value={"white"} startContent={<Sun />}>
               Claro
             </SelectItem>
           </Select>

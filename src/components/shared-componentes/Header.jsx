@@ -65,13 +65,7 @@ const Header = () => {
             <>
               <NavItem to="/panelControl">Panel de Control</NavItem>
               <NavItem>
-                <p
-                  onClick={() => {
-                    openModal(true);
-                  }}
-                >
-                  Log Out
-                </p>
+                <p onClick={() => {openModal(true) }}>Log Out</p>
               </NavItem>
             </>
           ) : (
@@ -90,13 +84,7 @@ const Header = () => {
             <>
               <NavMenuItem to="/panelControl">Panel de Control</NavMenuItem>
               <NavMenuItem>
-                <p
-                  onClick={() => {
-                    openModal(true);
-                  }}
-                >
-                  Log Out
-                </p>
+              <p onClick={() => {openModal(true) }}>Log Out</p>
               </NavMenuItem>
             </>
           ) : (

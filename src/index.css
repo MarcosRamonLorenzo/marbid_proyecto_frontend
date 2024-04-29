@@ -11,9 +11,12 @@
 .dark h3,
 .dark h4,
 .dark label,
+.dark span,
 .dark table {
   color: #eee;
 }
+
+
 .dark .card {
   background-color: #232323;
   box-shadow: 0px 0px 0px 0.5px rgba(255, 255, 255, 0.539);
