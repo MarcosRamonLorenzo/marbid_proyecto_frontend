@@ -7,10 +7,10 @@ const LogIn = ({ isRegister }) => {
   const { handleFormChange, handleSubmitUser } = useAuth();
 
   return (
-    <div className="bg-[url('https://loremflickr.com/1920/1080/NorthernLights/all')] h-screen w-screen bg-cover bg-center">
+    <div className="bg-[url('https://picsum.photos/1920/1080.jpg')] h-screen w-screen bg-cover bg-center">
       <section>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
-          <div className=" bg-white xl:mx-auto xl:w-full shadow-md p-4 xl:max-w-sm 2xl:max-w-md">
+          <div className="bg-white xl:mx-auto xl:w-full shadow-md p-4 xl:max-w-sm 2xl:max-w-md rounded-md">
             <div className="mb-2 flex justify-center"></div>
             <h2 className="text-center text-2xl font-bold leading-tight text-black">
               {isRegister
@@ -40,13 +40,15 @@ const LogIn = ({ isRegister }) => {
                     <label className="text-base font-medium text-gray-900">
                       Password
                     </label>
-                    <a
-                      className="text-sm font-semibold text-black hover:underline"
-                      title=""
-                      href="#"
-                    >
-                      Forgot password?
-                    </a>
+                    {!isRegister && (
+                      <a
+                        className="text-sm font-semibold text-black hover:underline"
+                        title=""
+                        href="#"
+                      >
+                        Forgot password?
+                      </a>
+                    )}
                   </div>
                   <div className="mt-2">
                     <input
@@ -60,6 +62,26 @@ const LogIn = ({ isRegister }) => {
                     />
                   </div>
                 </div>
+                {isRegister && (
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label className="text-base font-medium text-gray-900">
+                        Repeat password
+                      </label>
+                    </div>
+                    <div className="mt-2">
+                      <input
+                        placeholder="Password"
+                        type="password"
+                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                        name="password"
+                        onChange={(e) => {
+                          handleFormChange(e);
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
                 <div>
                   <button
                     className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
@@ -96,13 +118,23 @@ const LogIn = ({ isRegister }) => {
             </div>
             <div className="mt-3 text-center text-sm text-gray-600">
               {isRegister ? (
-                <Link to="/log-in" className="text-black hover:underline">
-                  Already have an account? Sign in
-                </Link>
+                <p>
+                  <span className="text-black">
+                    Already have an account?&nbsp;
+                  </span>
+                  <Link to="/log-in" className="text-blue-700 hover:underline">
+                    Sign in
+                  </Link>
+                </p>
               ) : (
-                <Link to="/sign-up" className="text-black hover:underline">
-                  Don't have an account? Create a free account
-                </Link>
+                <p>
+                  <span className="text-black">
+                    Don't have an account?&nbsp;
+                  </span>
+                  <Link to="/sign-up" className="text-blue-700 hover:underline">
+                    Create a free account
+                  </Link>
+                </p>
               )}
             </div>
           </div>
