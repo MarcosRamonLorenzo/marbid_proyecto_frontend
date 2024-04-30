@@ -1,5 +1,6 @@
 import { doSignInWithGoogle } from "@/firebase/authFunc.js";
 import { Link } from "react-router-dom";
+import "./scss/Login.scss";
 
 import useAuth from "@/hooks/useAuth.js";
 
@@ -19,30 +20,37 @@ const LogIn = ({ isRegister }) => {
             </h2>
             <form className="mt-8" method="POST" action="#">
               <div className="space-y-5">
+                <div className="inputFormulario">
+                  <input
+                    required
+                    type="text"
+                    className="input"
+                    name="email"
+                    onChange={(e) => {
+                      handleFormChange(e);
+                    }}
+                  />
+                  <span className="highlight"></span>
+                  <span className="bar"></span>
+                  <label>Email</label>
+                </div>
                 <div>
-                  <label className="text-base font-medium text-gray-900">
-                    Email address
-                  </label>
-                  <div className="mt-2">
+                  <div className="inputFormulario">
                     <input
-                      placeholder="Email"
-                      type="email"
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      name="email"
+                      required
+                      type="password"
+                      className="input"
+                      name="password"
                       onChange={(e) => {
                         handleFormChange(e);
                       }}
                     />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center justify-between">
-                    <label className="text-base font-medium text-gray-900">
-                      Password
-                    </label>
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <label>Password</label>
                     {!isRegister && (
                       <a
-                        className="text-sm font-semibold text-black hover:underline"
+                        className="text-sm font-semibold text-gray-700 hover:underline "
                         title=""
                         href="#"
                       >
@@ -50,36 +58,21 @@ const LogIn = ({ isRegister }) => {
                       </a>
                     )}
                   </div>
-                  <div className="mt-2">
+                </div>
+                {isRegister && (
+                  <div className="inputFormulario">
                     <input
-                      placeholder="Password"
+                      required
                       type="password"
-                      className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                      name="password"
+                      className="input"
+                      name="repeatPassword"
                       onChange={(e) => {
                         handleFormChange(e);
                       }}
                     />
-                  </div>
-                </div>
-                {isRegister && (
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <label className="text-base font-medium text-gray-900">
-                        Repeat password
-                      </label>
-                    </div>
-                    <div className="mt-2">
-                      <input
-                        placeholder="Password"
-                        type="password"
-                        className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                        name="password"
-                        onChange={(e) => {
-                          handleFormChange(e);
-                        }}
-                      />
-                    </div>
+                    <span className="highlight"></span>
+                    <span className="bar"></span>
+                    <label>Repeat password</label>
                   </div>
                 )}
                 <div>
