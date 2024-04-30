@@ -9,8 +9,13 @@ const LogIn = ({ isRegister }) => {
 
   return (
     <div className="bg-[url('https://picsum.photos/1920/1080.jpg')] h-screen w-screen bg-cover bg-center">
-      <section>
-        <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
+      <section className="fixed inset-0 flex items-center justify-center">
+        <div className="absolute top-10 left-10">
+          <Link to={"/"}>
+            <img src="\src\assets\logoMarbidWeb.webp" className="h-8" />
+          </Link>
+        </div>
+        <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8 w-1/2">
           <div className="bg-white xl:mx-auto xl:w-full shadow-md p-4 xl:max-w-sm 2xl:max-w-md rounded-md">
             <div className="mb-2 flex justify-center"></div>
             <h2 className="text-center text-2xl font-bold leading-tight text-black">
