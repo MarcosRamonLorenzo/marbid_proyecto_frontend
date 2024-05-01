@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./scss/Login.scss";
 
 import useAuth from "@/hooks/useAuth.js";
+import GoogleIcon from "@/components/shared-componentes/icons/GoogleIcon";
+import GitHubIcon from "@/components/shared-componentes/icons/GitHubIcon";
 
 const LogIn = ({ isRegister }) => {
   const { handleFormChange, handleSubmitUser } = useAuth();
@@ -21,11 +23,11 @@ const LogIn = ({ isRegister }) => {
             <h2 className="text-center text-2xl font-bold leading-tight text-black">
               {isRegister
                 ? "Sign Up for a new account"
-                : "Sign in to your account"}
+                : "Sign in to your account "}
             </h2>
-            <form className="mt-8" method="POST" action="#">
+            <div className="mt-8" >
               <div className="space-y-5">
-                <div className="inputFormulario">
+                <div className="input-formulario">
                   <input
                     required
                     type="text"
@@ -40,7 +42,7 @@ const LogIn = ({ isRegister }) => {
                   <label>Email</label>
                 </div>
                 <div>
-                  <div className="inputFormulario">
+                  <div className="input-formulario">
                     <input
                       required
                       type="password"
@@ -65,7 +67,7 @@ const LogIn = ({ isRegister }) => {
                   </div>
                 </div>
                 {isRegister && (
-                  <div className="inputFormulario">
+                  <div className="input-formulario">
                     <input
                       required
                       type="password"
@@ -92,7 +94,7 @@ const LogIn = ({ isRegister }) => {
                   </button>
                 </div>
               </div>
-            </form>
+            </div>
             <div className="mt-3 space-y-3">
               <button
                 className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
@@ -102,16 +104,23 @@ const LogIn = ({ isRegister }) => {
                 }}
               >
                 <span className="mr-2 inline-block">
-                  <svg
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-rose-500"
-                  >
-                    <path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 0 1-5.279-5.28 5.27 5.27 0 0 1 5.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 0 0-8.934 8.934 8.907 8.907 0 0 0 8.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z"></path>
-                  </svg>
+                 <GoogleIcon height={8} width={8} />
                 </span>
                 {isRegister ? "Sign up with Google" : "Sign in with Google"}
+              </button>
+            </div>
+            <div className="mt-3 space-y-3">
+              <button
+                className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                type="button"
+                onClick={() => {
+                  doSignInWithGoogle();
+                }}
+              >
+                <span className="mr-2 inline-block">
+                 <GitHubIcon height={8} width={8} />
+                </span>
+                {isRegister ? "Sign up with GitHub" : "Sign in with GitHub"}
               </button>
             </div>
             <div className="mt-3 text-center text-sm text-gray-600">
