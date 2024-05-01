@@ -3,7 +3,7 @@ import { Select, SelectItem, Avatar, Divider } from "@nextui-org/react";
 import { Moon, Sun } from "lucide-react";
 
 const Settings = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'white');
+  const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
   useEffect(() => {
     if (theme === "dark") {
@@ -143,7 +143,7 @@ const Settings = () => {
           <h3 className="text-xl ">theme</h3>
 
           <Select
-            defaultSelectedKeys={["white"]}
+            defaultSelectedKeys={[theme]}
             className="max-w-xs rounded-none md:w-96 mt-3"
             label="Selecciona un theme"
             radius="sm"
