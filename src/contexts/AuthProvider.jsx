@@ -1,19 +1,21 @@
-import React from "react";
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { redirect, useNavigate } from "react-router-dom";
-import { doCreateUserWithEmailAndPassword, doSignInWithEmailAndPassword } from "@/firebase/authFunc";
-import apiUrl from "@/config/apis.config"
+import { useNavigate } from "react-router-dom";
+import {
+  doCreateUserWithEmailAndPassword,
+  doSignInWithEmailAndPassword,
+  getUser,
+  createUser,
+} from "@/functions/authFunc";
 
 const authContext = createContext();
-
 
 const AuthProvider = ({ children }) => {
   const userDefaultValue = null;
   const loginDefaultValue = false;
 
-  const [currentFireBaseUser, setCurrentFireBaseUser] = useState(userDefaultValue);
+  const [currentUser, setCurrentUser] = useState(userDefaultValue);
   const [isLogin, setIsLogin] = useState(loginDefaultValue);
   const [loading, setLoading] = useState(true);
 
@@ -26,8 +28,6 @@ const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-
-
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormUser({ ...formUser, [name]: value });
@@ -37,43 +37,33 @@ const AuthProvider = ({ children }) => {
     e.preventDefault();
     try {
       if (action === "login") {
-       await doSignInWithEmailAndPassword(formUser.email, formUser.password);
+        await doSignInWithEmailAndPassword(formUser.email, formUser.password);
       } else {
-       await doCreateUserWithEmailAndPassword(formUser.email, formUser.password);
+        await doCreateUserWithEmailAndPassword(
+          formUser.email,
+          formUser.password
+        );
       }
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
+  const handleAuthConnectionUser = async (user) => {
+    const userDB = await getUser(user.uid);
 
-  const getUser = async (uid) => {
-    try {
-      const {data} = await fetch(`${apiUrl}/user/${uid}`).then((res) => res.json());
-      return data;
-
-    } catch (error) {
-      
-      console.log(error);
-    }
-  };
-  
-  const createUser = async (user) => {
-    try {
-      const response = await fetch(`${apiUrl}/user`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user),
+    if (!userDB) {
+      createUser({
+        id: user.uid,
+        email: user.email,
       });
-      console.log(response);
-      return response.json();
-    } catch (error) {
-      console.log(error);
+      setCurrentUser(user); // Si no hay datos en la base de datos, solo almacenamos los datos de Firebase
+    } else {
+      setCurrentUser({ ...user, userDB }); // Si hay datos en la base de datos, anidamos los datos de Firebase y de la base de datos
     }
-    
+    navigate("/");
   };
-  
-
 
   /* User State Controller*/
   useEffect(() => {
@@ -85,27 +75,18 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     if (user) {
       setLoading(false);
-      setCurrentFireBaseUser(user);
+      setCurrentUser(user);
       setIsLogin(true);
-      if (!await getUser(user.uid)) {
-        createUser({
-          id: user.uid,
-          email: user.email
-        });
-      }
-
+      handleAuthConnectionUser(user);
     } else {
-      setCurrentFireBaseUser(userDefaultValue);
+      setCurrentUser(userDefaultValue);
       setIsLogin(loginDefaultValue);
-      
     }
-    navigate("/");
     setLoading(false);
-   
   };
 
   const provideValues = {
-    currentFireBaseUser,
+    currentUser,
     isLogin,
     loading,
     handleFormChange,

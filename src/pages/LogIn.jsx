@@ -1,4 +1,4 @@
-import { doSignInWithGoogle } from "@/firebase/authFunc.js";
+import { doSignInWithGoogle,doSignInWithGitHub,doSignInWithTwitter } from "@/functions/authFunc.js";
 import { Link } from "react-router-dom";
 import "./scss/Login.scss";
 
@@ -114,13 +114,27 @@ const LogIn = ({ isRegister }) => {
                 className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
                 type="button"
                 onClick={() => {
-                  doSignInWithGoogle();
+                  doSignInWithGitHub();
                 }}
               >
                 <span className="mr-2 inline-block">
                  <GitHubIcon height={8} width={8} />
                 </span>
                 {isRegister ? "Sign up with GitHub" : "Sign in with GitHub"}
+              </button>
+            </div>
+            <div className="mt-3 space-y-3">
+              <button
+                className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                type="button"
+                onClick={() => {
+                  doSignInWithTwitter();
+                }}
+              >
+                <span className="mr-2 inline-block">
+                 <GoogleIcon height={8} width={8} />
+                </span>
+                {isRegister ? "Sign up with X" : "Sign in with X"}
               </button>
             </div>
             <div className="mt-3 text-center text-sm text-gray-600">

@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import useAuth from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
-import { doSignOut } from "@/firebase/authFunc";
+import { doSignOut } from "@/functions/authFunc";
 import { useModal } from "@/hooks/useModal";
 import ModalComponent from "@/components/shared-componentes/modals/ModalComponent";
 

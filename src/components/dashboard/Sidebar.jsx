@@ -1,11 +1,12 @@
 import {
-  MoreVertical,
+  UserCog2Icon,
   ArrowRightFromLine,
   ArrowLeftFromLine,
 } from "lucide-react";
 import { createContext, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
+import UserProfileCicleIcon from "../shared-componentes/icons/UserProfileCicleIcon";
 const SidebarContext = createContext();
 
 /**
@@ -13,7 +14,7 @@ const SidebarContext = createContext();
  */
 const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
-  const {currentFireBaseUser } = useAuth();
+  const {currentUser:{userDB,photoURL} } = useAuth();
   return (
     <aside className="h-screen">
       <nav className="h-full  flex flex-col bg-white dark:bg-[#1c1c1c] border-r dark:border-[#353842] shadow-sm  fixed z-20">
@@ -48,12 +49,12 @@ const Sidebar = ({ children }) => {
       `}
           >
             <div className="leading-4">
-              <h4 className="font-semibold">User</h4>
+              <h4 className="font-semibold">{userDB.name || "Marbid User"}</h4>
               <span className="text-xs text-gray-600 dark:text-white">
-              {currentFireBaseUser.email}
+              {userDB.email}
               </span>
             </div>
-            <MoreVertical size={20} />
+            <UserProfileCicleIcon src={photoURL} size={8} />
           </div>
         </div>
       </nav>

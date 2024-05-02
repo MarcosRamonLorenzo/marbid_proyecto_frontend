@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GoogleIcon = ({width=6,height=6}) => {
+const GoogleIcon = ({width=10,height=10}) => {
   return (
     <svg
     className={`md:h-${height+4} md:w-${height+4} h-${height}  w-${width}`}

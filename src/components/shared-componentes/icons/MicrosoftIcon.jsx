@@ -1,6 +1,6 @@
 import React from "react";
 
-const MicrosoftIcon = ({ width = 6, height = 6 }) => {
+const MicrosoftIcon = ({width=10,height=10}) => {
   return (
     <svg
     className={`md:h-${height+4} md:w-${height+4} h-${height}  w-${width}`}
