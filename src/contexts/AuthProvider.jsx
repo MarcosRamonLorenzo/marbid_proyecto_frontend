@@ -54,13 +54,13 @@ const AuthProvider = ({ children }) => {
     const userDB = await getUser(user.uid);
 
     if (!userDB) {
-      createUser({
+      const newUserDB = await createUser({
         id: user.uid,
         email: user.email,
       });
-      setCurrentUser(user); // Si no hay datos en la base de datos, solo almacenamos los datos de Firebase
+      setCurrentUser(user ,newUserDB); 
     } else {
-      setCurrentUser({ ...user, userDB }); // Si hay datos en la base de datos, anidamos los datos de Firebase y de la base de datos
+      setCurrentUser({ ...user, userDB }); 
     }
     navigate("/");
   };
@@ -83,6 +83,7 @@ const AuthProvider = ({ children }) => {
       setIsLogin(loginDefaultValue);
     }
     setLoading(false);
+    
   };
 
   const provideValues = {

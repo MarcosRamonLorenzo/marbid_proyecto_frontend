@@ -1,24 +1,19 @@
 import React from "react";
-import Header from "../components/shared-componentes/Header";
-import { Tabs, Tab, Divider } from "@nextui-org/react";
+import useAuth from "@/hooks/useAuth";
+import UserData from "@/components/user/UserData";
 
-const UserProfile = () => {
+const UserProfile = ({internal}) => {
+  const { currentUser, currentUser:{userDB} } = useAuth();
+
+  {internal && console.log("internal", internal)}
+
+
+
   return (
     <div className="h-screen">
-      <Header />
-
-      <div className="mx-5 my-10 lg:mx-24 lg:my-20 ">
-        <h2 className="text-3xl font-medium">Ajustes de Perfil.</h2>
-        <Divider className="my-4" />
-
-        <Tabs aria-label="Options" variant="underlined">
-          <Tab key="photos" title="Ajustes">
-            <div>hola</div>
-          </Tab>
-          <Tab key="tabla" title="Previsualización">
-            <div>hola</div>
-          </Tab>
-        </Tabs>
+      <div className="mb-10 lg:mb-20 ">
+        <img src="https://pbs.twimg.com/profile_banners/44196397/1690621312" alt="" className="w-screen h-60 object-cover	" />
+        <UserData userFireBase={currentUser} userDB={userDB} internal />
       </div>
     </div>
   );

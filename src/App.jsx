@@ -5,13 +5,13 @@ import authRoutes from "@/routes/auth.routes";
 import Loading from "@/components/shared-componentes/Loading";
 
 function App() {
-  const { isLogin, loading } = useAuth();
+  const { isLogin,currentUser, loading } = useAuth();
 
   if (loading) {
     return <Loading />; // Muestra el componente de carga mientras se verifica el estado de autenticación
   }
 
-  const routes = isLogin ? [...publicRoutes, ...authRoutes] : publicRoutes;
+  const routes = isLogin && currentUser ? [...publicRoutes, ...authRoutes] : publicRoutes;
 
   return (
     <>

@@ -5,6 +5,7 @@ import "./scss/Login.scss";
 import useAuth from "@/hooks/useAuth.js";
 import GoogleIcon from "@/components/shared-componentes/icons/GoogleIcon";
 import GitHubIcon from "@/components/shared-componentes/icons/GitHubIcon";
+import XTwitterIcon from "@/components/shared-componentes/icons/XTwitterIcon";
 
 const LogIn = ({ isRegister }) => {
   const { handleFormChange, handleSubmitUser } = useAuth();
@@ -132,7 +133,7 @@ const LogIn = ({ isRegister }) => {
                 }}
               >
                 <span className="mr-2 inline-block">
-                 <GoogleIcon height={8} width={8} />
+                 <XTwitterIcon height={8} width={8} />
                 </span>
                 {isRegister ? "Sign up with X" : "Sign in with X"}
               </button>

@@ -12,9 +12,10 @@ const authRoutes = [
     children: [
       { path: "creacionAnuncio", element: <LikedServices /> },
       { path: "favoritos", element: <LikedServices /> },
-      { path: "ofertasCreadas", element: <CreatedServices /> },
-      { path: "ofertasAplicadas", element: <CreatedServices /> },
+      { path: "servicios-creados", element: <CreatedServices /> },
+      { path: "servicios-aplicados", element: <CreatedServices /> },
       { path: "ajustes", element: <Settings /> },
+      { path: "profile", element: <UserProfile internal /> },
     ],
   },
 ];

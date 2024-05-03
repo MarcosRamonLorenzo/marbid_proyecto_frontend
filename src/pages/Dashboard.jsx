@@ -11,18 +11,18 @@ const Dashboard = () => {
         <Sidebar>
           <SidebarItem
             icon={<BookText />}
-            text="Ofertas Creadas"
-            path="ofertasCreadas"
+            text="Servicios Creados"
+            path="servicios-creados"
           />
           <SidebarItem
-            icon={<Heart />}
-            text="Ofertas Gustadas"
+            icon={<Heart />}  
+            text="Servicios Gustados"
             path="favoritos"
           />
           <SidebarItem
             icon={<ScrollText />}
-            text="Ofertas Aplicadas"
-            path="/"
+            text="Servicios Aplicados"
+            path="servicios-aplicados"
           />
           <SidebarItem icon={<Settings />} text="Ajustes" path="ajustes" />
         </Sidebar>

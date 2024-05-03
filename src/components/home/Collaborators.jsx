@@ -1,5 +1,5 @@
 import React from "react";
-import AWSIcon from "../shared-componentes/icons/AWSIcon";
+import XTwitterIcon from "../shared-componentes/icons/XTwitterIcon";
 import MetaIcon from "../shared-componentes/icons/MetaIcon";
 import GitHubIcon from "../shared-componentes/icons/GitHubIcon";
 import GoogleIcon from "../shared-componentes/icons/GoogleIcon";
@@ -9,15 +9,15 @@ const Collaborators = () => {
   return (
     <section className="flex flex-col items-center gap-10 mt-20 justify-center mx-5">
       <h2 className="text-2xl">Collaborators</h2>
-      <div className="flex flex-row md:gap-20 gap-12  ">
+      <div className="flex flex-row md:gap-20 gap-5  ">
         <button
           href="/"
           className="group flex justify-center p-2 rounded-md drop-shadow-xl  from-gray-800 to-black text-white font-semibold hover:translate-y-3 hover:rounded-[50%] transition-all duration-500 hover:from-[#331029] hover:to-[#310413]"
         >
-          {/* Imagen AWS. */}
-          <AWSIcon />
+          {/* Imagen X. */}
+          <XTwitterIcon />
           <span className="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700">
-            AWS
+            X
           </span>
         </button>
         <button

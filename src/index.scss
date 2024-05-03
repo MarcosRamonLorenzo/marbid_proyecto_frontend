@@ -2,6 +2,19 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+/*General Variables*/
+$color-first: #5271FF ;
+$color-second: #F26D3D ;
+$color-third: #F25EA3;
+
+.primary-color-class{
+  background-color: $color-first;
+}
+
+.secondary-color-class{
+  background-color: $color-second;
+}
+
 /*Modo oscuro*/
 
 .dark a,
