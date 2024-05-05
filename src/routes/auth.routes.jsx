@@ -7,7 +7,7 @@ import Settings from "@/pages/Settings";
 const authRoutes = [
   { path: "/user", element: <UserProfile /> },
   {
-    path: "/panelControl",
+    path: "/panel-control",
     element: <Dashboard />,
     children: [
       { path: "creacionAnuncio", element: <LikedServices /> },

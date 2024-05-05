@@ -12,7 +12,7 @@ import useAuth from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
 import { doSignOut } from "@/functions/authFunc";
 import { useModal } from "@/hooks/useModal";
-import ModalComponent from "@/components/shared-componentes/modals/ModalComponent";
+import ModalAcceptCancel from "@/components/shared-componentes/modals/ModalAcceptCancel";
 
 const NavItem = ({ to, children }) => (
   <NavbarItem>
@@ -63,7 +63,7 @@ const Header = () => {
           <NavItem to="/explora">Explora</NavItem>
           {isLogin ? (
             <>
-              <NavItem to="/panelControl">Panel de Control</NavItem>
+              <NavItem to="/panel-control">Panel de Control</NavItem>
               <NavItem>
                 <p onClick={() => {openModal(true) }}>Log Out</p>
               </NavItem>
@@ -82,7 +82,7 @@ const Header = () => {
           <NavMenuItem to="/explora">Explora</NavMenuItem>
           {isLogin ? (
             <>
-              <NavMenuItem to="/panelControl">Panel de Control</NavMenuItem>
+              <NavMenuItem to="/panel-control">Panel de Control</NavMenuItem>
               <NavMenuItem>
               <p onClick={() => {openModal(true) }}>Log Out</p>
               </NavMenuItem>
@@ -96,7 +96,7 @@ const Header = () => {
         </NavbarMenu>
       </Navbar>
 
-      <ModalComponent
+      <ModalAcceptCancel
         isOpen={isOpen}
         onClose={closeModal}
         title="Cerrar Sesión"

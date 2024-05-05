@@ -62,7 +62,7 @@ const AuthProvider = ({ children }) => {
     } else {
       setCurrentUser({ ...user, userDB }); 
     }
-    navigate("/");
+    //navigate("/"); fix/make redirect to home only in login or register 
   };
 
   /* User State Controller*/

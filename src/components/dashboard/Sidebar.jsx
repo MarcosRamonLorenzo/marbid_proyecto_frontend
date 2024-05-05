@@ -42,7 +42,7 @@ const Sidebar = ({ children }) => {
 
         <div className="border-t dark:border-[#353842]  flex p-3">
           {!expanded &&
-            <Link to="profile">
+            <Link to="profile" className="ml-2">
               <UserProfileCicleIcon src={photoURL} size={8} />
             </Link>
           }
@@ -50,7 +50,7 @@ const Sidebar = ({ children }) => {
             <div
               className={`
           flex justify-between items-center
-          overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"}`}
+          overflow-hidden gap-5 transition-all ${expanded ? "w-58 ml-3" : "w-0"}`}
             >
               <div className="leading-4">
                 <h4 className="font-semibold">{userDB?.name || "Marbid User"}</h4>

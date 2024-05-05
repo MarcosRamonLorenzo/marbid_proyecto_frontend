@@ -9,7 +9,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-const ModalComponent = ({
+const ModalAcceptCancel = ({
   isOpen = false,
   onClose,
   onConfirm,
@@ -43,4 +43,4 @@ const ModalComponent = ({
   );
 };
 
-export default ModalComponent;
+export default ModalAcceptCancel;
