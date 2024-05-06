@@ -63,9 +63,9 @@ const list = [
 ];
 
 const CreatedServices = () => {
-  const navigate = useNavigate();
+
   return (
-    <div className="mx-4 my-10 md:mx-24 md:my-20">
+    <div className=" created-services mx-4 my-10 md:mx-24 md:my-20">
       <Button
         className="flex items-center bg-blue-400 text-white gap-1 px-4 py-2 cursor-pointer  font-semibold tracking-widest rounded-md hover:bg-blue-400 duration-300 hover:gap-2 hover:translate-x-3 fixed right-5 bottom-5 z-30"
         endContent={<CirclePlus />}

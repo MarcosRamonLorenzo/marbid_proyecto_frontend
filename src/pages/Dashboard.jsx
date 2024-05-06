@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
-    <div className=" panel-control flex gap-20">
+    <div className="dashboard panel-control flex gap-20">
       <div className="">
         <Sidebar>
           <SidebarItem

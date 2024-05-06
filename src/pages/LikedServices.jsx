@@ -58,7 +58,7 @@ const list = [
 
 const LikedServices = () => {
   return (
-    <div className="mx-5 my-10 lg:mx-24 lg:my-20">
+    <div className="liked-services mx-5 my-10 lg:mx-24 lg:my-20">
       <h2 className="text-3xl font-medium">Ofertas Gustadas</h2>
       <Divider className="my-4" />
       <h3 className=" text-xl ml-3">Visualización</h3>

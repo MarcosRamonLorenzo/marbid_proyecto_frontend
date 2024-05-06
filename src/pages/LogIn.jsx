@@ -11,7 +11,7 @@ const LogIn = ({ isRegister }) => {
   const { handleFormChange, handleSubmitUser } = useAuth();
 
   return (
-    <div className="bg-[url('https://picsum.photos/1920/1080.jpg')] h-screen w-screen bg-cover bg-center">
+    <div className=" login bg-[url('https://picsum.photos/1920/1080.jpg')] h-screen w-screen bg-cover bg-center">
       <section className="fixed inset-0 flex items-center justify-center">
         <div className="absolute top-10 left-10">
           <Link to={"/"}>

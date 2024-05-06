@@ -7,7 +7,7 @@ const UserAvatar = ({ photoURL }) => (
   <img
     src={photoURL}
     alt=""
-    className="w-40 h-40 rounded-full -mt-10 border-4 border-white"
+    className="w-40 h-40 rounded-full -mt-10 border-4 border-white object-cover"
   />
 );
 
@@ -76,7 +76,7 @@ const UserTabs = () => (
 const UserData = ({ userDB, internal, openSetUser }) => (
   <>
     <div className="flex flex-col justify-center items-center">
-      <UserAvatar photoURL={userDB?.avatar_url} />
+      <UserAvatar photoURL={userDB?.avatar_img} />
       <UserDetails userDB={userDB} />
       <p className="text-xl mt-6">{userDB?.label || "Usuario de Marbid"}</p>
       <p className="w-[20em] md:w-[55em] mt-3">

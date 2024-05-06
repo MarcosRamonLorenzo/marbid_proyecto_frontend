@@ -29,8 +29,13 @@ $color-third: #F25EA3;
 .dark h4,
 .dark label,
 .dark span,
-.dark table {
+.dark table,
+.dark header {
   color: #eee;
+}
+
+.dark .settings svg {
+  stroke: #eee;
 }
 
 .dark {

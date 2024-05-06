@@ -10,7 +10,7 @@ import {
 
 const Service = () => {
   return (
-    <div className="lg:h-screen">
+    <div className=" service lg:h-screen">
       <Header />
       <div className="m-10 mb-0 flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
         <div className="">

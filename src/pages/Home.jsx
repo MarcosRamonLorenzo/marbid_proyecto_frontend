@@ -8,7 +8,7 @@ import OfertasBuscadas from "../components/home/SearchServices.jsx";
 
 const Home = () => {
   return (
-    <div>
+    <div className="home">
       <Header />
       <HeroSection />
       <Collaborators />

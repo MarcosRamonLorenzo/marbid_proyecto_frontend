@@ -13,7 +13,7 @@ const SidebarContext = createContext();
  */
 const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useState(false);
-  const { currentUser: { userDB, photoURL } } = useAuth();
+  const { currentUser: { userDB } } = useAuth();
 
   return (
     <aside className="h-screen">
@@ -42,8 +42,8 @@ const Sidebar = ({ children }) => {
 
         <div className="border-t dark:border-[#353842]  flex p-3">
           {!expanded &&
-            <Link to="profile" className="ml-2">
-              <UserProfileCicleIcon src={photoURL} size={8} />
+            <Link to="profile" className="ml-1">
+              <UserProfileCicleIcon src={userDB?.avatar_img} size={8} />
             </Link>
           }
           <Link to="profile">
@@ -58,7 +58,7 @@ const Sidebar = ({ children }) => {
                   {userDB?.email || "loading@email.com"}
                 </span>
               </div>
-              <UserProfileCicleIcon src={photoURL} size={8} />
+              <UserProfileCicleIcon src={userDB?.avatar_img} size={8} />
             </div>
           </Link>
         </div>

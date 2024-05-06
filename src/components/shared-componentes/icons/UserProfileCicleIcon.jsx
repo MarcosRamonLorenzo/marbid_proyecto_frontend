@@ -1,8 +1,9 @@
+import { Avatar } from '@nextui-org/react'
 import React from 'react'
 
 const UserProfileCicleIcon = ({src,size}) => {
   return (
-   <img src={src} className={`w-${size} rounded-2xl`} alt="" />
+    <Avatar src={src} size={size} />
   )
 }
 
