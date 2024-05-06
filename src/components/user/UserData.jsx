@@ -11,13 +11,13 @@ const UserAvatar = ({ photoURL }) => (
   />
 );
 
-const UserDetails = ({ userFireBase, userDB }) => {
-  const userTag = userFireBase?.email.split("@")[0];
+const UserDetails = ({ userDB }) => {
+  const userTag = userDB?.email.split("@")[0];
   const getCreatedAt = new Date(userDB?.createdAt).toLocaleDateString();
 
   return (
     <div className="text-center">
-      <h1 className="text-2xl font-bold">{userFireBase?.displayName}</h1>
+      <h1 className="text-2xl font-bold">{userDB?.name}</h1>
       <p className="text-gray-500">@{userTag}</p>
       <div className="flex gap-2 justify-center">
         <p className="text-gray-500">Usuario creado el {getCreatedAt}</p>
@@ -73,11 +73,11 @@ const UserTabs = () => (
   </Tabs>
 );
 
-const UserData = ({ userFireBase, userDB, internal, openSetUser }) => (
+const UserData = ({ userDB, internal, openSetUser }) => (
   <>
     <div className="flex flex-col justify-center items-center">
-      <UserAvatar photoURL={userFireBase.photoURL} />
-      <UserDetails userFireBase={userFireBase} userDB={userDB} />
+      <UserAvatar photoURL={userDB?.avatar_url} />
+      <UserDetails userDB={userDB} />
       <p className="text-xl mt-6">{userDB?.label || "Usuario de Marbid"}</p>
       <p className="w-[20em] md:w-[55em] mt-3">
         {userDB?.decription ||

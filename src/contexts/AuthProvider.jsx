@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithEmailAndPassword,
-  getUser,
+  getUserDB,
   createUser,
 } from "@/functions/authFunc";
 
@@ -51,12 +51,13 @@ const AuthProvider = ({ children }) => {
   };
 
   const handleAuthConnectionUser = async (user) => {
-    const userDB = await getUser(user.uid);
+    const userDB = await getUserDB(user.uid);
 
     if (!userDB) {
       const newUserDB = await createUser({
         id: user.uid,
         email: user.email,
+        avatar_img: user?.photoURL ||null,
       });
       setCurrentUser(user ,newUserDB); 
     } else {

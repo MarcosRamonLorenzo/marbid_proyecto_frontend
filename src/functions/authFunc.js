@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
+
 import { auth } from "@/firebase/firebase";
 
 
@@ -41,7 +42,7 @@ export const doSignOut = async () => {
   return auth.signOut();
 };
 
-export const getUser = async (uid) => {
+export const getUserDB = async (uid) => {
   try {
     const {data} = await fetch(`${apiUrl}/user/${uid}`).then((res) => res.json());
     return data;
@@ -51,6 +52,21 @@ export const getUser = async (uid) => {
     console.log(error);
   }
 };
+
+
+export const updateUser = async (user) => {
+  try {
+    const response = await fetch(`${apiUrl}/user/${user.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user),
+    });
+
+    return response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const createUser = async (user) => {
   try {
