@@ -24,7 +24,7 @@ const ModalAcceptCancel = ({
           <p>{text}</p>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" variant="light" onClick={onClose}>
+          <Button color="danger" onClick={onClose}>
             Cerrar
           </Button>
           <Button

@@ -8,13 +8,11 @@ import {
   getUserDB,
   createUser,
 } from "@/functions/authFunc";
-import { useModal } from "@/hooks/useModal";
 
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  // Si no se hace así creará bucle infinito, ya que es en este jsx donde se crea el error y no en el login.
-  const { openModal } = useModal();
+
 
   const nullDefaultValue = null;
   const stringDefaultValue = "";
@@ -32,7 +30,6 @@ const AuthProvider = ({ children }) => {
 
   const [formUser, setFormUser] = useState(formObject);
 
-  const navigate = useNavigate();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +52,6 @@ const AuthProvider = ({ children }) => {
           navigate("/");
         } else {
           setErrorAuth("Las contraseñas no son iguales");
-          openModal(true);
         }
       }
     } catch (error) {
@@ -104,6 +100,7 @@ const AuthProvider = ({ children }) => {
     isLogin,
     loading,
     errorAuth,
+    setErrorAuth,
     handleFormChange,
     handleSubmitUser,
   };
