@@ -13,13 +13,29 @@ import useAuth from "@/hooks/useAuth.js";
 import GoogleIcon from "@/components/shared-componentes/icons/GoogleIcon";
 import GitHubIcon from "@/components/shared-componentes/icons/GitHubIcon";
 import XTwitterIcon from "@/components/shared-componentes/icons/XTwitterIcon";
+import { useEffect } from "react";
 
 const LogIn = ({ isRegister }) => {
   const navigate = useNavigate();
 
-  const { handleFormChange, handleSubmitUser, errorAuth, isLogin } = useAuth();
-  // El open está en AuthProvider, ya que aquí al no estar el error provocaba bucle.
-  const { isOpen, closeModal } = useModal();
+
+  const { handleFormChange, handleSubmitUser, errorAuth,setErrorAuth, isLogin } = useAuth();
+  
+
+  const { isOpen,openModal, closeModal } = useModal();
+
+  useEffect(() => {
+    if (errorAuth) {
+      openModal();
+    }
+  }, [errorAuth]);
+  
+  
+
+  if (isLogin) {
+    navigate("/");
+  }
+
 
   if (isLogin) {
     navigate("/");
@@ -187,8 +203,10 @@ const LogIn = ({ isRegister }) => {
       </div>
       <ModalErrorAccept
         isOpen={isOpen}
-        onClose={closeModal}
-        title="Error"
+        onClose={()=>{
+          closeModal();
+          setErrorAuth(null)
+        }}
         text={errorAuth}
       />
     </>

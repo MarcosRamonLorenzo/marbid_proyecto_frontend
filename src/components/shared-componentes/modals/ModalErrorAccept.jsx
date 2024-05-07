@@ -7,23 +7,25 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Divider,
 } from "@nextui-org/react";
 
 const ModalErrorAccept = ({
   isOpen = true,
   onClose,
-  title = "Modal Error Accept",
+  title = "Error",
   text = "",
 }) => {
   return ReactDOM.createPortal(
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+        <Divider />
         <ModalBody>
           <p>{text}</p>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" variant="light" onClick={onClose}>
+          <Button color="danger"  onClick={onClose}>
             Aceptar
           </Button>
         </ModalFooter>
