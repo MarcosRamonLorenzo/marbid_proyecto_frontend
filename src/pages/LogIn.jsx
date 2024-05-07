@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import "./scss/Login.scss";
 import { useModal } from "@/hooks/useModal";
 import ModalErrorAccept from "@/components/shared-componentes/modals/ModalErrorAccept";
+import { useNavigate } from "react-router-dom";
 
 import useAuth from "@/hooks/useAuth.js";
 import GoogleIcon from "@/components/shared-componentes/icons/GoogleIcon";
@@ -14,9 +15,15 @@ import GitHubIcon from "@/components/shared-componentes/icons/GitHubIcon";
 import XTwitterIcon from "@/components/shared-componentes/icons/XTwitterIcon";
 
 const LogIn = ({ isRegister }) => {
-  const { handleFormChange, handleSubmitUser, errorAuth } = useAuth();
+  const navigate = useNavigate();
+
+  const { handleFormChange, handleSubmitUser, errorAuth, isLogin } = useAuth();
   // El open está en AuthProvider, ya que aquí al no estar el error provocaba bucle.
   const { isOpen, closeModal } = useModal();
+
+  if (isLogin) {
+    navigate("/");
+  }
 
   return (
     <>
@@ -94,7 +101,7 @@ const LogIn = ({ isRegister }) => {
                   )}
                   <div>
                     <button
-                      className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
+                      className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white transition duration-800 ease-in-out transform hover:bg-green-900 hover:scale-105"
                       type="button"
                       onClick={(e) => {
                         handleSubmitUser(e, isRegister ? "register" : "login");
@@ -107,7 +114,7 @@ const LogIn = ({ isRegister }) => {
               </div>
               <div className="mt-3 space-y-3">
                 <button
-                  className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                  className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none hover:scale-105"
                   type="button"
                   onClick={() => {
                     doSignInWithGoogle();
@@ -121,7 +128,7 @@ const LogIn = ({ isRegister }) => {
               </div>
               <div className="mt-3 space-y-3">
                 <button
-                  className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                  className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none hover:scale-105"
                   type="button"
                   onClick={() => {
                     doSignInWithGitHub();
@@ -135,7 +142,7 @@ const LogIn = ({ isRegister }) => {
               </div>
               <div className="mt-3 space-y-3">
                 <button
-                  className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none"
+                  className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none hover:scale-105"
                   type="button"
                   onClick={() => {
                     doSignInWithTwitter();

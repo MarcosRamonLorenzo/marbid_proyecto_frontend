@@ -44,15 +44,12 @@ const AuthProvider = ({ children }) => {
     try {
       if (action === "login") {
         await doSignInWithEmailAndPassword(formUser.email, formUser.password);
-        navigate("/");
       } else {
         if (formUser.password === formUser.repeatPassword) {
           await doCreateUserWithEmailAndPassword(
             formUser.email,
             formUser.password
           );
-
-          navigate("/");
         } else {
           setErrorAuth("Las contraseñas no son iguales");
           openModal(true);
