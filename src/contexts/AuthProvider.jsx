@@ -57,7 +57,8 @@ const AuthProvider = ({ children }) => {
       const newUserDB = await createUser({
         id: user.uid,
         email: user.email,
-        avatar_img: user?.photoURL ||null,
+        name: user?.displayName || null,
+        avatar_img: user?.photoURL || null,
       });
       setCurrentUser(user ,newUserDB); 
     } else {
@@ -79,12 +80,13 @@ const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       setIsLogin(true);
       handleAuthConnectionUser(user);
+
     } else {
       setCurrentUser(userDefaultValue);
       setIsLogin(loginDefaultValue);
     }
     setLoading(false);
-    
+    console.log(currentUser);
   };
 
   const provideValues = {

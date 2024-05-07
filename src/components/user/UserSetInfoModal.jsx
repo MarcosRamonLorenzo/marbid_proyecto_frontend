@@ -1,9 +1,18 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Image, Avatar,Select,SelectItem } from "@nextui-org/react";
 import { Edit2, Tag, FileText } from "lucide-react";
 import countries from '@/config/constries.config';
+import useAuth from "@/hooks/useAuth";
+import { useState } from "react";
 
 
 const UserEditModal = ({ isOpen, onClose }) => {
+
+  const {currentUser:{userDB}} = useAuth();
+  const { name, label, description, country, avatar_img , backround_img  } = userDB;
+  const userActualDataDefaultValue = { name, label, description, country, avatar_img , backround_img}
+  
+  const [userActualData,setUserActualData] = useState(userActualDataDefaultValue);
+
   return (
     <>
       <Modal
@@ -38,6 +47,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 placeholder="Introduce tu nombre"
                 variant="underlined"
                 color="second"
+                name="name"
+                value={userActualData.name}
               />
 
               <Input
@@ -48,6 +59,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 placeholder="Introduce tu etiqueta"
                 variant="underlined"
                 color="third"
+                name="label"
+                value={userActualData.label}
               />
 
               <Input
@@ -58,6 +71,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 placeholder="Introduce tu descripción"
                 variant="underlined"
                 color="first"
+                name="description"
+                value={userActualData.description}
               />
 
               <Select variant="underlined" className="mt-3" placeholder="Selecciona tu país" label="País" radius="sm">
