@@ -8,16 +8,22 @@ import {
   getUserDB,
   createUser,
 } from "@/functions/authFunc";
+import { useModal } from "@/hooks/useModal";
 
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const userDefaultValue = null;
+  // Si no se hace así creará bucle infinito, ya que es en este jsx donde se crea el error y no en el login.
+  const { openModal } = useModal();
+
+  const nullDefaultValue = null;
+  const stringDefaultValue = "";
   const loginDefaultValue = false;
 
-  const [currentUser, setCurrentUser] = useState(userDefaultValue);
+  const [currentUser, setCurrentUser] = useState(nullDefaultValue);
   const [isLogin, setIsLogin] = useState(loginDefaultValue);
   const [loading, setLoading] = useState(true);
+  const [errorAuth, setErrorAuth] = useState(stringDefaultValue);
 
   const formObject = {
     email: "",
@@ -38,13 +44,20 @@ const AuthProvider = ({ children }) => {
     try {
       if (action === "login") {
         await doSignInWithEmailAndPassword(formUser.email, formUser.password);
+        navigate("/");
       } else {
-        await doCreateUserWithEmailAndPassword(
-          formUser.email,
-          formUser.password
-        );
+        if (formUser.password === formUser.repeatPassword) {
+          await doCreateUserWithEmailAndPassword(
+            formUser.email,
+            formUser.password
+          );
+
+          navigate("/");
+        } else {
+          setErrorAuth("Las contraseñas no son iguales");
+          openModal(true);
+        }
       }
-      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -57,13 +70,13 @@ const AuthProvider = ({ children }) => {
       const newUserDB = await createUser({
         id: user.uid,
         email: user.email,
-        avatar_img: user?.photoURL ||null,
+        avatar_img: user?.photoURL || null,
       });
-      setCurrentUser(user ,newUserDB); 
+      setCurrentUser(user, newUserDB);
     } else {
-      setCurrentUser({ ...user, userDB }); 
+      setCurrentUser({ ...user, userDB });
     }
-    //navigate("/"); fix/make redirect to home only in login or register 
+    //navigate("/"); fix/make redirect to home only in login or register
   };
 
   /* User State Controller*/
@@ -80,17 +93,17 @@ const AuthProvider = ({ children }) => {
       setIsLogin(true);
       handleAuthConnectionUser(user);
     } else {
-      setCurrentUser(userDefaultValue);
+      setCurrentUser(nullDefaultValue);
       setIsLogin(loginDefaultValue);
     }
     setLoading(false);
-    
   };
 
   const provideValues = {
     currentUser,
     isLogin,
     loading,
+    errorAuth,
     handleFormChange,
     handleSubmitUser,
   };
