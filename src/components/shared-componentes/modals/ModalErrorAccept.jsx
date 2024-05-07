@@ -9,11 +9,10 @@ import {
   Button,
 } from "@nextui-org/react";
 
-const ModalAcceptCancel = ({
-  isOpen = false,
+const ModalErrorAccept = ({
+  isOpen = true,
   onClose,
-  onConfirm,
-  title = "Modal Accept Cancel",
+  title = "Modal Error Accept",
   text = "",
 }) => {
   return ReactDOM.createPortal(
@@ -25,16 +24,7 @@ const ModalAcceptCancel = ({
         </ModalBody>
         <ModalFooter>
           <Button color="danger" variant="light" onClick={onClose}>
-            Cerrar
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => {
-              onConfirm();
-              onClose();
-            }}
-          >
-            Continuar
+            Aceptar
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -43,4 +33,4 @@ const ModalAcceptCancel = ({
   );
 };
 
-export default ModalAcceptCancel;
+export default ModalErrorAccept;

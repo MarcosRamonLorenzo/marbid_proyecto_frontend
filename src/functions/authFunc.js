@@ -9,8 +9,7 @@ import {
 
 import { auth } from "@/firebase/firebase";
 
-
-import apiUrl from "@/config/apis.config"
+import apiUrl from "@/config/apis.config";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
@@ -36,7 +35,7 @@ export const doSignInWithTwitter = async () => {
   const provider = new TwitterAuthProvider();
   const result = await signInWithPopup(auth, provider);
   return result;
-}
+};
 
 export const doSignOut = async () => {
   return auth.signOut();
@@ -44,21 +43,20 @@ export const doSignOut = async () => {
 
 export const getUserDB = async (uid) => {
   try {
-    const {data} = await fetch(`${apiUrl}/user/${uid}`).then((res) => res.json());
+    const { data } = await fetch(`${apiUrl}/user/${uid}`).then((res) =>
+      res.json()
+    );
     return data;
-
   } catch (error) {
-    
     console.log(error);
   }
 };
-
 
 export const updateUser = async (user) => {
   try {
     const response = await fetch(`${apiUrl}/user/${user.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
 
@@ -66,13 +64,13 @@ export const updateUser = async (user) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const createUser = async (user) => {
   try {
     const response = await fetch(`${apiUrl}/user`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
 
@@ -80,6 +78,4 @@ export const createUser = async (user) => {
   } catch (error) {
     console.log(error);
   }
-  
 };
-
