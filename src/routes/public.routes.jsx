@@ -3,6 +3,7 @@ import Home from "@/pages/Home";
 import LogIn from "@/pages/LogIn";
 import Explore from "@/pages/Explore";
 import Service from "@/pages/Service";
+import NotFound from "@/pages/NotFound";
 import UserData from "@/components/user/UserData";
 
 const publicRoutes = [
@@ -11,6 +12,7 @@ const publicRoutes = [
   { path: "/sign-up", element: <LogIn isRegister={true} /> },
   { path: "/anuncio/:idAnuncio", element: <Service /> },
   { path: "/explora", element: <Explore /> },
+  { path: "/*", element: <NotFound /> },
   { path: "/user/:idUser", element: <UserData /> },
 ];
 
