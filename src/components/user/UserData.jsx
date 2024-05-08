@@ -4,7 +4,7 @@ import { CalendarDays, MessageCircleMore, SettingsIcon } from "lucide-react";
 import { Avatar } from "@nextui-org/react";
 
 const UserAvatar = ({ photoURL }) => (
-  <img
+  <Image
     src={photoURL}
     alt=""
     className="w-40 h-40 z-50 rounded-full -mt-10 border-4 border-white object-cover"
@@ -75,7 +75,7 @@ const UserTabs = () => (
 
 const UserData = ({ userDB, internal, openSetUser }) => (
   <>
-   <Image src={`https://app.requestly.io/delay/500/${userDB?.backround_img}`} radius="none"  alt="" className="w-screen h-60 object-cover	" />
+   <Image src={userDB?.backround_img} radius="none"  alt="" className="w-screen h-60 object-cover	" />
     <div className="flex flex-col justify-center items-center">
       <UserAvatar photoURL={userDB?.avatar_img} />
       <UserDetails userDB={userDB} />

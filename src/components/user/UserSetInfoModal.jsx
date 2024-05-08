@@ -1,34 +1,64 @@
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input, Image, Avatar,Select,SelectItem } from "@nextui-org/react";
-import { Edit2, Tag, FileText } from "lucide-react";
-import countries from '@/config/constries.config';
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  Input,
+  Image,
+  Avatar,
+  Select,
+  SelectItem,
+  Checkbox,
+} from "@nextui-org/react";
+import { Edit2, Tag, FileText, CameraIcon } from "lucide-react";
+import countries from "@/config/constries.config";
 import useAuth from "@/hooks/useAuth";
-
-
 
 const UserEditModal = ({ isOpen, onClose }) => {
   const { currentUser } = useAuth();
   const userDB = currentUser ? currentUser.userDB : null;
-  const { name, label, description, country, avatar_img , backround_img  } = userDB || {};
- 
+
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        placement="auto"
-        size="2xl"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} placement="auto" size="2xl">
         <ModalContent>
           <>
-            <ModalHeader className="flex flex-col gap-1">Editar Perfil</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1">
+              Editar Perfil
+            </ModalHeader>
             <ModalBody>
               <div className="flex justify-center items-start gap-10 ">
                 <div className="flex flex-col items-center my-2 ">
-                  <div className="relative">
-                    <Image className="mx-auto w-[25em] h-[10em] object-cover cursor-pointer hover:filter hover:brightness-75" src="https://app.requestly.io/delay/1000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg" />                
-                    <Button className="absolute top-2 right-2 z-50 " size="sm" color="secondary" onClick={()=>{}}>Aleatorio</Button>
+                  <div className="relative group">
+                    <Image
+                      className="mx-auto w-[25em] h-[10em] object-cover cursor-pointer hover:filter hover:brightness-75"
+                      src="https://app.requestly.io/delay/1000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+                    />
+                    <Checkbox
+                      className="absolute top-5 right-5 z-50 bg-[#eee] rounded"
+                      size="sm"
+                      color="secondary"
+                    >
+                      Aleatorio
+                    </Checkbox>
+                    <CameraIcon
+                      className="absolute m-auto inset-0 z-50 text-2xl text-default-400 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      onClick={() => {console.log("hola");}}
+                    />
                   </div>
-                  <Avatar className=" mx-auto -mt-5 z-10 scale-[1.5] cursor-pointer hover:filter hover:brightness-75" size="lg"  src={`https://app.requestly.io/delay/1000/${userDB?.avatar_img}`} />
+                  <div className="relative group">
+                    <Avatar
+                      className="mx-auto -mt-5 z-10 scale-[1.5] cursor-pointer hover:filter hover:brightness-75"
+                      size="lg"
+                      src={`https://app.requestly.io/delay/1000/${userDB?.avatar_img}`}
+                    />
+                    <CameraIcon
+                      className="absolute m-auto inset-0 top-0 z-50 text-2xl text-default-400 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      onClick={() => {console.log("hola");}}
+                    />
+                  </div>
                 </div>
               </div>
               <Input
@@ -68,14 +98,28 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 value={userDB?.description}
               />
 
-              <Select variant="underlined" className="mt-3" placeholder="Selecciona tu país" label="País" radius="sm">
-                {countries.map(country => (
-                  <SelectItem key={country.key} startContent={<Avatar alt={country.alt} className="w-6 h-6" src={country.src} />}>
+              <Select
+                variant="underlined"
+                className="mt-3"
+                placeholder="Selecciona tu país"
+                label="País"
+                radius="sm"
+              >
+                {countries.map((country) => (
+                  <SelectItem
+                    key={country.key}
+                    startContent={
+                      <Avatar
+                        alt={country.alt}
+                        className="w-6 h-6"
+                        src={country.src}
+                      />
+                    }
+                  >
                     {country.name}
                   </SelectItem>
                 ))}
               </Select>
-
             </ModalBody>
             <ModalFooter>
               <Button color="danger" onPress={onClose}>
@@ -90,6 +134,6 @@ const UserEditModal = ({ isOpen, onClose }) => {
       </Modal>
     </>
   );
-}
+};
 
 export default UserEditModal;

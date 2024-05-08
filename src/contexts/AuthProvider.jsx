@@ -76,6 +76,7 @@ const AuthProvider = ({ children }) => {
 
   const initializeUser = async (user) => {
     setLoading(true);
+    <LoadingMarbidLoad />
     if (user) {
       setLoading(false);
       setCurrentUser(user);
