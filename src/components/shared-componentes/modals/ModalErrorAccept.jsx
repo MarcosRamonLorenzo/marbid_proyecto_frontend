@@ -7,34 +7,26 @@ import {
   ModalBody,
   ModalFooter,
   Button,
+  Divider,
 } from "@nextui-org/react";
 
-const ModalAcceptCancel = ({
-  isOpen = false,
+const ModalErrorAccept = ({
+  isOpen = true,
   onClose,
-  onConfirm,
-  title = "Modal Accept Cancel",
+  title = "Error",
   text = "",
 }) => {
   return ReactDOM.createPortal(
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+        <Divider />
         <ModalBody>
           <p>{text}</p>
         </ModalBody>
         <ModalFooter>
-          <Button color="danger" onClick={onClose}>
-            Cerrar
-          </Button>
-          <Button
-            color="primary"
-            onClick={() => {
-              onConfirm();
-              onClose();
-            }}
-          >
-            Continuar
+          <Button color="danger"  onClick={onClose}>
+            Aceptar
           </Button>
         </ModalFooter>
       </ModalContent>
@@ -43,4 +35,4 @@ const ModalAcceptCancel = ({
   );
 };
 
-export default ModalAcceptCancel;
+export default ModalErrorAccept;

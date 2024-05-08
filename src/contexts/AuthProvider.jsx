@@ -13,12 +13,16 @@ import LoadingMarbidLoad from "@/components/shared-componentes/Loadings/LoadingM
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const userDefaultValue = null;
+
+
+  const nullDefaultValue = null;
+  const stringDefaultValue = "";
   const loginDefaultValue = false;
 
-  const [currentUser, setCurrentUser] = useState(userDefaultValue);
+  const [currentUser, setCurrentUser] = useState(nullDefaultValue);
   const [isLogin, setIsLogin] = useState(loginDefaultValue);
   const [loading, setLoading] = useState(true);
+  const [errorAuth, setErrorAuth] = useState(stringDefaultValue);
 
   const formObject = {
     email: "",
@@ -27,7 +31,6 @@ const AuthProvider = ({ children }) => {
 
   const [formUser, setFormUser] = useState(formObject);
 
-  const navigate = useNavigate();
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -40,12 +43,15 @@ const AuthProvider = ({ children }) => {
       if (action === "login") {
         await doSignInWithEmailAndPassword(formUser.email, formUser.password);
       } else {
-        await doCreateUserWithEmailAndPassword(
-          formUser.email,
-          formUser.password
-        );
+        if (formUser.password === formUser.repeatPassword) {
+          await doCreateUserWithEmailAndPassword(
+            formUser.email,
+            formUser.password
+          );
+        } else {
+          setErrorAuth("Las contraseñas no son iguales");
+        }
       }
-      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -60,12 +66,13 @@ const AuthProvider = ({ children }) => {
         email: user.email,
         name: user?.displayName || null,
         avatar_img: user?.photoURL || null,
+        
       });
-      setCurrentUser(user ,newUserDB); 
+      setCurrentUser(user, newUserDB);
     } else {
-      setCurrentUser({ ...user, userDB }); 
+      setCurrentUser({ ...user, userDB });
     }
-    //navigate("/"); fix/make redirect to home only in login or register 
+    //navigate("/"); fix/make redirect to home only in login or register
   };
 
   /* User State Controller*/
@@ -84,17 +91,18 @@ const AuthProvider = ({ children }) => {
       handleAuthConnectionUser(user);
 
     } else {
-      setCurrentUser(userDefaultValue);
+      setCurrentUser(nullDefaultValue);
       setIsLogin(loginDefaultValue);
     }
     setLoading(false);
-    console.log(currentUser);
   };
 
   const provideValues = {
     currentUser,
     isLogin,
     loading,
+    errorAuth,
+    setErrorAuth,
     handleFormChange,
     handleSubmitUser,
   };
