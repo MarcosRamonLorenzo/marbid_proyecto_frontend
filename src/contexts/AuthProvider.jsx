@@ -8,6 +8,7 @@ import {
   getUserDB,
   createUser,
 } from "@/functions/authFunc";
+import LoadingMarbidLoad from "@/components/shared-componentes/Loadings/LoadingMarbidLoad";
 
 const authContext = createContext();
 
@@ -99,7 +100,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <authContext.Provider value={provideValues}>
-      {children}
+       {loading ? <LoadingMarbidLoad /> : children}
     </authContext.Provider>
   );
 };

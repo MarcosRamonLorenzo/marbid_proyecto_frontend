@@ -2,17 +2,14 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, Input
 import { Edit2, Tag, FileText } from "lucide-react";
 import countries from '@/config/constries.config';
 import useAuth from "@/hooks/useAuth";
-import { useState } from "react";
+
 
 
 const UserEditModal = ({ isOpen, onClose }) => {
-
-  const {currentUser:{userDB}} = useAuth();
-  const { name, label, description, country, avatar_img , backround_img  } = userDB;
-  const userActualDataDefaultValue = { name, label, description, country, avatar_img , backround_img}
-  
-  const [userActualData,setUserActualData] = useState(userActualDataDefaultValue);
-
+  const { currentUser } = useAuth();
+  const userDB = currentUser ? currentUser.userDB : null;
+  const { name, label, description, country, avatar_img , backround_img  } = userDB || {};
+ 
   return (
     <>
       <Modal
@@ -25,18 +22,14 @@ const UserEditModal = ({ isOpen, onClose }) => {
           <>
             <ModalHeader className="flex flex-col gap-1">Editar Perfil</ModalHeader>
             <ModalBody>
-              <div className="flex justify-center items-start gap-20 ">
-              <div className="flex flex-col items-center my-2 ">
-                <h2 className="mb-2">Foto de Fondo</h2>
-                <Image className="w-80 mx-auto" src="https://app.requestly.io/delay/5000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg" />
-                <Button variant="flat" className="mt-2 third-color-class text-white">Seleccionar Archivo</Button>
-              </div>
-
-              <div className="flex flex-col justify-between items-center my-2 ">
-                <h2 className="my-2">Foto de Perfil</h2>
-                <Avatar src="https://i.pravatar.cc/150?u=a04258114e29026708c" className="w-50 h-50 mx-auto text-large" />
-                <Button variant="flat" className="mt-2 third-color-class text-white">Seleccionar Archivo</Button>
-              </div>
+              <div className="flex justify-center items-start gap-10 ">
+                <div className="flex flex-col items-center my-2 ">
+                  <div className="relative">
+                    <Image className="mx-auto w-[25em] h-[10em] object-cover cursor-pointer hover:filter hover:brightness-75" src="https://app.requestly.io/delay/1000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg" />                
+                    <Button className="absolute top-2 right-2 z-50 " size="sm" color="secondary" onClick={()=>{}}>Aleatorio</Button>
+                  </div>
+                  <Avatar className=" mx-auto -mt-5 z-10 scale-[1.5] cursor-pointer hover:filter hover:brightness-75" size="lg"  src={`https://app.requestly.io/delay/1000/${userDB?.avatar_img}`} />
+                </div>
               </div>
               <Input
                 autoFocus
@@ -48,7 +41,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="second"
                 name="name"
-                value={userActualData.name}
+                value={userDB?.name}
               />
 
               <Input
@@ -60,7 +53,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="third"
                 name="label"
-                value={userActualData.label}
+                value={userDB?.label}
               />
 
               <Input
@@ -72,7 +65,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="first"
                 name="description"
-                value={userActualData.description}
+                value={userDB?.description}
               />
 
               <Select variant="underlined" className="mt-3" placeholder="Selecciona tu país" label="País" radius="sm">
@@ -85,7 +78,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
 
             </ModalBody>
             <ModalFooter>
-              <Button color="danger" variant="flat" onPress={onClose}>
+              <Button color="danger" onPress={onClose}>
                 Cerrar
               </Button>
               <Button color="primary" onPress={onClose}>

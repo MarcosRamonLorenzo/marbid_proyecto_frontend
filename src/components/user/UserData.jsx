@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, Tab, Divider, Button } from "@nextui-org/react";
+import { Tabs, Tab, Divider, Button,Image } from "@nextui-org/react";
 import { CalendarDays, MessageCircleMore, SettingsIcon } from "lucide-react";
 import { Avatar } from "@nextui-org/react";
 
@@ -7,7 +7,7 @@ const UserAvatar = ({ photoURL }) => (
   <img
     src={photoURL}
     alt=""
-    className="w-40 h-40 rounded-full -mt-10 border-4 border-white object-cover"
+    className="w-40 h-40 z-50 rounded-full -mt-10 border-4 border-white object-cover"
   />
 );
 
@@ -75,14 +75,13 @@ const UserTabs = () => (
 
 const UserData = ({ userDB, internal, openSetUser }) => (
   <>
+   <Image src={`https://app.requestly.io/delay/500/${userDB?.backround_img}`} radius="none"  alt="" className="w-screen h-60 object-cover	" />
     <div className="flex flex-col justify-center items-center">
       <UserAvatar photoURL={userDB?.avatar_img} />
       <UserDetails userDB={userDB} />
-      <p className="text-xl mt-6">{userDB?.label || "Usuario de Marbid"}</p>
-      <p className="w-[20em] md:w-[55em] mt-3">
-        {userDB?.decription ||
-          "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt laboriosam aperiam laborum nihil odio fugiat earum quisquam, omnis repudiandae sit vel provident quo dolor similique rerum eum, unde dolorem dolorum?"}
-      </p>
+      <p className="text-xl mt-6">{userDB?.label}</p>
+      <p className="w-[20em] md:w-[55em] ">
+        {userDB?.decription } </p>
       <UserActions internal={internal} openSetUser={openSetUser} />
     </div>
     <div className="flex flex-col items-center">
