@@ -50,8 +50,8 @@ const LogIn = ({ isRegister }) => {
               <img src="\src\assets\logoMarbidWeb.webp" className="h-8" />
             </Link>
           </div>
-          <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-8 w-1/2">
-            <div className="bg-white xl:mx-auto xl:w-full shadow-md p-4 xl:max-w-sm 2xl:max-w-md rounded-md">
+          <div className="flex items-center justify-center px-2 py-6 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
+            <div className="bg-[#eee] w-[23em] md:w-[26em] p-4 rounded-md">
               <div className="mb-2 flex justify-center"></div>
               <h2 className="text-center text-2xl font-bold leading-tight text-black">
                 {isRegister
@@ -117,7 +117,7 @@ const LogIn = ({ isRegister }) => {
                   )}
                   <div>
                     <button
-                      className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white transition duration-800 ease-in-out transform hover:bg-green-900 hover:scale-105"
+                      className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white transition duration-800 ease-in-out transform hover:bg-blue-600 hover:scale-105"
                       type="button"
                       onClick={(e) => {
                         handleSubmitUser(e, isRegister ? "register" : "login");
