@@ -1,7 +1,7 @@
 import React from "react";
 import CardAnuncio from "../services/ServiceCard.jsx";
 import useDataFetch from "@/hooks/useDataFetch.js";
-import Loading from "../shared-componentes/Loading.jsx";
+import Loading from "../shared-componentes/Loadings/Loading.jsx";
 import configUrl from "@/config/apis.config.js";
 
 const ServiceList = () => {

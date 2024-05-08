@@ -8,6 +8,7 @@ import {
   getUserDB,
   createUser,
 } from "@/functions/authFunc";
+import LoadingMarbidLoad from "@/components/shared-componentes/Loadings/LoadingMarbidLoad";
 
 const authContext = createContext();
 
@@ -63,7 +64,9 @@ const AuthProvider = ({ children }) => {
       const newUserDB = await createUser({
         id: user.uid,
         email: user.email,
+        name: user?.displayName || null,
         avatar_img: user?.photoURL || null,
+        
       });
       setCurrentUser(user, newUserDB);
     } else {
@@ -80,11 +83,13 @@ const AuthProvider = ({ children }) => {
 
   const initializeUser = async (user) => {
     setLoading(true);
+    <LoadingMarbidLoad />
     if (user) {
       setLoading(false);
       setCurrentUser(user);
       setIsLogin(true);
       handleAuthConnectionUser(user);
+
     } else {
       setCurrentUser(nullDefaultValue);
       setIsLogin(loginDefaultValue);
@@ -104,7 +109,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <authContext.Provider value={provideValues}>
-      {children}
+       {loading ? <LoadingMarbidLoad /> : children}
     </authContext.Provider>
   );
 };

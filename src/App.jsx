@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import useAuth from "@/hooks/useAuth.js";
 import publicRoutes from "@/routes/public.routes";
 import authRoutes from "@/routes/auth.routes";
-import Loading from "@/components/shared-componentes/Loading";
+import Loading from "@/components/shared-componentes/Loadings/Loading";
 
 function App() {
   const { isLogin,currentUser, loading } = useAuth();

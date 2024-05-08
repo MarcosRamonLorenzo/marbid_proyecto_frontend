@@ -7,7 +7,7 @@ import SearchComponent from "../components/explore/SearchComponent.jsx";
 
 const Explore = () => {
   return (
-    <div>
+    <div className="h-screen">
       <Header />
       <div className=" explore flex flex-col justify-start mt-10 pb-10 mx-10 xl:mx-40 gap-5 ">
         <h1 className="text-3xl md:text-4xl  font-bold ">
