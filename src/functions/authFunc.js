@@ -8,6 +8,9 @@ import {
 } from "firebase/auth";
 
 import { auth } from "@/firebase/firebase";
+import { storage } from "@/firebase/firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
+
 
 import apiUrl from "@/config/apis.config";
 
@@ -52,8 +55,50 @@ export const getUserDB = async (uid) => {
   }
 };
 
-export const updateUser = async (user) => {
+export const updateUser = async (user, currentUser) => {
   try {
+    console.log({user, currentUser});
+    // Subir la imagen de fondo a Firebase Storage solo si ha cambiado
+    if (user.backround_img !== currentUser.backround_img) {
+      const backgroundStorageRef = ref(storage, 'backgroundImages/' + user.backround_img);
+      const backgroundUploadTask = uploadBytesResumable(backgroundStorageRef, user.backround_img);
+
+      backgroundUploadTask.on('state_changed', 
+        (snapshot) => {
+          // Progreso de la subida
+        }, 
+        (error) => {
+          // Manejar error
+        }, 
+        async () => {
+          // Subida completada
+          const backgroundDownloadURL = await getDownloadURL(backgroundUploadTask.snapshot.ref);
+          user.backround_img = backgroundDownloadURL;
+        }
+      );
+    }
+
+    // Subir la imagen de avatar a Firebase Storage solo si ha cambiado
+    if (user.avatar_img !== currentUser.avatar_img) {
+      const avatarStorageRef = ref(storage, 'avatars/' + user.avatar_img);
+      const avatarUploadTask = uploadBytesResumable(avatarStorageRef, user.avatar_img);
+
+      avatarUploadTask.on('state_changed', 
+        (snapshot) => {
+          // Progreso de la subida
+        }, 
+        (error) => {
+          // Manejar error
+        }, 
+        async () => {
+          // Subida completada
+          const avatarDownloadURL = await getDownloadURL(avatarUploadTask.snapshot.ref);
+          user.avatar_img = avatarDownloadURL;
+        }
+      );
+    }
+
+    // Actualizar el usuario en el backend
     const response = await fetch(`${apiUrl}/user/${user.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

@@ -13,7 +13,7 @@ const UserProfile = ({internal}) => {
       <div className="mb-10 lg:mb-20 ">
         <UserData  userDB={userDB} openSetUser={()=>{setUserPopUp(true)}} internal />
       </div>
-      {internal && <UserSetInfoModal isOpen={serPopUp} onClose={() => setUserPopUp(false)} />}
+      {internal && <UserSetInfoModal isOpen={serPopUp} onClose={() => setUserPopUp(false)}  />}
     </div>
   );
 };

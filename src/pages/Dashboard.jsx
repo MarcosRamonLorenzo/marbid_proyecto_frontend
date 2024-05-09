@@ -28,7 +28,7 @@ const Dashboard = () => {
         </Sidebar>
       </div>
       {/* Pongo padinbg left para que se vea el contenedor de dentro.  */}
-      <div className="w-[100%]">
+      <div className="w-full">
         <Outlet />
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import {
   Modal,
   ModalContent,
@@ -11,14 +12,69 @@ import {
   Select,
   SelectItem,
   Checkbox,
+  user,
 } from "@nextui-org/react";
 import { Edit2, Tag, FileText, CameraIcon } from "lucide-react";
 import countries from "@/config/constries.config";
 import useAuth from "@/hooks/useAuth";
+import { updateUser } from "@/functions/authFunc";
+import { handleFormChange } from "@/functions/formsFunc";
 
 const UserEditModal = ({ isOpen, onClose }) => {
   const { currentUser } = useAuth();
-  const userDB = currentUser ? currentUser.userDB : null;
+  const userDB = currentUser.userDB;
+
+  const [loading, setLoading] = useState(false);
+
+  /*Hay que hace un useEffect porque es un portal y n ose cargan losd atos al inicio */
+  useEffect(() => {
+    setEditedUser(userDB);
+  }, [userDB]);
+
+
+
+  const avatarFileInputRef = useRef(null);
+  const backgroundImageFileInputRef = useRef(null);
+
+  const handleAvatarCameraClick = () => {
+    avatarFileInputRef.current.click();
+  };
+
+  const handleBackgroundImageCameraClick = () => {
+    backgroundImageFileInputRef.current.click();
+  };
+
+  const handleBackgroundImageFileChange = async (event) => {
+    const file = event.target.files[0];
+    setLoading(true);
+    setEditedUser(prevState => ({ ...prevState, backround_img: URL.createObjectURL(file) }));
+    setLoading(false);
+  };
+
+  const handleAvatarFileChange = async (event) => {
+    const file = event.target.files[0];
+    setLoading(true);
+    setEditedUser(prevState => ({ ...prevState, avatar_img: URL.createObjectURL(file) }));
+    setLoading(false);
+  };
+
+  const editedUserDefaultObject = {
+    id: userDB?.id,
+    name: userDB?.name,
+    label: userDB?.label,
+    description: userDB?.description,
+    country: userDB?.country,
+    avatar_img: userDB?.avatar_img,
+    backround_img: userDB?.backround_img,
+  };
+
+  const [editedUser, setEditedUser] = useState(editedUserDefaultObject);
+
+  const handleClickEditButton = async () => {
+    const updatedUser= await updateUser(editedUser, userDB);
+    
+
+  };
 
   return (
     <>
@@ -34,7 +90,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                   <div className="relative group">
                     <Image
                       className="mx-auto w-[25em] h-[10em] object-cover cursor-pointer hover:filter hover:brightness-75"
-                      src="https://app.requestly.io/delay/1000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+                      src={editedUser?.backround_img || "https://static.vecteezy.com/system/resources/thumbnails/006/899/230/large/mystery-random-loot-box-from-game-icon-vector.jpg"}
                     />
                     <Checkbox
                       className="absolute top-5 right-5 z-50 bg-[#eee] rounded"
@@ -45,19 +101,21 @@ const UserEditModal = ({ isOpen, onClose }) => {
                     </Checkbox>
                     <CameraIcon
                       className="absolute m-auto inset-0 z-50 text-2xl text-default-400 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      onClick={() => {console.log("hola");}}
+                      onClick={handleBackgroundImageCameraClick}
                     />
+                    <input type="file" ref={backgroundImageFileInputRef} style={{ display: 'none' }} onChange={handleBackgroundImageFileChange} />
                   </div>
                   <div className="relative group">
                     <Avatar
                       className="mx-auto -mt-5 z-10 scale-[1.5] cursor-pointer hover:filter hover:brightness-75"
                       size="lg"
-                      src={`https://app.requestly.io/delay/1000/${userDB?.avatar_img}`}
+                      src={editedUser?.avatar_img}
                     />
                     <CameraIcon
                       className="absolute m-auto inset-0 top-0 z-50 text-2xl text-default-400 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      onClick={() => {console.log("hola");}}
+                      onClick={handleAvatarCameraClick}
                     />
+                    <input type="file" ref={avatarFileInputRef} style={{ display: 'none' }} onChange={handleAvatarFileChange} />
                   </div>
                 </div>
               </div>
@@ -71,7 +129,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="second"
                 name="name"
-                value={userDB?.name}
+                value={editedUser?.name}
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
               />
 
               <Input
@@ -83,7 +142,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="third"
                 name="label"
-                value={userDB?.label}
+                value={editedUser?.label}
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
               />
 
               <Input
@@ -95,7 +155,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="first"
                 name="description"
-                value={userDB?.description}
+                value={editedUser?.description}
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
               />
 
               <Select
@@ -104,6 +165,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 placeholder="Selecciona tu país"
                 label="País"
                 radius="sm"
+                name="country"
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
               >
                 {countries.map((country) => (
                   <SelectItem
@@ -125,7 +188,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
               <Button color="danger" onPress={onClose}>
                 Cerrar
               </Button>
-              <Button color="primary" onPress={onClose}>
+              <Button color="primary" onClick={()=>{handleClickEditButton()}}>
                 Editar
               </Button>
             </ModalFooter>
