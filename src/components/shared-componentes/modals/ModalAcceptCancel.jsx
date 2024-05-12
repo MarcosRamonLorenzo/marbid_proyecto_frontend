@@ -39,7 +39,7 @@ const ModalAcceptCancel = ({
         </ModalFooter>
       </ModalContent>
     </Modal>,
-    document.body
+    document.getElementById('modal-accept-cancel')
   );
 };
 

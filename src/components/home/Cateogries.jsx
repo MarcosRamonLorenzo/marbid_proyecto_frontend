@@ -74,7 +74,7 @@ const Cateogries = () => {
               radius="lg"
               width="100%"
               className="w-full object-cover h-[140px]"
-              src="https://assets-global.website-files.com/64d129e8b2ca32f3a33b0066/64f0bb76e56702b45df78665_sala%20de%20edicion%20vacia%20edicion%20online.jpg"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJKnEfhoQBjnLTCdEKHHTylFdFuEYdn8768OVZ5sESg9fJXorn6ku2IgvyTa6ioRXpEP0&usqp=CAU"
             />
           </CardBody>
           <CardFooter className="text-small justify-between">

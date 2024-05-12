@@ -3,7 +3,8 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { NextUIProvider } from "@nextui-org/react";
 import { BrowserRouter } from "react-router-dom";
-import AuthProvider from "./contexts/AuthProvider.jsx";
+import AuthProvider from "@/contexts/AuthProvider.jsx";
+import AlertsProvider from "./contexts/AlertsProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.scss";
 
@@ -12,9 +13,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <NextUIProvider>
       <QueryClientProvider client={new QueryClient()}>
         <BrowserRouter>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
+          <AlertsProvider>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </AlertsProvider>
         </BrowserRouter>
       </QueryClientProvider>
     </NextUIProvider>
