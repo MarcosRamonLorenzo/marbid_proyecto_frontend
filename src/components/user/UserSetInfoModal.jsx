@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import {
   Modal,
   ModalContent,
@@ -11,14 +12,94 @@ import {
   Select,
   SelectItem,
   Checkbox,
+  user,
 } from "@nextui-org/react";
 import { Edit2, Tag, FileText, CameraIcon } from "lucide-react";
 import countries from "@/config/constries.config";
 import useAuth from "@/hooks/useAuth";
+import { updateUser } from "@/functions/authFunc";
+import { handleFormChange,handleFileChange } from "@/functions/formsFunc";
+import Loading from "../shared-componentes/Loadings/Loading";
 
 const UserEditModal = ({ isOpen, onClose }) => {
-  const { currentUser } = useAuth();
-  const userDB = currentUser ? currentUser.userDB : null;
+
+  
+   // Get current user and reloadUserDB function from the authentication context
+   const { currentUser, reloadUserDB } = useAuth();
+   const userDB = currentUser.userDB;
+ 
+   // Default object for the edited user, based on the current user's data
+   const editedUserDefaultObject = {
+     id: userDB?.id,
+     name: userDB?.name,
+     label: userDB?.label,
+     description: userDB?.description,
+     country: userDB?.country,
+     avatar_img: userDB?.avatar_img,
+     backround_img: userDB?.backround_img,
+   };
+ 
+   // State for loading status and edited user
+   const [loading, setLoading] = useState(false);
+   const [editedUser, setEditedUser] = useState(editedUserDefaultObject);
+ 
+   // References for the avatar and background image file inputs
+   const avatarFileInputRef = useRef(null);
+   const backgroundImageFileInputRef = useRef(null);
+ 
+   // State for the avatar and background image URLs
+   const [avatarImageUrl, setAvatarImageUrl] = useState(null);
+   const [backgroundImageUrl, setBackgroundImageUrl] = useState(null);
+ 
+   // Handler for avatar camera click
+   const handleAvatarCameraClick = () => {
+     avatarFileInputRef.current.click();
+   };
+ 
+   // Handler for background image camera click
+   const handleBackgroundImageCameraClick = () => {
+     backgroundImageFileInputRef.current.click();
+   };
+ 
+   // Handler for background image file change
+   const handleBackgroundImageFileChange = async (event) => {
+    handleFileChange(event, setEditedUser, 'backround_img');
+  };
+ 
+   // Handler for avatar file change
+   const handleAvatarFileChange = async (event) => {
+    handleFileChange(event, setEditedUser, 'avatar_img');
+  };
+ 
+   // Handler for click on the edit button
+   const handleClickEditButton = async () => {
+     setLoading(true);
+     const updatedUser = await updateUser(editedUser, userDB);
+     reloadUserDB(updatedUser.data);
+     setLoading(false);
+     onClose();
+   };
+ 
+   // useEffect to set the edited user and image URLs when the userDB changes
+   useEffect(() => {
+     setEditedUser(userDB);
+     setAvatarImageUrl(userDB?.avatar_img);
+     setBackgroundImageUrl(userDB?.backround_img);
+   }, [userDB]);
+   
+   // useEffect to update the avatar image URL when the avatar image in the edited user changes
+   useEffect(() => {
+     if (editedUser.avatar_img instanceof File) {
+       setAvatarImageUrl(URL.createObjectURL(editedUser.avatar_img));
+     }
+   }, [editedUser?.avatar_img]);
+   
+   // useEffect to update the background image URL when the background image in the edited user changes
+   useEffect(() => {
+     if (editedUser.backround_img instanceof File) {
+       setBackgroundImageUrl(URL.createObjectURL(editedUser.backround_img));
+     }
+   }, [editedUser?.backround_img]);
 
   return (
     <>
@@ -34,7 +115,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                   <div className="relative group">
                     <Image
                       className="mx-auto w-[25em] h-[10em] object-cover cursor-pointer hover:filter hover:brightness-75"
-                      src="https://app.requestly.io/delay/1000/https://nextui-docs-v2.vercel.app/images/hero-card-complete.jpeg"
+                      src={ backgroundImageUrl || "https://static.vecteezy.com/system/resources/thumbnails/006/899/230/large/mystery-random-loot-box-from-game-icon-vector.jpg"}
                     />
                     <Checkbox
                       className="absolute top-5 right-5 z-50 bg-[#eee] rounded"
@@ -45,19 +126,21 @@ const UserEditModal = ({ isOpen, onClose }) => {
                     </Checkbox>
                     <CameraIcon
                       className="absolute m-auto inset-0 z-50 text-2xl text-default-400 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      onClick={() => {console.log("hola");}}
+                      onClick={handleBackgroundImageCameraClick}
                     />
+                    <input type="file" ref={backgroundImageFileInputRef} style={{ display: 'none' }} onChange={handleBackgroundImageFileChange} />
                   </div>
                   <div className="relative group">
                     <Avatar
                       className="mx-auto -mt-5 z-10 scale-[1.5] cursor-pointer hover:filter hover:brightness-75"
                       size="lg"
-                      src={`https://app.requestly.io/delay/1000/${userDB?.avatar_img}`}
+                      src={avatarImageUrl}
                     />
                     <CameraIcon
                       className="absolute m-auto inset-0 top-0 z-50 text-2xl text-default-400 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                      onClick={() => {console.log("hola");}}
+                      onClick={handleAvatarCameraClick}
                     />
+                    <input type="file" ref={avatarFileInputRef} style={{ display: 'none' }} onChange={handleAvatarFileChange} />
                   </div>
                 </div>
               </div>
@@ -71,7 +154,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="second"
                 name="name"
-                value={userDB?.name}
+                value={editedUser?.name}
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
               />
 
               <Input
@@ -83,7 +167,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="third"
                 name="label"
-                value={userDB?.label}
+                value={editedUser?.label}
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
               />
 
               <Input
@@ -95,7 +180,8 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 variant="underlined"
                 color="first"
                 name="description"
-                value={userDB?.description}
+                value={editedUser?.description}
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
               />
 
               <Select
@@ -104,6 +190,9 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 placeholder="Selecciona tu país"
                 label="País"
                 radius="sm"
+                name="country"
+                onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
+                defaultSelectedKeys={[editedUser?.country]}
               >
                 {countries.map((country) => (
                   <SelectItem
@@ -125,13 +214,14 @@ const UserEditModal = ({ isOpen, onClose }) => {
               <Button color="danger" onPress={onClose}>
                 Cerrar
               </Button>
-              <Button color="primary" onPress={onClose}>
+              <Button color="primary" onClick={()=>{handleClickEditButton()}}>
                 Editar
               </Button>
             </ModalFooter>
           </>
         </ModalContent>
       </Modal>
+      {loading && <Loading/>}
     </>
   );
 };

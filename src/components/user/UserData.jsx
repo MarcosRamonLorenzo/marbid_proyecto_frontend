@@ -1,13 +1,13 @@
-import React from "react";
-import { Tabs, Tab, Divider, Button,Image } from "@nextui-org/react";
+import { Tabs, Tab, Divider, Button,Image, avatar } from "@nextui-org/react";
 import { CalendarDays, MessageCircleMore, SettingsIcon } from "lucide-react";
 import { Avatar } from "@nextui-org/react";
+
 
 const UserAvatar = ({ photoURL }) => (
   <Image
     src={photoURL}
     alt=""
-    className="w-40 h-40 z-50 rounded-full -mt-10 border-4 border-white object-cover"
+    className="md:w-40 md:h-40 z-40 rounded-full -mt-10 border-4 border-white object-cover"
   />
 );
 
@@ -16,16 +16,16 @@ const UserDetails = ({ userDB }) => {
   const getCreatedAt = new Date(userDB?.createdAt).toLocaleDateString();
 
   return (
-    <div className="text-center">
-      <h1 className="text-2xl font-bold">{userDB?.name}</h1>
+    <div className="flex flex-col items-center gap-1">
+      <h1 className=" text-xl md:text-2xl font-bold">{userDB?.name}</h1>
       <p className="text-gray-500">@{userTag}</p>
       <div className="flex gap-2 justify-center">
         <p className="text-gray-500">Usuario creado el {getCreatedAt}</p>
         <CalendarDays className="w-4" />
       </div>
       {userDB?.country && (
-        <div>
-          <p className="text-gray-500">{userDB.country}</p>
+        <div className="flex justify-center gap-2 ">
+          <p className="text-gray-500 capitalize">{userDB.country}</p>
           <Avatar
             className="w-6 h-6"
             src={`https://flagcdn.com/${userDB.country[0] + userDB.country[1]}.svg`}
@@ -75,17 +75,17 @@ const UserTabs = () => (
 
 const UserData = ({ userDB, internal, openSetUser }) => (
   <>
+  <div className="flex flex-col justify-center items-center w-[full]">
    <Image src={userDB?.backround_img} radius="none"  alt="" className="w-screen h-60 object-cover	" />
-    <div className="flex flex-col justify-center items-center">
       <UserAvatar photoURL={userDB?.avatar_img} />
       <UserDetails userDB={userDB} />
-      <p className="text-xl mt-6">{userDB?.label}</p>
-      <p className="w-[20em] md:w-[55em] ">
-        {userDB?.decription } </p>
+      <p className="text-xl mt-6 capitalize ">{userDB?.label}</p>
+      <p className="max-w-[20em] md:max-w-[55em] capitalize ">
+        {userDB?.description } </p>
       <UserActions internal={internal} openSetUser={openSetUser} />
     </div>
-    <div className="flex flex-col items-center">
-      <Divider className="w-11/12 mt-10" />
+    <div className="flex flex-col items-center ">
+      <Divider className="w-[80%] mt-10" />
       <UserTabs />
     </div>
   </>

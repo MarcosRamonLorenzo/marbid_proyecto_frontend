@@ -8,6 +8,9 @@ import {
 } from "firebase/auth";
 
 import { auth } from "@/firebase/firebase";
+import { storage } from "@/firebase/firebase";
+import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
+
 
 import apiUrl from "@/config/apis.config";
 
@@ -52,8 +55,36 @@ export const getUserDB = async (uid) => {
   }
 };
 
-export const updateUser = async (user) => {
+
+const uploadBackgroundImage = async (image) => {
+  const backgroundStorageRef = ref(storage, `backgroundImages/${self.crypto.randomUUID()}`);
+  await uploadBytes(backgroundStorageRef, image);
+  return getDownloadURL(backgroundStorageRef);
+};
+
+const uploadAvatarImage = async (image) => {
+  const avatarStorageRef = ref(storage, `avatars/${self.crypto.randomUUID()}`);
+  await uploadBytes(avatarStorageRef, image);
+  return getDownloadURL(avatarStorageRef);
+};
+
+export const updateUser = async (user, currentUser) => {
   try {
+    // Subir la imagen de fondo a Firebase Storage solo si ha cambiado
+    if (user.backround_img !== currentUser.backround_img) {
+      const backgroundImageUrl = await uploadBackgroundImage(user.backround_img);
+      console.log(backgroundImageUrl);
+      user.backround_img = backgroundImageUrl;
+    }
+    
+    // Subir la imagen de avatar a Firebase Storage solo si ha cambiado
+    if (user.avatar_img !== currentUser.avatar_img) {
+      const avatarImageUrl = await uploadAvatarImage(user.avatar_img);
+      console.log(avatarImageUrl);
+      user.avatar_img = avatarImageUrl;
+    }
+
+    // Actualizar el usuario en el backend
     const response = await fetch(`${apiUrl}/user/${user.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
