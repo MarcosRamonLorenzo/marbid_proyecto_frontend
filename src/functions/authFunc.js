@@ -9,7 +9,7 @@ import {
 
 import { auth } from "@/firebase/firebase";
 import { storage } from "@/firebase/firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 
 
 import apiUrl from "@/config/apis.config";
@@ -55,47 +55,33 @@ export const getUserDB = async (uid) => {
   }
 };
 
+
+const uploadBackgroundImage = async (image) => {
+  const backgroundStorageRef = ref(storage, `backgroundImages/${self.crypto.randomUUID()}`);
+  await uploadBytes(backgroundStorageRef, image);
+  return getDownloadURL(backgroundStorageRef);
+};
+
+const uploadAvatarImage = async (image) => {
+  const avatarStorageRef = ref(storage, `avatars/${self.crypto.randomUUID()}`);
+  await uploadBytes(avatarStorageRef, image);
+  return getDownloadURL(avatarStorageRef);
+};
+
 export const updateUser = async (user, currentUser) => {
   try {
-    console.log({user, currentUser});
     // Subir la imagen de fondo a Firebase Storage solo si ha cambiado
     if (user.backround_img !== currentUser.backround_img) {
-      const backgroundStorageRef = ref(storage, 'backgroundImages/' + user.backround_img);
-      const backgroundUploadTask = uploadBytesResumable(backgroundStorageRef, user.backround_img);
-
-      backgroundUploadTask.on('state_changed', 
-        (snapshot) => {
-          // Progreso de la subida
-        }, 
-        (error) => {
-          // Manejar error
-        }, 
-        async () => {
-          // Subida completada
-          const backgroundDownloadURL = await getDownloadURL(backgroundUploadTask.snapshot.ref);
-          user.backround_img = backgroundDownloadURL;
-        }
-      );
+      const backgroundImageUrl = await uploadBackgroundImage(user.backround_img);
+      console.log(backgroundImageUrl);
+      user.backround_img = backgroundImageUrl;
     }
-
+    
     // Subir la imagen de avatar a Firebase Storage solo si ha cambiado
     if (user.avatar_img !== currentUser.avatar_img) {
-      const avatarStorageRef = ref(storage, 'avatars/' + user.avatar_img);
-      const avatarUploadTask = uploadBytesResumable(avatarStorageRef, user.avatar_img);
-
-      avatarUploadTask.on('state_changed', 
-        (snapshot) => {
-          // Progreso de la subida
-        }, 
-        (error) => {
-          // Manejar error
-        }, 
-        async () => {
-          // Subida completada
-          const avatarDownloadURL = await getDownloadURL(avatarUploadTask.snapshot.ref);
-          user.avatar_img = avatarDownloadURL;
-        }
-      );
+      const avatarImageUrl = await uploadAvatarImage(user.avatar_img);
+      console.log(avatarImageUrl);
+      user.avatar_img = avatarImageUrl;
     }
 
     // Actualizar el usuario en el backend

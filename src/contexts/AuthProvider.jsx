@@ -1,7 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithEmailAndPassword,
@@ -74,6 +73,13 @@ const AuthProvider = ({ children }) => {
     }
     //navigate("/"); fix/make redirect to home only in login or register
   };
+  
+  const reloadUserDB =  (user) => {
+    if (user.id === currentUser.uid) {
+      setCurrentUser({ ...currentUser, userDB: user });
+      console.log(currentUser);
+    }
+  };
 
   /* User State Controller*/
   useEffect(() => {
@@ -102,6 +108,7 @@ const AuthProvider = ({ children }) => {
     isLogin,
     loading,
     errorAuth,
+    reloadUserDB,
     setErrorAuth,
     handleFormChange,
     handleSubmitUser,

@@ -18,63 +18,88 @@ import { Edit2, Tag, FileText, CameraIcon } from "lucide-react";
 import countries from "@/config/constries.config";
 import useAuth from "@/hooks/useAuth";
 import { updateUser } from "@/functions/authFunc";
-import { handleFormChange } from "@/functions/formsFunc";
+import { handleFormChange,handleFileChange } from "@/functions/formsFunc";
+import Loading from "../shared-componentes/Loadings/Loading";
 
 const UserEditModal = ({ isOpen, onClose }) => {
-  const { currentUser } = useAuth();
-  const userDB = currentUser.userDB;
 
-  const [loading, setLoading] = useState(false);
-
-  /*Hay que hace un useEffect porque es un portal y n ose cargan losd atos al inicio */
-  useEffect(() => {
-    setEditedUser(userDB);
-  }, [userDB]);
-
-
-
-  const avatarFileInputRef = useRef(null);
-  const backgroundImageFileInputRef = useRef(null);
-
-  const handleAvatarCameraClick = () => {
-    avatarFileInputRef.current.click();
+  
+   // Get current user and reloadUserDB function from the authentication context
+   const { currentUser, reloadUserDB } = useAuth();
+   const userDB = currentUser.userDB;
+ 
+   // Default object for the edited user, based on the current user's data
+   const editedUserDefaultObject = {
+     id: userDB?.id,
+     name: userDB?.name,
+     label: userDB?.label,
+     description: userDB?.description,
+     country: userDB?.country,
+     avatar_img: userDB?.avatar_img,
+     backround_img: userDB?.backround_img,
+   };
+ 
+   // State for loading status and edited user
+   const [loading, setLoading] = useState(false);
+   const [editedUser, setEditedUser] = useState(editedUserDefaultObject);
+ 
+   // References for the avatar and background image file inputs
+   const avatarFileInputRef = useRef(null);
+   const backgroundImageFileInputRef = useRef(null);
+ 
+   // State for the avatar and background image URLs
+   const [avatarImageUrl, setAvatarImageUrl] = useState(null);
+   const [backgroundImageUrl, setBackgroundImageUrl] = useState(null);
+ 
+   // Handler for avatar camera click
+   const handleAvatarCameraClick = () => {
+     avatarFileInputRef.current.click();
+   };
+ 
+   // Handler for background image camera click
+   const handleBackgroundImageCameraClick = () => {
+     backgroundImageFileInputRef.current.click();
+   };
+ 
+   // Handler for background image file change
+   const handleBackgroundImageFileChange = async (event) => {
+    handleFileChange(event, setEditedUser, 'backround_img');
   };
-
-  const handleBackgroundImageCameraClick = () => {
-    backgroundImageFileInputRef.current.click();
+ 
+   // Handler for avatar file change
+   const handleAvatarFileChange = async (event) => {
+    handleFileChange(event, setEditedUser, 'avatar_img');
   };
-
-  const handleBackgroundImageFileChange = async (event) => {
-    const file = event.target.files[0];
-    setLoading(true);
-    setEditedUser(prevState => ({ ...prevState, backround_img: URL.createObjectURL(file) }));
-    setLoading(false);
-  };
-
-  const handleAvatarFileChange = async (event) => {
-    const file = event.target.files[0];
-    setLoading(true);
-    setEditedUser(prevState => ({ ...prevState, avatar_img: URL.createObjectURL(file) }));
-    setLoading(false);
-  };
-
-  const editedUserDefaultObject = {
-    id: userDB?.id,
-    name: userDB?.name,
-    label: userDB?.label,
-    description: userDB?.description,
-    country: userDB?.country,
-    avatar_img: userDB?.avatar_img,
-    backround_img: userDB?.backround_img,
-  };
-
-  const [editedUser, setEditedUser] = useState(editedUserDefaultObject);
-
-  const handleClickEditButton = async () => {
-    const updatedUser= await updateUser(editedUser, userDB);
-    
-
-  };
+ 
+   // Handler for click on the edit button
+   const handleClickEditButton = async () => {
+     setLoading(true);
+     const updatedUser = await updateUser(editedUser, userDB);
+     reloadUserDB(updatedUser.data);
+     setLoading(false);
+     onClose();
+   };
+ 
+   // useEffect to set the edited user and image URLs when the userDB changes
+   useEffect(() => {
+     setEditedUser(userDB);
+     setAvatarImageUrl(userDB?.avatar_img);
+     setBackgroundImageUrl(userDB?.backround_img);
+   }, [userDB]);
+   
+   // useEffect to update the avatar image URL when the avatar image in the edited user changes
+   useEffect(() => {
+     if (editedUser.avatar_img instanceof File) {
+       setAvatarImageUrl(URL.createObjectURL(editedUser.avatar_img));
+     }
+   }, [editedUser?.avatar_img]);
+   
+   // useEffect to update the background image URL when the background image in the edited user changes
+   useEffect(() => {
+     if (editedUser.backround_img instanceof File) {
+       setBackgroundImageUrl(URL.createObjectURL(editedUser.backround_img));
+     }
+   }, [editedUser?.backround_img]);
 
   return (
     <>
@@ -90,7 +115,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                   <div className="relative group">
                     <Image
                       className="mx-auto w-[25em] h-[10em] object-cover cursor-pointer hover:filter hover:brightness-75"
-                      src={editedUser?.backround_img || "https://static.vecteezy.com/system/resources/thumbnails/006/899/230/large/mystery-random-loot-box-from-game-icon-vector.jpg"}
+                      src={ backgroundImageUrl || "https://static.vecteezy.com/system/resources/thumbnails/006/899/230/large/mystery-random-loot-box-from-game-icon-vector.jpg"}
                     />
                     <Checkbox
                       className="absolute top-5 right-5 z-50 bg-[#eee] rounded"
@@ -109,7 +134,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                     <Avatar
                       className="mx-auto -mt-5 z-10 scale-[1.5] cursor-pointer hover:filter hover:brightness-75"
                       size="lg"
-                      src={editedUser?.avatar_img}
+                      src={avatarImageUrl}
                     />
                     <CameraIcon
                       className="absolute m-auto inset-0 top-0 z-50 text-2xl text-default-400 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity duration-200"
@@ -167,6 +192,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
                 radius="sm"
                 name="country"
                 onChange={(e) => handleFormChange(e, editedUser, setEditedUser)}
+                defaultSelectedKeys={[editedUser?.country]}
               >
                 {countries.map((country) => (
                   <SelectItem
@@ -195,6 +221,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
           </>
         </ModalContent>
       </Modal>
+      {loading && <Loading/>}
     </>
   );
 };
