@@ -4,7 +4,7 @@ import LogIn from "@/pages/LogIn";
 import Explore from "@/pages/Explore";
 import Service from "@/pages/Service";
 import NotFound from "@/pages/NotFound";
-import UserData from "@/components/user/UserData";
+import UserProfile from "@/pages/UserProfile";
 
 const publicRoutes = [
   { path: "/", element: <Home /> },
@@ -13,7 +13,7 @@ const publicRoutes = [
   { path: "/anuncio/:idAnuncio", element: <Service /> },
   { path: "/explora", element: <Explore /> },
   { path: "/*", element: <NotFound /> },
-  { path: "/user/:idUser", element: <UserData /> },
+  { path: "/user/:idUser", element: <UserProfile /> },
 ];
 
 export default publicRoutes;
