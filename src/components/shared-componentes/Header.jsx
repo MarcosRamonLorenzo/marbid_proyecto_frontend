@@ -10,7 +10,6 @@ import {
 } from "@nextui-org/react";
 import useAuth from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
-import { doSignOut } from "@/functions/authFunc";
 import { useModal } from "@/hooks/useModal";
 import ModalAcceptCancel from "@/components/shared-componentes/modals/ModalAcceptCancel";
 
@@ -31,7 +30,7 @@ const NavMenuItem = ({ to, children }) => (
 );
 
 const Header = () => {
-  const { isLogin } = useAuth();
+  const { isLogin, handleSignOut } = useAuth();
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
@@ -102,7 +101,7 @@ const Header = () => {
         title="Cerrar Sesión"
         text="¿Estás seguro de que deseas cerrar sesión?"
         onConfirm={() => {
-          doSignOut();
+          handleSignOut();
         }}
       />
     </>

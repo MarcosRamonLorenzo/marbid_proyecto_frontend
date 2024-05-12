@@ -6,13 +6,16 @@ import {
   doSignInWithEmailAndPassword,
   getUserDB,
   createUser,
+  doSignOut
 } from "@/functions/authFunc";
 import LoadingMarbidLoad from "@/components/shared-componentes/Loadings/LoadingMarbidLoad";
+import useAlert from "@/hooks/useAlert";
 
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
+  const {setError,setSuccess}= useAlert();
 
   const nullDefaultValue = null;
   const stringDefaultValue = "";
@@ -21,7 +24,6 @@ const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(nullDefaultValue);
   const [isLogin, setIsLogin] = useState(loginDefaultValue);
   const [loading, setLoading] = useState(true);
-  const [errorAuth, setErrorAuth] = useState(stringDefaultValue);
 
   const formObject = {
     email: "",
@@ -36,6 +38,7 @@ const AuthProvider = ({ children }) => {
     setFormUser({ ...formUser, [name]: value });
   };
 
+  //Submit user with email
   const handleSubmitUser = async (e, action) => {
     e.preventDefault();
     try {
@@ -48,11 +51,23 @@ const AuthProvider = ({ children }) => {
             formUser.password
           );
         } else {
-          setErrorAuth("Las contraseñas no son iguales");
+          setError("Las contraseñas no son iguales");
         }
+
       }
+      setSuccess("Inicio de sesión exitoso");
     } catch (error) {
-      console.log(error);
+      setError(error.message);
+    }
+  };
+
+  //Submit user with providers
+  const handleSignInProvider = async (signInFunction) => {
+    try {
+      await signInFunction();
+      setSuccess("Inicio de sesión exitoso");
+    } catch (error) {
+      setError("Error al iniciar sesión: " + error.message);
     }
   };
 
@@ -71,7 +86,6 @@ const AuthProvider = ({ children }) => {
     } else {
       setCurrentUser({ ...user, userDB });
     }
-    //navigate("/"); fix/make redirect to home only in login or register
   };
   
   const reloadUserDB =  (user) => {
@@ -81,6 +95,14 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      await doSignOut();
+      setSuccess("Cerrado de sesión exitoso");
+    } catch (error) {
+      setError(error.message);
+    }
+  };
   /* User State Controller*/
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -89,7 +111,6 @@ const AuthProvider = ({ children }) => {
 
   const initializeUser = async (user) => {
     setLoading(true);
-    <LoadingMarbidLoad />
     if (user) {
       setLoading(false);
       setCurrentUser(user);
@@ -107,11 +128,11 @@ const AuthProvider = ({ children }) => {
     currentUser,
     isLogin,
     loading,
-    errorAuth,
     reloadUserDB,
-    setErrorAuth,
     handleFormChange,
     handleSubmitUser,
+    handleSignInProvider,
+    handleSignOut
   };
 
   return (

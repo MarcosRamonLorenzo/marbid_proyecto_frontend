@@ -3,38 +3,26 @@ import {
   doSignInWithGitHub,
   doSignInWithTwitter,
 } from "@/functions/authFunc.js";
+
 import { Link } from "react-router-dom";
 import "./scss/Login.scss";
+
 import { useModal } from "@/hooks/useModal";
-import ModalErrorAccept from "@/components/shared-componentes/modals/ModalErrorAccept";
 import { useNavigate } from "react-router-dom";
+import useAlert from "@/hooks/useAlert";
 
 import useAuth from "@/hooks/useAuth.js";
 import GoogleIcon from "@/components/shared-componentes/icons/GoogleIcon";
 import GitHubIcon from "@/components/shared-componentes/icons/GitHubIcon";
 import XTwitterIcon from "@/components/shared-componentes/icons/XTwitterIcon";
-import { useEffect } from "react";
 
+ 
 const LogIn = ({ isRegister }) => {
   const navigate = useNavigate();
 
-
-  const { handleFormChange, handleSubmitUser, errorAuth,setErrorAuth, isLogin } = useAuth();
+  const { handleFormChange, handleSubmitUser, isLogin,handleSignInProvider } = useAuth();
   
-
-  const { isOpen,openModal, closeModal } = useModal();
-
-  useEffect(() => {
-    if (errorAuth) {
-      openModal();
-    }
-  }, [errorAuth]);
-  
-  
-
-  if (isLogin) {
-    navigate("/");
-  }
+  const {setError,setSucess} = useAlert();
 
 
   if (isLogin) {
@@ -133,7 +121,7 @@ const LogIn = ({ isRegister }) => {
                   className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none hover:scale-105"
                   type="button"
                   onClick={() => {
-                    doSignInWithGoogle();
+                    handleSignInProvider(doSignInWithGoogle);
                   }}
                 >
                   <span className="mr-2 inline-block">
@@ -147,7 +135,7 @@ const LogIn = ({ isRegister }) => {
                   className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none hover:scale-105"
                   type="button"
                   onClick={() => {
-                    doSignInWithGitHub();
+                    handleSignInProvider(doSignInWithGitHub);
                   }}
                 >
                   <span className="mr-2 inline-block">
@@ -161,7 +149,7 @@ const LogIn = ({ isRegister }) => {
                   className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none hover:scale-105"
                   type="button"
                   onClick={() => {
-                    doSignInWithTwitter();
+                    handleSignInProvider(doSignInWithTwitter);
                   }}
                 >
                   <span className="mr-2 inline-block">
@@ -201,14 +189,6 @@ const LogIn = ({ isRegister }) => {
           </div>
         </section>
       </div>
-      <ModalErrorAccept
-        isOpen={isOpen}
-        onClose={()=>{
-          closeModal();
-          setErrorAuth(null)
-        }}
-        text={errorAuth}
-      />
     </>
   );
 };
