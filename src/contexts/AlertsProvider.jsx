@@ -5,25 +5,30 @@ const alertsContext = createContext();
 const AlertsProvider = ({ children }) => {
   const defaultValueAlert = { state: false, message: "" };
 
-  const [alertError, setErrorAlert] = useState(defaultValueAlert);
-  const [alertSuccess, setSuccessAlert] = useState(defaultValueAlert);
+  const [alertError, setMessageErrorAlert] = useState(defaultValueAlert);
+  const [alertSuccess, setMessageSuccessAlert] = useState(defaultValueAlert);
 
-  const setError = (message) => {
-    setErrorAlert({ state: true, message });
+  const setErrorAlert = (message) => {
+    setMessageErrorAlert({ state: true, message });
     setTimeout(() => {
-      setErrorAlert(defaultValueAlert);
+      setMessageErrorAlert(defaultValueAlert);
     }, 3000);
   };
 
-  const setSuccess = (message) => {
-    setSuccessAlert({ state: true, message });
+  const setSuccessAlert = (message) => {
+    setMessageSuccessAlert({ state: true, message });
 
     setTimeout(() => {
-      setSuccessAlert(defaultValueAlert);
+      setMessageSuccessAlert(defaultValueAlert);
     }, 3000);
   };
 
-  const providerValues = { alertError, alertSuccess, setError, setSuccess };
+  const providerValues = {
+    alertError,
+    alertSuccess,
+    setErrorAlert,
+    setSuccessAlert,
+  };
 
   return (
     <alertsContext.Provider value={providerValues}>
