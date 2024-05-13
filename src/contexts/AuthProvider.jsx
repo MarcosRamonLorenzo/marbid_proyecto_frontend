@@ -6,7 +6,7 @@ import {
   doSignInWithEmailAndPassword,
   getUserDB,
   createUser,
-  doSignOut
+  doSignOut,
 } from "@/functions/authFunc";
 import LoadingMarbidLoad from "@/components/shared-componentes/Loadings/LoadingMarbidLoad";
 import useAlert from "@/hooks/useAlert";
@@ -14,16 +14,17 @@ import useAlert from "@/hooks/useAlert";
 const authContext = createContext();
 
 const AuthProvider = ({ children }) => {
-
-  const {setError,setSuccess}= useAlert();
+  const { setErrorAlert, setSuccessAlert } = useAlert();
 
   const nullDefaultValue = null;
   const stringDefaultValue = "";
   const loginDefaultValue = false;
+  const emailValidFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const [currentUser, setCurrentUser] = useState(nullDefaultValue);
   const [isLogin, setIsLogin] = useState(loginDefaultValue);
   const [loading, setLoading] = useState(true);
+  const [errorModal, setErrorModal] = useState(stringDefaultValue);
 
   const formObject = {
     email: "",
@@ -32,32 +33,48 @@ const AuthProvider = ({ children }) => {
 
   const [formUser, setFormUser] = useState(formObject);
 
-
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormUser({ ...formUser, [name]: value });
+  };
+
+  const handleErrorModal = (value) => {
+    setErrorModal(value);
   };
 
   //Submit user with email
   const handleSubmitUser = async (e, action) => {
     e.preventDefault();
     try {
-      if (action === "login") {
-        await doSignInWithEmailAndPassword(formUser.email, formUser.password);
+      if (formUser.email.length < 1) {
+        setErrorModal("Rellena el campo de email");
+      } else if (!emailValidFormat.test(formUser.email)) {
+        setErrorModal("El email no es correcto");
+      } else if (formUser.password.length < 1) {
+        setErrorModal("Rellena el campo de contraseña");
       } else {
-        if (formUser.password === formUser.repeatPassword) {
-          await doCreateUserWithEmailAndPassword(
-            formUser.email,
-            formUser.password
-          );
+        if (action === "login") {
+          await doSignInWithEmailAndPassword(formUser.email, formUser.password);
+          setSuccessAlert("Inicio de sesión exitoso");
         } else {
-          setError("Las contraseñas no son iguales");
+          if (formUser.password === formUser.repeatPassword) {
+            await doCreateUserWithEmailAndPassword(
+              formUser.email,
+              formUser.password
+            );
+            setSuccessAlert("Cuenta creada con éxito");
+          } else if (
+            formUser.repeatPassword == null ||
+            formUser.repeatPassword.length < 1
+          ) {
+            setErrorModal("Rellena el campo de contraseña auxiliar");
+          } else {
+            setErrorModal("Las contraseñas no coinciden");
+          }
         }
-
       }
-      setSuccess("Inicio de sesión exitoso");
     } catch (error) {
-      setError(error.message);
+      setErrorModal(error.message);
     }
   };
 
@@ -65,9 +82,9 @@ const AuthProvider = ({ children }) => {
   const handleSignInProvider = async (signInFunction) => {
     try {
       await signInFunction();
-      setSuccess("Inicio de sesión exitoso");
+      setSuccessAlert("Inicio de sesión exitoso");
     } catch (error) {
-      setError("Error al iniciar sesión: " + error.message);
+      setErrorAlert("Error al iniciar sesión: " + error.message);
     }
   };
 
@@ -80,15 +97,14 @@ const AuthProvider = ({ children }) => {
         email: user.email,
         name: user?.displayName || null,
         avatar_img: user?.photoURL || null,
-        
       });
       setCurrentUser(user, newUserDB);
     } else {
       setCurrentUser({ ...user, userDB });
     }
   };
-  
-  const reloadUserDB =  (user) => {
+
+  const reloadUserDB = (user) => {
     if (user.id === currentUser.uid) {
       setCurrentUser({ ...currentUser, userDB: user });
       console.log(currentUser);
@@ -98,9 +114,9 @@ const AuthProvider = ({ children }) => {
   const handleSignOut = async () => {
     try {
       await doSignOut();
-      setSuccess("Cerrado de sesión exitoso");
+      setSuccessAlert("Cerrado de sesión exitoso");
     } catch (error) {
-      setError(error.message);
+      setErrorAlert("Error al cerrar sesión: " + error.message);
     }
   };
   /* User State Controller*/
@@ -116,7 +132,6 @@ const AuthProvider = ({ children }) => {
       setCurrentUser(user);
       setIsLogin(true);
       handleAuthConnectionUser(user);
-
     } else {
       setCurrentUser(nullDefaultValue);
       setIsLogin(loginDefaultValue);
@@ -128,16 +143,18 @@ const AuthProvider = ({ children }) => {
     currentUser,
     isLogin,
     loading,
+    errorModal,
     reloadUserDB,
     handleFormChange,
     handleSubmitUser,
     handleSignInProvider,
-    handleSignOut
+    handleSignOut,
+    handleErrorModal,
   };
 
   return (
     <authContext.Provider value={provideValues}>
-       {loading ? <LoadingMarbidLoad /> : children}
+      {loading ? <LoadingMarbidLoad /> : children}
     </authContext.Provider>
   );
 };

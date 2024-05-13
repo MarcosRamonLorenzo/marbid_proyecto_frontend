@@ -5,25 +5,36 @@ import {
 } from "@/functions/authFunc.js";
 
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import "./scss/Login.scss";
-
+import ModalErrorAccept from "@/components/shared-componentes/modals/ModalErrorAccept";
 import { useModal } from "@/hooks/useModal";
 import { useNavigate } from "react-router-dom";
-import useAlert from "@/hooks/useAlert";
 
 import useAuth from "@/hooks/useAuth.js";
 import GoogleIcon from "@/components/shared-componentes/icons/GoogleIcon";
 import GitHubIcon from "@/components/shared-componentes/icons/GitHubIcon";
 import XTwitterIcon from "@/components/shared-componentes/icons/XTwitterIcon";
 
- 
 const LogIn = ({ isRegister }) => {
   const navigate = useNavigate();
 
-  const { handleFormChange, handleSubmitUser, isLogin,handleSignInProvider } = useAuth();
-  
-  const {setError,setSucess} = useAlert();
+  const {
+    handleFormChange,
+    handleSubmitUser,
+    handleErrorModal,
+    handleSignInProvider,
+    isLogin,
+    errorModal,
+  } = useAuth();
 
+  const { isOpen, openModal, closeModal } = useModal();
+
+  useEffect(() => {
+    if (errorModal) {
+      openModal();
+    }
+  }, [errorModal]);
 
   if (isLogin) {
     navigate("/");
@@ -189,6 +200,14 @@ const LogIn = ({ isRegister }) => {
           </div>
         </section>
       </div>
+      <ModalErrorAccept
+        isOpen={isOpen}
+        onClose={() => {
+          closeModal();
+          handleErrorModal(null);
+        }}
+        text={errorModal}
+      />
     </>
   );
 };
