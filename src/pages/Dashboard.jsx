@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../components/dashboard/Sidebar.jsx";
 import SidebarItem from "../components/dashboard/SidebarItem.jsx";
 import { ScrollText, BookText, Heart, Settings } from "lucide-react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate,useLocation } from "react-router-dom";
 
 const Dashboard = () => {
+  const { pathname }= useLocation();
+  const  navigate  = useNavigate();
+
+  //To redirect beacuse panel-control page not exists.
+  useEffect(() => {
+    if(pathname === "/panel-control"){
+      navigate("/panel-control/profile")
+    }
+  }, [])
+  
+
   return (
     <div className="dashboard panel-control flex gap-20">
       <div className="">
