@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Select, SelectItem, Avatar, Divider } from "@nextui-org/react";
+import { Select, SelectItem, Divider } from "@nextui-org/react";
 import { Moon, Sun } from "lucide-react";
+import useTheme from "@/hooks/useTheme";
 
 const Settings = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme'));
 
-  useEffect(() => {
-    if (theme === "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
-  }, [theme]);
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
+  const { theme,setTheme } = useTheme();
+  
   return (
     <div className=" settings mx-5 my-10 2xl:mx-24 2xl:my-20">
       <h2 className="text-3xl font-medium">Ajustes Generales</h2>
