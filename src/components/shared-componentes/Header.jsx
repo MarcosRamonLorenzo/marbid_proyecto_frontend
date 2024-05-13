@@ -12,6 +12,7 @@ import useAuth from "@/hooks/useAuth";
 import { Link } from "react-router-dom";
 import { useModal } from "@/hooks/useModal";
 import ModalAcceptCancel from "@/components/shared-componentes/modals/ModalAcceptCancel";
+import "./scss/Header.scss";
 
 const NavItem = ({ to, children }) => (
   <NavbarItem>
@@ -34,7 +35,7 @@ const Header = () => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
-    <>
+    <div className="headerPrincipalDiv">
       <Navbar isBordered className="dark:bg-[#1c1c1c]">
         <NavbarContent className="sm:hidden" justify="start">
           <NavbarMenuToggle />
@@ -64,13 +65,23 @@ const Header = () => {
             <>
               <NavItem to="/panel-control">Panel de Control</NavItem>
               <NavItem>
-                <p onClick={() => {openModal(true) }}>Log Out</p>
+                <p
+                  onClick={() => {
+                    openModal(true);
+                  }}
+                >
+                  Log Out
+                </p>
               </NavItem>
             </>
           ) : (
             <>
-              <NavItem to="/log-in">Log In</NavItem>
-              <NavItem to="/sign-up">Sign Up</NavItem>
+              <NavItem to="/log-in">
+                <li>Log In</li>
+              </NavItem>
+              <NavItem to="/sign-up">
+                <li>Sign Up</li>
+              </NavItem>
             </>
           )}
         </NavbarContent>
@@ -83,7 +94,13 @@ const Header = () => {
             <>
               <NavMenuItem to="/panel-control">Panel de Control</NavMenuItem>
               <NavMenuItem>
-              <p onClick={() => {openModal(true) }}>Log Out</p>
+                <p
+                  onClick={() => {
+                    openModal(true);
+                  }}
+                >
+                  Log Out
+                </p>
               </NavMenuItem>
             </>
           ) : (
@@ -104,7 +121,7 @@ const Header = () => {
           handleSignOut();
         }}
       />
-    </>
+    </div>
   );
 };
 

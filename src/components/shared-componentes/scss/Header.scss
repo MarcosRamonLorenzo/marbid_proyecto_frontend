@@ -1,0 +1,39 @@
+.headerPrincipalDiv {
+  li {
+    list-style-type: none;
+    color: #121010;
+    font-family: inherit;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: color;
+  }
+
+  li:focus,
+  li:hover {
+    color: #121010;
+  }
+
+  li:focus:after,
+  li:hover:after {
+    width: 100%;
+    left: 0%;
+  }
+
+  li:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    background-image: linear-gradient(to right, #5271ff 50%, #f26d3d 50%);
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left;
+  }
+}
