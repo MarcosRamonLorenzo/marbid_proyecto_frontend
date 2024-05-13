@@ -77,10 +77,10 @@ const Header = () => {
           ) : (
             <>
               <NavItem to="/log-in">
-                <li>Log In</li>
+                <p>Log In</p>
               </NavItem>
               <NavItem to="/sign-up">
-                <li>Sign Up</li>
+                <p>Sign Up</p>
               </NavItem>
             </>
           )}
