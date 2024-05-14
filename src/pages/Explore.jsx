@@ -1,7 +1,7 @@
 import Header from "../components/shared-componentes/Header.jsx";
 import { Divider } from "@nextui-org/react";
 
-import ServiceFilter from "../components/explore/ServiceFilter.jsx";
+import SelectCateogries from "../components/categories/SelectCateogries.jsx";
 import ServiceList from "../components/explore/ServiceList.jsx";
 import SearchComponent from "../components/explore/SearchComponent.jsx";
 
@@ -14,7 +14,7 @@ const Explore = () => {
           Explora todas los anuncios.
         </h1>
         <div className=" flex gap-2 ">
-          <ServiceFilter />
+          <SelectCateogries />
           <SearchComponent />
         </div>
         <Divider className="my-4" />
