@@ -3,14 +3,20 @@ import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
 import useDataFetch from "@/hooks/useDataFetch.js";
 import configUrl from "@/config/apis.config.js";
 
-const ServiceFilter = () => {
+const SelectCateogries = ({ onChange, variant = "flat" }) => {
   const { data: categories, isLoading } = useDataFetch(
     "categories",
     `${configUrl}/categories`
   );
 
   return (
-    <Autocomplete label="Select a category" className="max-w-xs" radius="sm">
+    <Autocomplete
+      variant={variant}
+      label="Selecciona una categoría"
+      className="max-w-xs"
+      radius="sm"
+      onChange={onChange}
+    >
       {categories &&
         categories.length &&
         categories.map((category) => (
@@ -22,4 +28,4 @@ const ServiceFilter = () => {
   );
 };
 
-export default ServiceFilter;
+export default SelectCateogries;

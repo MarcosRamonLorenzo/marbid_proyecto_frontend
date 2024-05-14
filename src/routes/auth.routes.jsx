@@ -3,6 +3,7 @@ import Dashboard from "@/pages/Dashboard";
 import LikedServices from "@/pages/LikedServices";
 import CreatedServices from "@/pages/CreatedServices";
 import Settings from "@/pages/Settings";
+import ServiceForm from "@/pages/ServiceForm";
 
 const authRoutes = [
   { path: "/user", element: <UserProfile /> },
@@ -14,6 +15,8 @@ const authRoutes = [
       { path: "favoritos", element: <LikedServices /> },
       { path: "servicios-creados", element: <CreatedServices /> },
       { path: "servicios-aplicados", element: <CreatedServices /> },
+      { path: "creacion-servicio", element: <ServiceForm /> },
+      { path: "edición-servicio", element: <ServiceForm edit={true} /> },
       { path: "ajustes", element: <Settings /> },
       { path: "profile", element: <UserProfile internal /> },
     ],

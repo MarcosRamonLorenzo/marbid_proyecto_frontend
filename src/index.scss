@@ -19,6 +19,18 @@ $color-third: #F25EA3;
   background-color: $color-third;
 }
 
+
+.primary-stroke-class {
+  stroke: $color-first;
+}
+
+.secondary-stroke-class {
+  stroke: $color-second;
+}
+
+.third-stroke-class {
+  stroke: $color-third;
+}
 /*Modo oscuro*/
 
 .dark a,

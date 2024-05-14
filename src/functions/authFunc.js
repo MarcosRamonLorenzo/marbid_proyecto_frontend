@@ -57,7 +57,6 @@ export const getUserDB = async (uid) => {
   }
 };
 
-
 const uploadBackgroundImage = async (image) => {
   const backgroundStorageRef = ref(storage, `backgroundImages/${self.crypto.randomUUID()}`);
   await uploadBytes(backgroundStorageRef, image);
@@ -112,3 +111,4 @@ export const createUser = async (user) => {
     console.log(error);
   }
 };
+
