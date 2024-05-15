@@ -1,5 +1,5 @@
 import { Input, Textarea } from "@nextui-org/react";
-import { Captions,NotebookPen   } from "lucide-react";
+import { Captions,Euro,NotebookPen   } from "lucide-react";
 import React from "react";
 import SelectCateogries from "../categories/SelectCateogries";
 
@@ -7,27 +7,32 @@ const ServiceDataForm = () => {
   return (
     <>
       <Input
-        endContent={
-          <Captions  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-        }
+        isClearable
         label="Título"
         placeholder="Introduce el título del servicio"
         variant="underlined"
-        color="third"
         name="label"
         onChange={(e) => {}}
       />
       <Textarea
+      
         className=" resize-y "
-        endContent={
-          <NotebookPen  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-        }
         label="Contenido"
         placeholder="Introduce el contenido del servicio"
         variant="underlined"
-        color="third"
         name="label"
         onChange={(e) => {} }
+      />
+      <Input
+        endContent={
+          <Euro  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+        }
+        label="Precio"
+        placeholder="Introduce el precio del servicio"
+        variant="underlined"
+        name="label"
+        type="number"
+        onChange={(e) => {}}
       />
       <SelectCateogries variant="underlined"/>
     </>
