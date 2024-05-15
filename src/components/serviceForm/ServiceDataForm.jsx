@@ -1,35 +1,53 @@
 import { Input, Textarea } from "@nextui-org/react";
-import { Captions,NotebookPen   } from "lucide-react";
+import { Captions,Euro,NotebookPen   } from "lucide-react";
 import React from "react";
 import SelectCateogries from "../categories/SelectCateogries";
+import useService from "@/hooks/useService";
+import { handleFormChange } from "@/functions/formsFunc";
+
+
 
 const ServiceDataForm = () => {
+
+
+
+  const {formService,setFormService} = useService();
+
   return (
     <>
       <Input
-        endContent={
-          <Captions  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-        }
+        isClearable
         label="Título"
         placeholder="Introduce el título del servicio"
         variant="underlined"
-        color="third"
-        name="label"
+        name="title"
         onChange={(e) => {}}
+        value={formService?.title}
       />
       <Textarea
+      
         className=" resize-y "
-        endContent={
-          <NotebookPen  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-        }
         label="Contenido"
         placeholder="Introduce el contenido del servicio"
         variant="underlined"
-        color="third"
-        name="label"
+        name="content"
         onChange={(e) => {} }
+        value={formService?.content}
       />
-      <SelectCateogries variant="underlined"/>
+      <Input
+        endContent={
+          <Euro  className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+        }
+        label="Precio"
+        placeholder="Introduce el precio del servicio"
+        variant="underlined"
+        name="price"
+        type="number"
+        onChange={(e) => {}}
+        value={formService?.price}
+      />
+      <SelectCateogries variant="underlined" onChange={(e) => {console.log(e);}}/>  
+      
     </>
   );
 };

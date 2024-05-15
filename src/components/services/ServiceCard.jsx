@@ -4,19 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 const ServiceCard = ({ item }) => {
   const navigate = useNavigate();
+  console.log(item);
 
   return (
     <Card shadow="sm" className="flex flex-col items-start card">
       <CardBody className="overflow-visible p-0">
         <Image
           onClick={() => {
-            navigate(`/anuncio/${item.title}`);
+            navigate(`/anuncio/${item?.title}`);
           }}
           isZoomed
           shadow="sm"
           radius="xs"
           width="100%"
-          alt={item.title}
+          alt={item?.title}
           className="w-full object-cover h-[240px]"
           src={
             "https://cdn.pixabay.com/photo/2016/11/23/14/45/coding-1853305_640.jpg"
@@ -27,15 +28,15 @@ const ServiceCard = ({ item }) => {
       <CardFooter className="text-small flex flex-col items-start gap-4">
         <div className="flex justify-start items-start">
           <User
-            name="Jane Doe"
-            description="Product Designer"
+            name={item.user?.name}
+            description={item?.user?.label}
             avatarProps={{
-              src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
+              src: `${item?.user?.avatar_img}`,
             }}
           />
         </div>
-        <h3 className="font-medium text-2xl">{item.title}</h3>
-        <p className="text-default-500">{item.price}</p>{" "}
+        <h3 className="font-medium text-2xl">{item?.title}</h3>
+        <p className="text-default-500">{item?.price}</p>{" "}
         <p className="text-start">
           Necesito programador web para desarrollar una página de comercio
           electrónico. La página debe tener un diseño atractivo, funcional.
