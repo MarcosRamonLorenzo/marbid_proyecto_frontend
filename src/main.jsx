@@ -8,6 +8,7 @@ import AlertsProvider from "./contexts/AlertsProvider.jsx";
 import ThemeProvider from "./contexts/ThemeProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.scss";
+import { ServiceProvider } from "./contexts/ServiceProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -17,7 +18,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <BrowserRouter>
             <AlertsProvider>
               <AuthProvider>
+                <ServiceProvider>
                 <App />
+                </ServiceProvider>
               </AuthProvider>
             </AlertsProvider>
           </BrowserRouter>
