@@ -3,25 +3,26 @@
 @import "tailwindcss/utilities";
 
 /*General Variables*/
-$color-first: #5271FF ;
-$color-second: #F26D3D ;
-$color-third: #F25EA3;
+$color-first: #5271ff;
+$color-second: #f26d3d;
+$color-third: #f25ea3;
 
-.primary-color-class{
+.primary-color-class {
   background-color: $color-first;
 }
 
-.secondary-color-class{
+.secondary-color-class {
   background-color: $color-second;
 }
 
-.third-color-class{
+.third-color-class {
   background-color: $color-third;
 }
 
 /*Modo oscuro*/
 
 .dark a,
+.dark li,
 .dark p,
 .dark h1,
 .dark h2,
