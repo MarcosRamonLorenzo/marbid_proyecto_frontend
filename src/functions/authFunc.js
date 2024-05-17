@@ -12,8 +12,6 @@ import { auth } from "@/firebase/firebase";
 import { storage } from "@/firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
 
-import useAlert from "@/hooks/useAlert";
-
 import apiUrl from "@/config/apis.config";
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
@@ -70,18 +68,15 @@ const uploadAvatarImage = async (image) => {
 };
 
 export const updateUser = async (user, currentUser) => {
-  try {
     // Subir la imagen de fondo a Firebase Storage solo si ha cambiado
     if (user.backround_img !== currentUser.backround_img) {
       const backgroundImageUrl = await uploadBackgroundImage(user.backround_img);
-      console.log(backgroundImageUrl);
       user.backround_img = backgroundImageUrl;
     }
     
     // Subir la imagen de avatar a Firebase Storage solo si ha cambiado
     if (user.avatar_img !== currentUser.avatar_img) {
       const avatarImageUrl = await uploadAvatarImage(user.avatar_img);
-      console.log(avatarImageUrl);
       user.avatar_img = avatarImageUrl;
     }
 
@@ -93,13 +88,9 @@ export const updateUser = async (user, currentUser) => {
     });
 
     return response.json();
-  } catch (error) {
-    console.log(error);
-  }
 };
 
 export const createUser = async (user) => {
-  try {
     const response = await fetch(`${apiUrl}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -107,8 +98,5 @@ export const createUser = async (user) => {
     });
 
     return response.json();
-  } catch (error) {
-    console.log(error);
-  }
 };
 

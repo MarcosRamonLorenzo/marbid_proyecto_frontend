@@ -7,7 +7,7 @@ const UserAvatar = ({ photoURL }) => (
   <Image
     src={photoURL}
     alt=""
-    className="md:w-40 md:h-40 z-40 rounded-full -mt-10 border-4 border-white object-cover"
+    className="w-40 h-40 z-40 rounded-full -mt-10 border-4 border-white object-cover"
   />
 );
 

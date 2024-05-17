@@ -9,7 +9,10 @@ import {
 import { InfoIcon, Lock, ShieldCloseIcon } from "lucide-react";
 import React from "react";
 
-const ModalPayment = ({ open, close }) => {
+const ModalPayment = ({ open, close,onConfirm }) => {
+
+ 
+
   return (
     <>
       <Modal
@@ -86,7 +89,7 @@ const ModalPayment = ({ open, close }) => {
             <Button color="danger" radius="sm" onPress={close}>
               Cancelar
             </Button>
-            <Button color="primary" radius="sm" onPress={close}>
+            <Button color="primary" radius="sm" onClick={onConfirm}>
               Confirmar Pago
             </Button>
           </ModalFooter>
