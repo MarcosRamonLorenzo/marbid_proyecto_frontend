@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const ServiceCard = ({ item }) => {
   const navigate = useNavigate();
-  console.log(item);
 
   return (
     <Card shadow="sm" className="flex flex-col items-start card">

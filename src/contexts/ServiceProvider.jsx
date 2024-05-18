@@ -1,5 +1,9 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useDataFetch from "@/hooks/useDataFetch";
+import apiUrl from "@/config/apis.config";
+import useAuth from "@/hooks/useAuth";
+import useAlert from "@/hooks/useAlert";
 
 const ServiceContext = createContext();
 
@@ -9,6 +13,20 @@ const ServiceProvider = ({ children }) => {
   const falseInitialValue = false;
   const emptyValue = "";
 
+  const { currentUser } = useAuth();
+
+  const { setErrorService } = useAlert();
+
+  // Getters of services and services by users.
+  const { dataAllServices, errorAllServices, isLoadingAllServices } =
+    useDataFetch("createdServices", `${apiUrl}/service/`);
+
+  const { dataUserServices, errorUserServices, isLoadingUserServices } =
+    useDataFetch(
+      "createdServices",
+      `${apiUrl}/service/created/${currentUser.uid}`
+    );
+
   const initialFormState = {
     title: "",
     price: "",
@@ -17,10 +35,8 @@ const ServiceProvider = ({ children }) => {
     image: "",
   };
 
-  const [sevice, setService] = useState(nullValue);
-  const [errorService, setErrorService] = useState(emptyValue);
-  const [loading, setLoading] = useState(true);
-  //Estado que alamacena el anuncio seleccionado que se visualizará en la pagina de anuuncio indvidual.
+  const [sevices, setServices] = useState(nullValue);
+  const [loading, setLoading] = useState(falseInitialValue);
   const [selectedServices, setSelectedServices] = useState(nullValue);
   const [createdServices, setCreatedServices] = useState(nullValue);
   const [errorCategory, setErrorCategory] = useState(emptyValue);
@@ -29,6 +45,10 @@ const ServiceProvider = ({ children }) => {
   const [formService, setFormService] = useState(initialFormState);
 
   const navegate = useNavigate();
+
+  const handleLoading = (newLoginState) => {
+    setLoading(newLoginState);
+  };
 
   const handleCategoryFilter = async (category) => {
     setLoading(trueInitialValue);
@@ -101,34 +121,50 @@ const ServiceProvider = ({ children }) => {
   };
 
   const servicesCreatedByUser = async () => {
-    try {
-      /*const { error, data } = await supabaseConexion
-        .from("ANUNCIO")
-        .select("*")
-        .eq("id_usuario", estadoUsuario.id);*/
+    if (isLoadingUserServices) {
+      setLoading(true);
+    }
 
-      setCreatedServices(data);
-    } catch (error) {
-      setErrorService(error.message);
+    if (!errorUserServices) {
+      setCreatedServices(dataUserServices);
+    } else {
+      setErrorService(errorUserServices.message);
     }
   };
 
   const getServices = async () => {
-    try {
-      /*const { data, error } = await supabaseConexion
-        .from("ANUNCIO")
-        .select("*");*/
+    if (isLoadingAllServices) {
+      setLoading(true);
+    }
 
-      if (error) throw error;
-
-      setService(data);
-    } catch (error) {
-      setErrorService(error.message);
+    if (!errorAllServices) {
+      setServices(dataAllServices);
+    } else {
+      setErrorService(errorAllServices.message);
     }
   };
 
+  // useEffect inicial.
+  useEffect(() => {
+    getServices();
+  }, []);
+
+  // useEffect service por usuario.
+  useEffect(() => {
+    if (currentUser) {
+      servicesCreatedByUser();
+    }
+  }, [currentUser]);
+
+  const provideValues = {
+    sevices,
+    createdServices,
+    loading,
+    handleLoading,
+  };
+
   return (
-    <ServiceContext.Provider value={[formService, setFormService]}>
+    <ServiceContext.Provider value={provideValues}>
       {children}
     </ServiceContext.Provider>
   );
