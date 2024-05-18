@@ -1,6 +1,7 @@
 import { Tabs, Tab, Divider, Button,Image, avatar } from "@nextui-org/react";
 import { CalendarDays, MessageCircleMore, SettingsIcon } from "lucide-react";
 import { Avatar } from "@nextui-org/react";
+import { formatDate } from "@/functions/timeFunc";
 
 
 const UserAvatar = ({ photoURL }) => (
@@ -13,7 +14,7 @@ const UserAvatar = ({ photoURL }) => (
 
 const UserDetails = ({ userDB }) => {
   const userTag = userDB?.email.split("@")[0];
-  const getCreatedAt = new Date(userDB?.createdAt).toLocaleDateString();
+  const getCreatedAt = formatDate(userDB?.createdAt);
 
   return (
     <div className="flex flex-col items-center gap-1">
