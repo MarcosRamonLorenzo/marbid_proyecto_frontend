@@ -1,4 +1,3 @@
-import {useEffect, useState } from "react";
 import { CirclePlus, GripVertical } from "lucide-react";
 import {
   Divider,
@@ -17,11 +16,8 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import ServiceCard from "../components/services/ServiceCard";
-import useDataFetch from "@/hooks/useDataFetch";
-import apiUrl from "@/config/apis.config";
-import useAuth from "@/hooks/useAuth";
-import useAlert from "@/hooks/useAlert";
 import LoadingCards from "@/components/shared-componentes/Loadings/LoadingCards";
+import { ServiceProvider } from "@/contexts/ServiceProvider";
 import { useNavigate } from "react-router-dom";
 
 const CreatedServices = () => {
@@ -40,9 +36,7 @@ const CreatedServices = () => {
     if (error) {
       setError(error.message);
     }
-  }, [data]);
-
-
+  }, [data])
   const navigate = useNavigate();
 
   return (
@@ -50,7 +44,9 @@ const CreatedServices = () => {
       <Button
         className="flex items-center bg-blue-400 text-white gap-1 px-4 py-2 cursor-pointer  font-semibold tracking-widest rounded-md hover:bg-blue-400 duration-300 hover:gap-2 hover:translate-x-3 fixed right-5 bottom-5 z-30"
         endContent={<CirclePlus />}
-        onClick={()=>{navigate("/panel-control/creacion-servicio")}}
+        onClick={() => {
+          navigate("/panel-control/creacion-servicio");
+        }}
       >
         Crear Anuncio
       </Button>
@@ -61,7 +57,7 @@ const CreatedServices = () => {
         {/* General View */}
         <Tab key="photos" title="General">
           <div className="gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5">
-            {isLoading && <LoadingCards/>}
+            {isLoading && <LoadingCards />}
             {createdServices.length ? (
               createdServices.map((item, index) => (
                 <ServiceCard item={item} key={index} />
@@ -72,46 +68,49 @@ const CreatedServices = () => {
           </div>
         </Tab>
         {/* Table View */}
-       {createdServices.length && <Tab key="tabla" title="Tabla">
-          <Table
-            aria-label="Example static collection table"
-            className="w-[23em] sm:w-[30em] lg:w-[45em] xl:w-[50em] mt-5"
-          >
-            <TableHeader>
-              <TableColumn>Nombre</TableColumn>
-              <TableColumn>Precio</TableColumn>
-              <TableColumn>Estado</TableColumn>
-              <TableColumn>Acciones</TableColumn>
-            </TableHeader>
-            <TableBody>
-              {createdServices.length && (
-                createdServices.map((item, index) => {
-                  return (
-                    <TableRow key={index}>
-                      <TableCell>{item.title}</TableCell>
-                      <TableCell>{item.price}</TableCell>
-                      <TableCell>Active</TableCell>
-                      <TableCell className="w-20">
-                        <Dropdown>
-                          <DropdownTrigger>
-                            <Button isIconOnly size="sm" variant="light">
-                              <GripVertical />
-                            </Button>
-                          </DropdownTrigger>
-                          <DropdownMenu>
-                            <DropdownItem color="secondary">View</DropdownItem>
-                            <DropdownItem color="primary">Edit</DropdownItem>
-                            <DropdownItem color="danger">Delete</DropdownItem>
-                          </DropdownMenu>
-                        </Dropdown>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })
-              )}
-            </TableBody>
-          </Table>
-        </Tab> } 
+        {createdServices.length && (
+          <Tab key="tabla" title="Tabla">
+            <Table
+              aria-label="Example static collection table"
+              className="w-[23em] sm:w-[30em] lg:w-[45em] xl:w-[50em] mt-5"
+            >
+              <TableHeader>
+                <TableColumn>Nombre</TableColumn>
+                <TableColumn>Precio</TableColumn>
+                <TableColumn>Estado</TableColumn>
+                <TableColumn>Acciones</TableColumn>
+              </TableHeader>
+              <TableBody>
+                {createdServices.length &&
+                  createdServices.map((item, index) => {
+                    return (
+                      <TableRow key={index}>
+                        <TableCell>{item.title}</TableCell>
+                        <TableCell>{item.price}</TableCell>
+                        <TableCell>Active</TableCell>
+                        <TableCell className="w-20">
+                          <Dropdown>
+                            <DropdownTrigger>
+                              <Button isIconOnly size="sm" variant="light">
+                                <GripVertical />
+                              </Button>
+                            </DropdownTrigger>
+                            <DropdownMenu>
+                              <DropdownItem color="secondary">
+                                View
+                              </DropdownItem>
+                              <DropdownItem color="primary">Edit</DropdownItem>
+                              <DropdownItem color="danger">Delete</DropdownItem>
+                            </DropdownMenu>
+                          </Dropdown>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </Tab>
+        )}
       </Tabs>
     </div>
   );
