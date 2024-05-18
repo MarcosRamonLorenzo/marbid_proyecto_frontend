@@ -5,10 +5,7 @@ import Loading from "../shared-componentes/Loadings/Loading.jsx";
 import configUrl from "@/config/apis.config.js";
 
 const ServiceList = () => {
-  const { data: services, isLoading } = useDataFetch(
-    "services",
-    `${configUrl}/service`
-  );
+  const { data: services, isLoading } = useDataFetch("services",`${configUrl}/service`);
 
   return (
     <>
@@ -16,7 +13,7 @@ const ServiceList = () => {
         {isLoading ? (
           <Loading />
         ) : services.length ? (
-          services.map((item, index) => <CardAnuncio item={item} key={index} />)
+          services.map((item, index) => <CardAnuncio item={item} key={index} isLikeable />)
         ) : (
           <h1>No se han encontrado anuncios</h1>
         )}
