@@ -69,12 +69,17 @@ const Service = () => {
             </div>
             <Divider className="my-4" />
 
-            <div className="flex mt-2 relative ">
-              <Input type="email" label="Añade un cometario" color="primary" />
-              <SendHorizontal
-                size={16}
-                strokeWidth={1}
-                className=" absolute right-4 top-3 cursor-pointer text-black dark:text-white"
+            <div className="flex mt-2  ">
+              <Input
+                type="email"
+                label="Añade un cometario"
+                color="primary"
+                endContent={
+                  <SendHorizontal
+                    
+                    className=" cursor-pointer text-black dark:text-white"
+                  />
+                }
               />
             </div>
           </div>

@@ -26,8 +26,11 @@ import { useNavigate } from "react-router-dom";
 
 const CreatedServices = () => {
   const { currentUser } = useAuth();
+
   const [createdServices, setCreatedServices] = useState([]);
+
   const { data,error,isLoading } = useDataFetch('createdServices',`${apiUrl}/service/created/${currentUser.uid}`);
+
   const { setError } = useAlert();
 
   useEffect(() => {
@@ -38,6 +41,7 @@ const CreatedServices = () => {
       setError(error.message);
     }
   }, [data]);
+
 
   const navigate = useNavigate();
 

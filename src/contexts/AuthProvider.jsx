@@ -139,6 +139,7 @@ const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
+
   const provideValues = {
     currentUser,
     isLogin,

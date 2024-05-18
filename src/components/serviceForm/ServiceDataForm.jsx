@@ -1,5 +1,5 @@
 import { Input, Textarea } from "@nextui-org/react";
-import { Captions,Euro,NotebookPen   } from "lucide-react";
+import { Euro   } from "lucide-react";
 import React from "react";
 import SelectCateogries from "../categories/SelectCateogries";
 import useService from "@/hooks/useService";
@@ -8,8 +8,6 @@ import { handleFormChange } from "@/functions/formsFunc";
 
 
 const ServiceDataForm = () => {
-
-
 
   const {formService,setFormService} = useService();
 
@@ -21,7 +19,7 @@ const ServiceDataForm = () => {
         placeholder="Introduce el título del servicio"
         variant="underlined"
         name="title"
-        onChange={(e) => {}}
+        onChange={(e) => {handleFormChange(e,formService,setFormService)}}
         value={formService?.title}
       />
       <Textarea
@@ -31,7 +29,7 @@ const ServiceDataForm = () => {
         placeholder="Introduce el contenido del servicio"
         variant="underlined"
         name="content"
-        onChange={(e) => {} }
+        onChange={(e) => {handleFormChange(e,formService,setFormService)}}
         value={formService?.content}
       />
       <Input
@@ -43,10 +41,12 @@ const ServiceDataForm = () => {
         variant="underlined"
         name="price"
         type="number"
-        onChange={(e) => {}}
+        onChange={(e) => {handleFormChange(e,formService,setFormService)}}
         value={formService?.price}
       />
-      <SelectCateogries variant="underlined" onChange={(e) => {console.log(e);}}/>  
+      <SelectCateogries variant="underlined"
+        onChange={(e) => {handleFormChange(e,formService,setFormService)}}
+       />  
       
     </>
   );
