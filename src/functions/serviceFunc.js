@@ -46,3 +46,16 @@ export const updateService = async (service) => {
 
     return response.json();
 }
+
+export const getAllServices =  async () =>{
+        const response = await fetch(`${apiUrl}/service`);
+        const data = await response.json();
+        return data;
+}
+
+export const getAllServicesCreatedByUser = async (id_user) => {
+    const response = await fetch(`${apiUrl}/service/created/${id_user}`);
+    const data = await response.json();
+    return data;
+
+}
