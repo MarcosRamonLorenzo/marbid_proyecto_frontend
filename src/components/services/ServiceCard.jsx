@@ -33,7 +33,8 @@ const ServiceCard = ({ item, isLikeable, onClick }) => {
           onClick={() => {
             /*Si es el mismo que no vaya a su perfil*/
             () => {
-              (currentUser.uid !== item.user.id) && navigate(`/user/${item.user.id}`);
+              currentUser.uid !== item.user.id &&
+                navigate(`/user/${item.user.id}`);
             };
           }}
         >
@@ -51,7 +52,7 @@ const ServiceCard = ({ item, isLikeable, onClick }) => {
             : item?.title}
         </h3>
         <p className="text-start">
-          {item?.content.length > 55
+          {item?.content?.length > 55
             ? item?.content.substring(0, 55) + "..."
             : item?.content}
         </p>

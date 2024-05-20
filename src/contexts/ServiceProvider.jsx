@@ -1,5 +1,10 @@
-import { createContext, useState,useEffect } from "react";
-import { createService, getAllServices, getAllServicesCreatedByUser, updateService } from "@/functions/serviceFunc";
+import { createContext, useState } from "react";
+import {
+  createService,
+  getAllServices,
+  getAllServicesCreatedByUser,
+  updateService,
+} from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
 import useAuth from "@/hooks/useAuth";
 
@@ -21,7 +26,7 @@ const ServiceProvider = ({ children }) => {
   };
 
   const [formService, setFormService] = useState(initialFormState);
-  const [sevices, setServices] = useState(nullValue);
+  const [services, setServices] = useState(nullValue);
   const [createdServices, setCreatedServices] = useState(nullValue);
 
   const handleCreateService = async () => {
@@ -45,20 +50,19 @@ const ServiceProvider = ({ children }) => {
 
   /* */
 
-  const servicesCreatedByUser = async (idUser) => {
-      try {
-        const { data , error } = await getAllServicesCreatedByUser(idUser);
-        if (error) throw error ;
-        setCreatedServices(data);
-      } catch (error) {
-        setErrorAlert(error.message);
-      }
+  const getServicesCreatedByUser = async (idUser) => {
+    try {
+      const { data, error } = await getAllServicesCreatedByUser(idUser);
+      if (error) throw error;
+      setCreatedServices(data);
+    } catch (error) {
+      setErrorAlert(error.message);
+    }
   };
 
   const getServices = async () => {
-
     try {
-      const {error, data } = await getAllServices();
+      const { error, data } = await getAllServices();
       if (error) throw error;
       setServices(data);
     } catch (error) {
@@ -66,9 +70,12 @@ const ServiceProvider = ({ children }) => {
     }
   };
 
-
   const value = {
+    services,
+    createdServices,
     formService,
+    getServicesCreatedByUser,
+    getServices,
     setFormService,
     handleCreateService,
     handleUpdateService,
