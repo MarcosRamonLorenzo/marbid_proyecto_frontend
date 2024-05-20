@@ -24,12 +24,16 @@ export const doSignInWithEmailAndPassword = async (email, password) => {
 
 export const doSignInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: 'select_account'
+  });
   const result = await signInWithPopup(auth, provider);
   return result;
 };
 
 export const doSignInWithGitHub = async () => {
   const provider = new GithubAuthProvider();
+  provider.addScope('user:email');
   const result = await signInWithPopup(auth, provider);
   return result;
 };
@@ -98,5 +102,26 @@ export const createUser = async (user) => {
     });
 
     return response.json();
+};
+
+const emailValidFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export const validateFormUser = (formUser) => {
+  if (formUser.email.length < 1) {
+    return "Rellena el campo de email";
+  } else if (!emailValidFormat.test(formUser.email)) {
+    return "El email no es correcto";
+  } else if (formUser.password.length < 1) {
+    return "Rellena el campo de contraseña";
+  } else if (
+    formUser.repeatPassword == null ||
+    formUser.repeatPassword.length < 1
+  ) {
+    return "Rellena el campo de contraseña auxiliar";
+  } else if (formUser.password !== formUser.repeatPassword) {
+    return "Las contraseñas no coinciden";
+  } else {
+    return null;
+  }
 };
 

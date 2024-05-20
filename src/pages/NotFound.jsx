@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <>
       <Header />
-      <div className="container-not-found">
+      <div className="container-not-found dark:bg-[#232323]">
         <div className="flex flex-col items-center justify-center">
           <Image src="\src\assets\marbid.svg" alt="404" width={80} /> 
           <h1>Página no encontrada</h1>
