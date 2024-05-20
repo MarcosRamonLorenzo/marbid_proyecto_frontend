@@ -106,6 +106,7 @@ const AuthProvider = ({ children }) => {
       setErrorAlert("Error al cerrar sesión: " + error.message);
     }
   };
+
   /* User State Controller*/
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);

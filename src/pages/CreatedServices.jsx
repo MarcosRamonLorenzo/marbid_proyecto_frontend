@@ -17,11 +17,8 @@ import {
   DropdownItem,
 } from "@nextui-org/react";
 import ServiceCard from "../components/services/ServiceCard";
-import useDataFetch from "@/hooks/useDataFetch";
-import apiUrl from "@/config/apis.config";
-import useAuth from "@/hooks/useAuth";
-import useAlert from "@/hooks/useAlert";
 import LoadingCards from "@/components/shared-componentes/Loadings/LoadingCards";
+import { ServiceProvider } from "@/contexts/ServiceProvider";
 import { useNavigate } from "react-router-dom";
 
 const CreatedServices = () => {
@@ -40,9 +37,7 @@ const CreatedServices = () => {
     if (error) {
       setError(error.message);
     }
-  }, [data]);
-
-
+  }, [data])
   const navigate = useNavigate();
 
   return (
@@ -50,7 +45,7 @@ const CreatedServices = () => {
       <Button
         className="flex items-center bg-blue-400 text-white gap-1 px-4 py-2 cursor-pointer  font-semibold tracking-widest rounded-md hover:bg-blue-400 duration-300 hover:gap-2 hover:translate-x-3 fixed right-5 bottom-5 z-30"
         endContent={<CirclePlus />}
-        onClick={() => { navigate("/panel-control/creacion-servicio") }}
+        onClick={()=>{navigate("/panel-control/creacion-servicio")}}
       >
         Crear Anuncio
       </Button>
@@ -72,7 +67,7 @@ const CreatedServices = () => {
           </div>
         </Tab>
         {/* Table View */}
-        {createdServices.length && <Tab key="tabla" title="Tabla">
+       {createdServices.length && <Tab key="tabla" title="Tabla">
           <Table
             aria-label="Example static collection table"
             className="w-[23em] sm:w-[30em] lg:w-[45em] xl:w-[50em] mt-5"
@@ -80,8 +75,6 @@ const CreatedServices = () => {
             <TableHeader>
               <TableColumn>Nombre</TableColumn>
               <TableColumn>Precio</TableColumn>
-              <TableColumn>Categoría</TableColumn>
-              <TableColumn>Image</TableColumn>
               <TableColumn>Estado</TableColumn>
               <TableColumn>Acciones</TableColumn>
             </TableHeader>
@@ -92,15 +85,20 @@ const CreatedServices = () => {
                     <TableRow key={index}>
                       <TableCell>{item.title}</TableCell>
                       <TableCell>{item.price}</TableCell>
-                      <TableCell>{item.price}</TableCell>
-                      <TableCell>{item.price}</TableCell>
                       <TableCell>Active</TableCell>
                       <TableCell className="w-20">
-                        <div className="flex gap-3">
-                          <Eye size={20}  strokeWidth={2} className="primary-stroke-class cursor-pointer" onClick={() => { navigate(`/service/${item.id}`) }}>View</Eye>
-                          <Edit2Icon size={18} strokeWidth={2} className="secondary-stroke-class cursor-pointer"  onClick={() => { navigate(`/panel-control/edicion-servicio/${item.id}`) }}>Edit</Edit2Icon>
-                          <Trash2Icon size={18}strokeWidth={2} className="third-stroke-class cursor-pointer" >Delete</Trash2Icon>
-                        </div>
+                        <Dropdown>
+                          <DropdownTrigger>
+                            <Button isIconOnly size="sm" variant="light">
+                              <GripVertical />
+                            </Button>
+                          </DropdownTrigger>
+                          <DropdownMenu>
+                            <DropdownItem color="secondary">View</DropdownItem>
+                            <DropdownItem color="primary">Edit</DropdownItem>
+                            <DropdownItem color="danger">Delete</DropdownItem>
+                          </DropdownMenu>
+                        </Dropdown>
                       </TableCell>
                     </TableRow>
                   );
@@ -108,7 +106,7 @@ const CreatedServices = () => {
               )}
             </TableBody>
           </Table>
-        </Tab>}
+        </Tab> } 
       </Tabs>
     </div>
   );
