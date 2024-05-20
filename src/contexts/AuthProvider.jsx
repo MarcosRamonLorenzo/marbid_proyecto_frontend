@@ -112,11 +112,6 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser])
-  
-
   const initializeUser = (user) => {
     setLoading(true);
     if (user) {
