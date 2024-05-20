@@ -7,6 +7,7 @@ import {
   getUserDB,
   createUser,
   doSignOut,
+  validateFormUser
 } from "@/functions/authFunc";
 import LoadingMarbidLoad from "@/components/shared-componentes/Loadings/LoadingMarbidLoad";
 import useAlert from "@/hooks/useAlert";
@@ -19,7 +20,6 @@ const AuthProvider = ({ children }) => {
   const nullDefaultValue = null;
   const stringDefaultValue = "";
   const loginDefaultValue = false;
-  const emailValidFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const [currentUser, setCurrentUser] = useState(nullDefaultValue);
   const [isLogin, setIsLogin] = useState(loginDefaultValue);
@@ -46,31 +46,19 @@ const AuthProvider = ({ children }) => {
   const handleSubmitUser = async (e, action) => {
     e.preventDefault();
     try {
-      if (formUser.email.length < 1) {
-        setErrorModal("Rellena el campo de email");
-      } else if (!emailValidFormat.test(formUser.email)) {
-        setErrorModal("El email no es correcto");
-      } else if (formUser.password.length < 1) {
-        setErrorModal("Rellena el campo de contraseña");
+      const error = validateFormUser(formUser);
+      if (error) {
+        setErrorModal(error);
       } else {
         if (action === "login") {
           await doSignInWithEmailAndPassword(formUser.email, formUser.password);
           setSuccessAlert("Inicio de sesión exitoso");
         } else {
-          if (formUser.password === formUser.repeatPassword) {
-            await doCreateUserWithEmailAndPassword(
-              formUser.email,
-              formUser.password
-            );
-            setSuccessAlert("Cuenta creada con éxito");
-          } else if (
-            formUser.repeatPassword == null ||
-            formUser.repeatPassword.length < 1
-          ) {
-            setErrorModal("Rellena el campo de contraseña auxiliar");
-          } else {
-            setErrorModal("Las contraseñas no coinciden");
-          }
+          await doCreateUserWithEmailAndPassword(
+            formUser.email,
+            formUser.password
+          );
+          setSuccessAlert("Cuenta creada con éxito");
         }
       }
     } catch (error) {
@@ -95,19 +83,18 @@ const AuthProvider = ({ children }) => {
       const newUserDB = await createUser({
         id: user.uid,
         email: user.email,
-        name: user?.displayName || null,
-        avatar_img: user?.photoURL || null,
+        name: user?.displayName || "Anónimo",
+        avatar_img: user?.photoURL 
       });
-      setCurrentUser(user, newUserDB);
+      setCurrentUser({ ...user, userDB: newUserDB.data });
     } else {
       setCurrentUser({ ...user, userDB });
     }
-  };
+};
 
   const reloadUserDB = (user) => {
     if (user.id === currentUser.uid) {
       setCurrentUser({ ...currentUser, userDB: user });
-      console.log(currentUser);
     }
   };
 
@@ -125,17 +112,18 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const initializeUser = async (user) => {
+  const initializeUser = (user) => {
     setLoading(true);
     if (user) {
       setLoading(false);
       setCurrentUser(user);
-      setIsLogin(true);
       handleAuthConnectionUser(user);
+      setIsLogin(true);
     } else {
       setCurrentUser(nullDefaultValue);
       setIsLogin(loginDefaultValue);
     }
+
     setLoading(false);
   };
 
