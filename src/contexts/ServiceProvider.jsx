@@ -22,31 +22,8 @@ const ServiceProvider = ({ children }) => {
     authorCreated: currentUser?.uid,
   };
 
-  // Getters of services and services by users.
-  const { dataAllServices, errorAllServices, isLoadingAllServices } =
-    useDataFetch("createdServices", `${apiUrl}/service/`);
+  
 
-  const { dataUserServices, errorUserServices, isLoadingUserServices } =
-    useDataFetch(
-      "createdServices",
-      `${apiUrl}/service/created/${currentUser.uid}`
-    );
-
-  const initialFormState = {
-    title: "",
-    price: "",
-    content: "",
-    category: "",
-    image: "",
-  };
-
-  const [sevices, setServices] = useState(nullValue);
-  const [loading, setLoading] = useState(falseInitialValue);
-  const [selectedServices, setSelectedServices] = useState(nullValue);
-  const [createdServices, setCreatedServices] = useState(nullValue);
-  const [errorCategory, setErrorCategory] = useState(emptyValue);
-  const [categories, setCategories] = useState(nullValue);
-  const [errorFiltred, setErrorFiltred] = useState(emptyValue);
   const [formService, setFormService] = useState(initialFormState);
   const [sevices, setServices] = useState(nullValue);
   const [createdServices, setCreatedServices] = useState(nullValue);

@@ -10,7 +10,7 @@ const publicRoutes = [
   { path: "/", element: <Home /> },
   { path: "/log-in", element: <LogIn /> },
   { path: "/sign-up", element: <LogIn isRegister={true} /> },
-  { path: "/service/:serviceId", element: <ServicePage /> },
+  { path: "/servicio/:serviceId", element: <ServicePage /> },
   { path: "/explora", element: <Explore /> },
   { path: "/*", element: <NotFound /> },
   { path: "/user/:idUser", element: <UserProfile /> },
