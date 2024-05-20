@@ -1,5 +1,5 @@
-import {useEffect, useState } from "react";
-import { CirclePlus, GripVertical } from "lucide-react";
+import { useEffect, useState } from "react";
+import { CirclePlus, Edit2Icon, Eye, GripVertical, Trash2Icon } from "lucide-react";
 import {
   Divider,
   Tabs,
@@ -29,7 +29,7 @@ const CreatedServices = () => {
 
   const [createdServices, setCreatedServices] = useState([]);
 
-  const { data,error,isLoading } = useDataFetch('createdServices',`${apiUrl}/service/created/${currentUser.uid}`);
+  const { data, error, isLoading } = useDataFetch('createdServices', `${apiUrl}/service/created/${currentUser.uid}`);
 
   const { setError } = useAlert();
 
@@ -50,7 +50,7 @@ const CreatedServices = () => {
       <Button
         className="flex items-center bg-blue-400 text-white gap-1 px-4 py-2 cursor-pointer  font-semibold tracking-widest rounded-md hover:bg-blue-400 duration-300 hover:gap-2 hover:translate-x-3 fixed right-5 bottom-5 z-30"
         endContent={<CirclePlus />}
-        onClick={()=>{navigate("/panel-control/creacion-servicio")}}
+        onClick={() => { navigate("/panel-control/creacion-servicio") }}
       >
         Crear Anuncio
       </Button>
@@ -61,7 +61,7 @@ const CreatedServices = () => {
         {/* General View */}
         <Tab key="photos" title="General">
           <div className="gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5">
-            {isLoading && <LoadingCards/>}
+            {isLoading && <LoadingCards />}
             {createdServices.length ? (
               createdServices.map((item, index) => (
                 <ServiceCard item={item} key={index} />
@@ -72,7 +72,7 @@ const CreatedServices = () => {
           </div>
         </Tab>
         {/* Table View */}
-       {createdServices.length && <Tab key="tabla" title="Tabla">
+        {createdServices.length && <Tab key="tabla" title="Tabla">
           <Table
             aria-label="Example static collection table"
             className="w-[23em] sm:w-[30em] lg:w-[45em] xl:w-[50em] mt-5"
@@ -80,6 +80,8 @@ const CreatedServices = () => {
             <TableHeader>
               <TableColumn>Nombre</TableColumn>
               <TableColumn>Precio</TableColumn>
+              <TableColumn>Categoría</TableColumn>
+              <TableColumn>Image</TableColumn>
               <TableColumn>Estado</TableColumn>
               <TableColumn>Acciones</TableColumn>
             </TableHeader>
@@ -90,20 +92,15 @@ const CreatedServices = () => {
                     <TableRow key={index}>
                       <TableCell>{item.title}</TableCell>
                       <TableCell>{item.price}</TableCell>
+                      <TableCell>{item.price}</TableCell>
+                      <TableCell>{item.price}</TableCell>
                       <TableCell>Active</TableCell>
                       <TableCell className="w-20">
-                        <Dropdown>
-                          <DropdownTrigger>
-                            <Button isIconOnly size="sm" variant="light">
-                              <GripVertical />
-                            </Button>
-                          </DropdownTrigger>
-                          <DropdownMenu>
-                            <DropdownItem color="secondary">View</DropdownItem>
-                            <DropdownItem color="primary">Edit</DropdownItem>
-                            <DropdownItem color="danger">Delete</DropdownItem>
-                          </DropdownMenu>
-                        </Dropdown>
+                        <div className="flex gap-3">
+                          <Eye size={20}  strokeWidth={2} className="primary-stroke-class cursor-pointer" onClick={() => { navigate(`/service/${item.id}`) }}>View</Eye>
+                          <Edit2Icon size={18} strokeWidth={2} className="secondary-stroke-class cursor-pointer"  onClick={() => { navigate(`/panel-control/edicion-servicio/${item.id}`) }}>Edit</Edit2Icon>
+                          <Trash2Icon size={18}strokeWidth={2} className="third-stroke-class cursor-pointer" >Delete</Trash2Icon>
+                        </div>
                       </TableCell>
                     </TableRow>
                   );
@@ -111,7 +108,7 @@ const CreatedServices = () => {
               )}
             </TableBody>
           </Table>
-        </Tab> } 
+        </Tab>}
       </Tabs>
     </div>
   );
