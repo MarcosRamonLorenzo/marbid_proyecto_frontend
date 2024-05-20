@@ -26,8 +26,8 @@ const ServicePage = () => {
         <div className="">
           <Image
             className="rounded-tl-xl rounded-tr-xl"
-            width={600}
-            height={200}
+            width={700}
+            height={100}
             alt="Service img"
             radius="none"
             src={service?.image}
@@ -37,12 +37,9 @@ const ServicePage = () => {
           </div>
           <div className="flex flex-row justify-between">
             <div className="text-small flex flex-col items-start gap-1 mt-3">
-            <UserAvatarView user={service?.authorCreated} />
+              <UserAvatarView user={service?.authorCreated} />
               <h3 className="font-medium text-2xl font-bold capitalize">{service?.title}</h3>
               <p className="text-lg font-bold">{service?.price}€</p>{" "}
-              <p className="text-start w-96">
-                {service?.content}
-              </p>
             </div>
             <div className="flex flex-col items-end gap-5 mt-3">
               <div className="flex items-center justify-center gap-5">
@@ -52,10 +49,12 @@ const ServicePage = () => {
                 </div>
                 <p className="text-sm">{formatDate(service?.createdAt)}</p>
               </div>
-              
+
             </div>
           </div>
-
+          <p className="text-sm md:w-[40em] ">
+                {service?.content}
+          </p>
           <div className="flex items-center justify-start gap-2 mt-10 ">
             <Button
               radius="sm"

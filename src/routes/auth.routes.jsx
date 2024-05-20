@@ -16,7 +16,7 @@ const authRoutes = [
       { path: "servicios-creados", element: <CreatedServices /> },
       { path: "servicios-aplicados", element: <CreatedServices /> },
       { path: "creacion-servicio", element: <ServiceForm /> },
-      { path: "edición-servicio", element: <ServiceForm edit={true} /> },
+      { path: "edicion-servicio/:idService", element: <ServiceForm edit={true} /> },
       { path: "ajustes", element: <Settings /> },
       { path: "profile", element: <UserProfile internal /> },
     ],

@@ -15,7 +15,7 @@ const ServiceList = () => {
         {isLoading ? (
           <Loading />
         ) : services.length ? (
-          services.map((item, index) => <ServiceCard item={item} key={index} onClick={()=>{navigate(`/service/${item.id}`)}} isLikeable />)
+          services.map((item, index) => <ServiceCard item={item} key={index} onClick={()=>{navigate(`/servicio/${item.id}`)}} isLikeable />)
         ) : (
           <h1>No se han encontrado anuncios</h1>
         )}

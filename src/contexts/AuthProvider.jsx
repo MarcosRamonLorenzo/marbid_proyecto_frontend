@@ -84,7 +84,7 @@ const AuthProvider = ({ children }) => {
         id: user.uid,
         email: user.email,
         name: user?.displayName || "Anónimo",
-        avatar_img: user?.photoURL 
+        avatar_img: user.photoURL || undefined 
       });
       setCurrentUser({ ...user, userDB: newUserDB.data });
     } else {
@@ -106,6 +106,7 @@ const AuthProvider = ({ children }) => {
       setErrorAlert("Error al cerrar sesión: " + error.message);
     }
   };
+
   /* User State Controller*/
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
