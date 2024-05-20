@@ -2,12 +2,14 @@ import { createContext, useState,useEffect } from "react";
 import { createService, getAllServices, getAllServicesCreatedByUser, updateService } from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
 import useAuth from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const ServiceContext = createContext();
 
 const ServiceProvider = ({ children }) => {
   const { setSuccessAlert, setErrorAlert } = useAlert();
   const { currentUser } = useAuth();
+  const  navigate  = useNavigate();
 
   const nullValue = null;
 
@@ -27,8 +29,9 @@ const ServiceProvider = ({ children }) => {
   const handleCreateService = async () => {
     try {
       const response = await createService(formService);
-      if (condition) throw response.error;
+      if (response.error) throw response.error;
       setSuccessAlert("Servicio creado con éxito");
+      navigate(`/panel-control/servicios-creados`);
     } catch (error) {
       setErrorAlert(error.message);
     }
@@ -43,7 +46,6 @@ const ServiceProvider = ({ children }) => {
     }
   };
 
-  /* */
 
   const servicesCreatedByUser = async (idUser) => {
       try {
