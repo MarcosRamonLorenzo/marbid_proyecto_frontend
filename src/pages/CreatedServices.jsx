@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react";
-import { CirclePlus, Edit2Icon, Eye, Trash2Icon } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import {
   Divider,
   Tabs,
   Tab,
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
   Button,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
@@ -22,6 +12,7 @@ import useDataFetch from "@/hooks/useDataFetch";
 import apiUrl from "@/config/apis.config";
 import useAlert from "@/hooks/useAlert";
 import CreatedServicesList from "@/components/services/CreatedServicesList";
+import CreatedServicesTable from "@/components/services/CreatedServicesTable";
 
 const CreatedServices = () => {
   const { currentUser } = useAuth();
@@ -72,68 +63,7 @@ const CreatedServices = () => {
         {/* Table View */}
         {createdServices.length && (
           <Tab key="tabla" title="Tabla">
-            <Table
-              aria-label="Example static collection table"
-              className="w-[23em] sm:w-[30em] lg:w-[45em] xl:w-[50em] mt-5"
-            >
-              <TableHeader>
-                <TableColumn>Nombre</TableColumn>
-                <TableColumn>Precio</TableColumn>
-                <TableColumn>Categoría</TableColumn>
-                <TableColumn>Contenido</TableColumn>
-                <TableColumn>Estado</TableColumn>
-                <TableColumn>Acciones</TableColumn>
-              </TableHeader>
-              <TableBody>
-                {createdServices.length &&
-                  createdServices.map((item, index) => {
-                    return (
-                      <TableRow key={index}>
-                        <TableCell>{item.title}</TableCell>
-                        <TableCell>{item.price}</TableCell>
-                        <TableCell>{item.category}</TableCell>
-                        <TableCell>
-                          {item?.content.substring(0, 50) + "..."}
-                        </TableCell>
-
-                        <TableCell>Active</TableCell>
-                        <TableCell className=" flex">
-                          <Button isIconOnly size="sm" variant="light">
-                            <Eye
-                              size={20}
-                              className="primary-stroke-class"
-                              onClick={() => {
-                                navigate(`/servicio/${item.id}`);
-                              }}
-                            />
-                          </Button>
-                          <Button
-                            isIconOnly
-                            size="sm"
-                            variant="light"
-                            onClick={() => {
-                              navigate(
-                                `/panel-control/edicion-servicio/${item.id}`
-                              );
-                            }}
-                          >
-                            <Edit2Icon
-                              size={20}
-                              className="secondary-stroke-class"
-                            />
-                          </Button>
-                          <Button isIconOnly size="sm" variant="light">
-                            <Trash2Icon
-                              size={20}
-                              className="third-stroke-class"
-                            />
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
+           <CreatedServicesTable createdServices={createdServices} />
           </Tab>
         )}
       </Tabs>

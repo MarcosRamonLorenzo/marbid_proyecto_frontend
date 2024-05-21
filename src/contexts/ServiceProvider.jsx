@@ -27,6 +27,7 @@ const ServiceProvider = ({ children }) => {
   const [formService, setFormService] = useState(initialFormState);
   const [sevices, setServices] = useState(nullValue);
   const [createdServices, setCreatedServices] = useState(nullValue);
+  const [ selectedPreviewImage,setSelectedPreviewImage] = useState(nullValue);
 
   const handleCreateService = async () => {
     try {
@@ -89,6 +90,8 @@ const ServiceProvider = ({ children }) => {
     setFormService,
     handleCreateService,
     handleUpdateService,
+    selectedPreviewImage,
+    setSelectedPreviewImage
   };
 
   return (

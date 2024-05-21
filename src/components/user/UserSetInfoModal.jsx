@@ -15,7 +15,7 @@ import {
   user,
 } from "@nextui-org/react";
 import { Edit2, Tag, FileText, CameraIcon } from "lucide-react";
-import countries from "@/config/constries.config";
+import countries from "@/config/countries.config";
 import useAuth from "@/hooks/useAuth";
 import { updateUser } from "@/functions/authFunc";
 import { handleFormChange, handleFileChange } from "@/functions/formsFunc";
@@ -119,7 +119,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} placement="auto" size="2xl">
+      <Modal isOpen={isOpen} onClose={onClose} placement="auto" size="2xl" backdrop="blur">
         <ModalContent>
           <>
             <ModalHeader className="flex flex-col gap-1">
@@ -218,7 +218,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
               >
                 {countries.map((country) => (
                   <SelectItem
-                    key={country.key}
+                    key={country.name}
                     startContent={
                       <Avatar
                         alt={country.alt}

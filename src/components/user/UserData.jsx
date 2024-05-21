@@ -29,11 +29,6 @@ const UserDetails = ({ userDB }) => {
       {userDB?.country && (
         <div className="flex justify-center gap-2 ">
           <p className="text-gray-500 capitalize">{userDB.country}</p>
-          <Avatar
-            className="w-6 h-6"
-            src={`https://flagcdn.com/${userDB.country[0] + userDB.country[1]
-              }.svg`}
-          />
         </div>
       )}
     </div>
@@ -69,12 +64,13 @@ const UserActions = ({ internal, openSetUser }) => (
 );
 
 const UserTabs = ({ idUser }) => {
-  const { data, isLoading } = useDataFetch(`services-${idUser}`,`${apiUrl}/service/created/${idUser}`);
-  console.log(data);
+  const { data, isLoading } = useDataFetch(`services-${idUser}`, `${apiUrl}/service/created/${idUser}`);
   return (
     <Tabs aria-label="Options" variant="underlined">
       <Tab key="created-ofers" title="Servicios Creados">
-       <CreatedServicesList createdServices={data} isLoading={isLoading} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <CreatedServicesList createdServices={data} isLoading={isLoading} />
+        </div>
       </Tab>
       <Tab key="like-ofers" title="Comentarios">
         Este usuario no ha comentado
@@ -102,7 +98,7 @@ const UserData = ({ userDB, internal, openSetUser }) => (
     </div>
     <div className="flex flex-col items-center ">
       <Divider className="w-[80%] mt-10" />
-      <UserTabs idUser={userDB.id} />
+      <UserTabs idUser={userDB?.id} />
     </div>
   </>
 );
