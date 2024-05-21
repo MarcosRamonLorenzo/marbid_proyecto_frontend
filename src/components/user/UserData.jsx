@@ -1,8 +1,10 @@
-import { Tabs, Tab, Divider, Button,Image, avatar } from "@nextui-org/react";
+import { Tabs, Tab, Divider, Button, Image, avatar } from "@nextui-org/react";
 import { CalendarDays, MessageCircleMore, SettingsIcon } from "lucide-react";
 import { Avatar } from "@nextui-org/react";
 import { formatDate } from "@/functions/timeFunc";
-
+import useDataFetch from "@/hooks/useDataFetch";
+import CreatedServicesList from "../services/CreatedServicesList";
+import apiUrl from "@/config/apis.config";
 
 const UserAvatar = ({ photoURL }) => (
   <Image
@@ -29,7 +31,8 @@ const UserDetails = ({ userDB }) => {
           <p className="text-gray-500 capitalize">{userDB.country}</p>
           <Avatar
             className="w-6 h-6"
-            src={`https://flagcdn.com/${userDB.country[0] + userDB.country[1]}.svg`}
+            src={`https://flagcdn.com/${userDB.country[0] + userDB.country[1]
+              }.svg`}
           />
         </div>
       )}
@@ -54,7 +57,9 @@ const UserActions = ({ internal, openSetUser }) => (
       <Button
         radius="sm"
         className="mt-5 secondary-color-class text-white py-0 px-10"
-        startContent={<SettingsIcon size={20} color="#ffffff" strokeWidth={2} />}
+        startContent={
+          <SettingsIcon size={20} color="#ffffff" strokeWidth={2} />
+        }
         onClick={openSetUser}
       >
         Editar Perfil
@@ -63,31 +68,41 @@ const UserActions = ({ internal, openSetUser }) => (
   </>
 );
 
-const UserTabs = () => (
-  <Tabs aria-label="Options" variant="underlined">
-    <Tab key="created-ofers" title="Servicios Creados">
-      Este usuario no ha publicado servicios
-    </Tab>
-    <Tab key="like-ofers" title="Comentarios">
-      Este usuario no ha comentado
-    </Tab>
-  </Tabs>
-);
+const UserTabs = ({ idUser }) => {
+  const { data, isLoading } = useDataFetch(`services-${idUser}`,`${apiUrl}/service/created/${idUser}`);
+  console.log(data);
+  return (
+    <Tabs aria-label="Options" variant="underlined">
+      <Tab key="created-ofers" title="Servicios Creados">
+       <CreatedServicesList createdServices={data} isLoading={isLoading} />
+      </Tab>
+      <Tab key="like-ofers" title="Comentarios">
+        Este usuario no ha comentado
+      </Tab>
+    </Tabs>
+  );
+};
 
 const UserData = ({ userDB, internal, openSetUser }) => (
   <>
-  <div className="flex flex-col justify-center items-center w-[full]">
-   <Image src={userDB?.backround_img} radius="none"  alt="" className="w-screen h-60 object-cover	" />
+    <div className="flex flex-col justify-center items-center w-[full]">
+      <Image
+        src={userDB?.backround_img}
+        radius="none"
+        alt=""
+        className="w-screen h-60 object-cover	"
+      />
       <UserAvatar photoURL={userDB?.avatar_img} />
       <UserDetails userDB={userDB} />
       <p className="text-xl mt-6 capitalize ">{userDB?.label}</p>
       <p className="max-w-[20em] md:max-w-[55em] capitalize ">
-        {userDB?.description } </p>
+        {userDB?.description}{" "}
+      </p>
       <UserActions internal={internal} openSetUser={openSetUser} />
     </div>
     <div className="flex flex-col items-center ">
       <Divider className="w-[80%] mt-10" />
-      <UserTabs />
+      <UserTabs idUser={userDB.id} />
     </div>
   </>
 );

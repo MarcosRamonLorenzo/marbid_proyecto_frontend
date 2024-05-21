@@ -7,7 +7,6 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-
 import { auth } from "@/firebase/firebase";
 import { storage } from "@/firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "@firebase/storage";
@@ -25,7 +24,7 @@ export const doSignInWithEmailAndPassword = async (email, password) => {
 export const doSignInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
   provider.setCustomParameters({
-    prompt: 'select_account'
+    prompt: "select_account",
   });
   const result = await signInWithPopup(auth, provider);
   return result;
@@ -33,7 +32,7 @@ export const doSignInWithGoogle = async () => {
 
 export const doSignInWithGitHub = async () => {
   const provider = new GithubAuthProvider();
-  provider.addScope('user:email');
+  provider.addScope("user:email");
   const result = await signInWithPopup(auth, provider);
   return result;
 };
@@ -60,7 +59,10 @@ export const getUserDB = async (uid) => {
 };
 
 const uploadBackgroundImage = async (image) => {
-  const backgroundStorageRef = ref(storage, `backgroundImages/${self.crypto.randomUUID()}`);
+  const backgroundStorageRef = ref(
+    storage,
+    `backgroundImages/${self.crypto.randomUUID()}`
+  );
   await uploadBytes(backgroundStorageRef, image);
   return getDownloadURL(backgroundStorageRef);
 };
@@ -72,36 +74,36 @@ const uploadAvatarImage = async (image) => {
 };
 
 export const updateUser = async (user, currentUser) => {
-    // Subir la imagen de fondo a Firebase Storage solo si ha cambiado
-    if (user.backround_img !== currentUser.backround_img) {
-      const backgroundImageUrl = await uploadBackgroundImage(user.backround_img);
-      user.backround_img = backgroundImageUrl;
-    }
-    
-    // Subir la imagen de avatar a Firebase Storage solo si ha cambiado
-    if (user.avatar_img !== currentUser.avatar_img) {
-      const avatarImageUrl = await uploadAvatarImage(user.avatar_img);
-      user.avatar_img = avatarImageUrl;
-    }
+  // Subir la imagen de fondo a Firebase Storage solo si ha cambiado
+  if (user.backround_img !== currentUser.backround_img) {
+    const backgroundImageUrl = await uploadBackgroundImage(user.backround_img);
+    user.backround_img = backgroundImageUrl;
+  }
 
-    // Actualizar el usuario en el backend
-    const response = await fetch(`${apiUrl}/user/${user.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
+  // Subir la imagen de avatar a Firebase Storage solo si ha cambiado
+  if (user.avatar_img !== currentUser.avatar_img) {
+    const avatarImageUrl = await uploadAvatarImage(user.avatar_img);
+    user.avatar_img = avatarImageUrl;
+  }
 
-    return response.json();
+  // Actualizar el usuario en el backend
+  const response = await fetch(`${apiUrl}/user/${user.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
+
+  return response.json();
 };
 
 export const createUser = async (user) => {
-    const response = await fetch(`${apiUrl}/user`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
-    });
+  const response = await fetch(`${apiUrl}/user`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user),
+  });
 
-    return response.json();
+  return response.json();
 };
 
 const emailValidFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -125,3 +127,34 @@ export const validateFormUser = (formUser) => {
   }
 };
 
+export const validateEditedUser = (user) => {
+  if (!user.id) {
+    return "El ID es requerido";
+  }
+
+  if (!user.name || user.name.length > 100) {
+    return "El nombre es requerido y no puede tener más de 100 caracteres";
+  }
+
+  if (!user.label || user.label.length > 100) {
+    return "La etiqueta es requerida y no puede tener más de 100 caracteres";
+  }
+
+  if (!user.description || user.description.length > 500) {
+    return "La descripción es requerida y no puede tener más de 500 caracteres";
+  }
+
+  if (!user.country || user.country.length > 50) {
+    return "El país es requerido y no puede tener más de 50 caracteres";
+  }
+
+  if (!user.avatar_img) {
+    return "La imagen de avatar es requerida";
+  }
+
+  if (!user.backround_img) {
+    return "La imagen de fondo es requerida";
+  }
+
+  return null;
+};
