@@ -12,6 +12,7 @@ import useDataFetch from "@/hooks/useDataFetch";
 import apiUrl from "@/config/apis.config";
 import UserAvatarView from "@/components/user/UserAvatarView";
 import { formatDate } from "@/functions/timeFunc";
+import Loading from "@/components/shared-componentes/Loadings/Loading";
 
 const ServicePage = () => {
 
@@ -19,10 +20,13 @@ const ServicePage = () => {
 
   const { data: service, isLoading } = useDataFetch("services", `${apiUrl}/service/${serviceId}`);
 
+  if (isLoading) return <Loading/>
+
   return (
+    
     <div className=" service lg:h-screen">
       <Header />
-      <div className="m-10 mb-0 flex flex-col lg:flex-row justify-center gap-10 lg:gap-32">
+      <div className="m-10 mb-0 flex flex-col md:flex-row justify-center gap-10 lg:gap-32">
         <div className="">
           <Image
             className="rounded-tl-xl rounded-tr-xl"
@@ -39,7 +43,8 @@ const ServicePage = () => {
             <div className="text-small flex flex-col items-start gap-1 mt-3">
               <UserAvatarView user={service?.authorCreated} />
               <h3 className="font-medium text-2xl font-bold capitalize">{service?.title}</h3>
-              <p className="text-lg font-bold">{service?.price}€</p>{" "}
+              <p className="text-xs font-bold">{service?.category.name}</p>
+              <p className="text-xl font-bold">{service?.price}€</p>
             </div>
             <div className="flex flex-col items-end gap-5 mt-3">
               <div className="flex items-center justify-center gap-5">
@@ -88,7 +93,7 @@ const ServicePage = () => {
           </div>
           <div className="mt-5 ">
             <h3 className="text-lg font-bold">Comentarios</h3>
-            <div className="mt-5 dark:bg-[#27272A] bg- w-full rounded-xl">
+            <div className="mt-5 dark:bg-[#27272A]  w-full rounded-xl">
               <p className="p-5 dark:text-white text-black">Sin Comentarios</p>
             </div>
 
