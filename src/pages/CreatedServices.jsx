@@ -62,8 +62,8 @@ const CreatedServices = () => {
         </Tab>
         {/* Table View */}
         {createdServices.length && (
-          <Tab key="tabla" title="Tabla">
-           <CreatedServicesTable createdServices={createdServices} />
+          <Tab key="tabla" title="Tabla" aria-labelledby="created-services-table">
+           <CreatedServicesTable createdServices={createdServices} setCreatedServices={setCreatedServices} />
           </Tab>
         )}
       </Tabs>

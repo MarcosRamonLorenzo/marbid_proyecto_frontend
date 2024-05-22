@@ -34,8 +34,6 @@ export const updateService = async (service) => {
         service.image = serviceImageUrl;
     }
 
-    console.log(service);
-
     const response = await fetch(`${apiUrl}/service/${service.id}`, {
         method: 'PUT',
         headers: {
@@ -46,6 +44,15 @@ export const updateService = async (service) => {
 
     return response.json();
 }
+
+export const deleteService = async (id) => {
+    const response = await fetch(`${apiUrl}/service/${id}`, {
+        method: 'DELETE',
+    });
+
+    return response.json();
+}
+
 
 export const getAllServices =  async () =>{
         const response = await fetch(`${apiUrl}/service`);
