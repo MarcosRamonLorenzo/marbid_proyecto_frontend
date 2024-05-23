@@ -1,11 +1,10 @@
 import React from "react";
 import Header from "../components/shared-componentes/Header";
-import { Image, Button, Input, Divider } from "@nextui-org/react";
+import { Image, Button } from "@nextui-org/react";
 import {
   MessageCircleMore,
   Feather,
   HeartIcon,
-  Forward,
 } from "lucide-react";
 import { useParams } from "react-router-dom";
 import useDataFetch from "@/hooks/useDataFetch";
@@ -13,6 +12,9 @@ import apiUrl from "@/config/apis.config";
 import UserAvatarView from "@/components/user/UserAvatarView";
 import { formatDate } from "@/functions/timeFunc";
 import Loading from "@/components/shared-componentes/Loadings/Loading";
+import CommentProvider from "@/contexts/CommentProvider";
+import CommentsServiceList from "@/components/comments/CommentsServiceList";
+import CommentInput from "@/components/comments/CommentInput";
 
 const ServicePage = () => {
 
@@ -20,10 +22,10 @@ const ServicePage = () => {
 
   const { data: service, isLoading } = useDataFetch("services", `${apiUrl}/service/${serviceId}`);
 
-  if (isLoading) return <Loading/>
+  if (isLoading) return <Loading />
 
   return (
-    
+
     <div className=" service lg:h-screen">
       <Header />
       <div className="m-10 mb-0 flex flex-col md:flex-row justify-center gap-10 lg:gap-32">
@@ -43,7 +45,7 @@ const ServicePage = () => {
             <div className="text-small flex flex-col items-start gap-1 mt-3">
               <UserAvatarView user={service?.authorCreated} />
               <h3 className="font-medium text-2xl font-bold capitalize">{service?.title}</h3>
-              <p className="text-xs font-bold">{service?.category.name}</p>
+              <p className="text-xs font-bold">{service?.category?.name}</p>
               <p className="text-xl font-bold">{service?.price}€</p>
             </div>
             <div className="flex flex-col items-end gap-5 mt-3">
@@ -58,7 +60,7 @@ const ServicePage = () => {
             </div>
           </div>
           <p className="text-sm md:w-[40em] ">
-                {service?.content}
+            {service?.content}
           </p>
           <div className="flex items-center justify-start gap-2 mt-10 ">
             <Button
@@ -78,26 +80,15 @@ const ServicePage = () => {
               Aplicar Anuncio
             </Button>
           </div>
-          <div className="flex mt-2  ">
-            <Input
-              type="email"
-              variant="underlined"
-              label="Añade un cometario"
-              endContent={
-                <Forward
-
-                  className=" cursor-pointer text-black dark:text-white"
-                />
-              }
-            />
-          </div>
-          <div className="mt-5 ">
-            <h3 className="text-lg font-bold">Comentarios</h3>
-            <div className="mt-5 dark:bg-[#27272A]  w-full rounded-xl">
-              <p className="p-5 dark:text-white text-black">Sin Comentarios</p>
+          <CommentProvider idService={service?.id} >
+            <CommentInput className={"flex mt-2"} />
+            <div className="mt-5 comments">
+              <h3 className="text-lg font-bold">Comentarios</h3>
+              <div className="mt-5 dark:bg-[#27272A]  w-full rounded-xl">
+                <CommentsServiceList className={"p-5 dark:text-white text-black flex flex-col gap-9"} />
+              </div>
             </div>
-
-          </div>
+          </CommentProvider>
         </div>
 
 

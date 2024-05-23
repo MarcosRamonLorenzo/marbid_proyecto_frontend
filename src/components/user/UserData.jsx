@@ -5,6 +5,7 @@ import { formatDate } from "@/functions/timeFunc";
 import useDataFetch from "@/hooks/useDataFetch";
 import CreatedServicesList from "../services/CreatedServicesList";
 import apiUrl from "@/config/apis.config";
+import UserCommentsList from "../comments/UserCommentsList";
 
 const UserAvatar = ({ photoURL }) => (
   <Image
@@ -64,16 +65,21 @@ const UserActions = ({ internal, openSetUser }) => (
 );
 
 const UserTabs = ({ idUser }) => {
-  const { data, isLoading } = useDataFetch(`services-${idUser}`, `${apiUrl}/service/created/${idUser}`);
+  const { data, isLoading } = useDataFetch(
+    `services-${idUser}`,
+    `${apiUrl}/service/created/${idUser}`
+  );
   return (
     <Tabs aria-label="Options" variant="underlined">
       <Tab key="created-ofers" title="Servicios Creados">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          <CreatedServicesList createdServices={data} isLoading={isLoading} />
-        </div>
+          <CreatedServicesList
+            createdServices={data}
+            isLoading={isLoading}
+            className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"}
+            />
       </Tab>
       <Tab key="like-ofers" title="Comentarios">
-        Este usuario no ha comentado
+       <UserCommentsList className={""} />
       </Tab>
     </Tabs>
   );
