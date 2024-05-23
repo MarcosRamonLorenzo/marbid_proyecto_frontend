@@ -1,8 +1,8 @@
 import {Card, Skeleton} from "@nextui-org/react";
 
-const LoadingCards = () => {
+const LoadingCards = ({className}) => {
   return (
-    <div className="flex w-[80vw] flex-wrap gap-6 items-center   ">
+    <div className={className || "flex w-[80vw] flex-wrap gap-6 items-center"}>
       {Array.from({ length: 9 }).map((_, index) => (
         <Card key={index} className="w-[480px] h-[480px] space-y-5 p-4" radius="lg">
           <Skeleton className="rounded-lg">
