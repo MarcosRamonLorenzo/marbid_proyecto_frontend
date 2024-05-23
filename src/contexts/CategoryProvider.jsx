@@ -17,7 +17,6 @@ const CategoryProvider = ({ children }) => {
 
       if (error) throw error;
 
-      console.log(data);
       setCategories(data);
     } catch (error) {
       setErrorAlert(error.message);

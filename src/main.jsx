@@ -9,6 +9,7 @@ import ThemeProvider from "./contexts/ThemeProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.scss";
 import { ServiceProvider } from "./contexts/ServiceProvider.jsx";
+import CategoryProvider from "./contexts/CategoryProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -19,7 +20,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <AlertsProvider>
               <AuthProvider>
                 <ServiceProvider>
-                <App />
+                  <CategoryProvider>
+                    <App />
+                  </CategoryProvider>
                 </ServiceProvider>
               </AuthProvider>
             </AlertsProvider>

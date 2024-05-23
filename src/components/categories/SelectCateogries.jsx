@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { Autocomplete, AutocompleteItem } from "@nextui-org/react";
+import {
+  Autocomplete,
+  AutocompleteItem,
+  Select,
+  SelectItem,
+} from "@nextui-org/react";
 import useCategory from "@/hooks/useCategory.js";
 
 const SelectCateogries = ({ onChange, variant = "flat" }) => {
@@ -7,10 +12,10 @@ const SelectCateogries = ({ onChange, variant = "flat" }) => {
 
   useEffect(() => {
     getAllCategories();
-  }, [categories]);
+  }, []);
 
   return (
-    <Autocomplete
+    <Select
       variant={variant}
       label="Selecciona una categoría"
       className="max-w-xs"
@@ -20,11 +25,11 @@ const SelectCateogries = ({ onChange, variant = "flat" }) => {
       {categories &&
         categories.length &&
         categories.map((category) => (
-          <AutocompleteItem key={category.id} value={category.name}>
+          <SelectItem key={category.id} value={category.name}>
             {category.name}
-          </AutocompleteItem>
+          </SelectItem>
         ))}
-    </Autocomplete>
+    </Select>
   );
 };
 
