@@ -85,7 +85,7 @@ const ServicePage = () => {
             <div className="mt-5 comments">
               <h3 className="text-lg font-bold">Comentarios</h3>
               <div className="mt-5 dark:bg-[#27272A]  w-full rounded-xl">
-                <CommentsServiceList className={"p-5 dark:text-white text-black"} />
+                <CommentsServiceList className={"p-5 dark:text-white text-black flex flex-col gap-9"} />
               </div>
             </div>
           </CommentProvider>

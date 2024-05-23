@@ -4,8 +4,7 @@ import Loading from "../shared-componentes/Loadings/Loading";
 import Comment from "./Comment";
 
 const CommentsServiceList = ({ className }) => {
-  const { loading, comments } = useComment();
-  console.log(comments);
+  const { loading, comments , handleDeleteComment } = useComment();
   if (loading) return <Loading />;
 
   return (
@@ -16,9 +15,10 @@ const CommentsServiceList = ({ className }) => {
             <Comment
               key={comment.id}
               date={comment?.createdAt}
-              avatar={comment?.author?.avatar_img}
+              author={comment?.author}
               content={comment?.content}
               username={comment?.author?.name}
+              onDelete={()=>{handleDeleteComment(comment.id)}}
             />
           );
         })

@@ -1,7 +1,7 @@
 import apiUrl from "@/config/apis.config";
 
-export const createComment = (comment) => {
-  const respose = fetch(`${apiUrl}/comment/`, {
+export const createComment = async (comment) => {
+  const respose = await fetch(`${apiUrl}/comment/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(comment),
@@ -17,16 +17,7 @@ export const deleteComment = async (commentId) => {
     return response.json();
     }
 
-export const updateComment = async (comment) => {
-    const response = await fetch(`${apiUrl}/comment/${comment.id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(comment),
-    });
-    return response.json();
-    }
-
-
+    
  export const getCommentsByServiceId = async (serviceId) => {
     const response = await fetch(`${apiUrl}/comment/service/${serviceId}`);
     return response.json();

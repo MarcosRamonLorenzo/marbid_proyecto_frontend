@@ -32,7 +32,7 @@ const CommentProvider = ({ idService, children }) => {
         setLoading(true);
         const {error,data:newComment} = await createComment(comment);
         if (error) throw error; 
-        setComments([...comments, newComment]);
+        setComments([newComment, ...comments]);
         setSuccessAlert("Comentario creado correctamente");
         setComment(initialValueMessage);
       } catch (error) {

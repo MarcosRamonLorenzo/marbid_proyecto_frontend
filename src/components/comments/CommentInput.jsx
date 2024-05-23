@@ -12,7 +12,7 @@ const CommentInput = ({ className }) => {
   return (
     <div className={className}>
       <Input
-        type="email"
+        type="text"
         variant="underlined"
         label="Añade un cometario"
         value={comment.content}
