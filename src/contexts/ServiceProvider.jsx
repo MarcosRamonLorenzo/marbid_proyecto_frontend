@@ -74,7 +74,6 @@ const ServiceProvider = ({ children }) => {
   };
 
   const getServices = async () => {
-
     try {
       const { error, data } = await getAllServices();
       if (error) throw error;
@@ -84,6 +83,9 @@ const ServiceProvider = ({ children }) => {
     }
   };
 
+  const navigateService =(idService)=>{
+    navigate(`/servicio/${idService}`);
+  }
 
   const value = {
     formService,
@@ -91,7 +93,8 @@ const ServiceProvider = ({ children }) => {
     handleCreateService,
     handleUpdateService,
     selectedPreviewImage,
-    setSelectedPreviewImage
+    setSelectedPreviewImage,
+    navigateService
   };
 
   return (

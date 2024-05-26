@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { formatDate } from "@/functions/timeFunc";
-import { useNavigate } from "react-router-dom";
+import useService from "@/hooks/useService";
 
 const CommentPreviewUser = ({ comment }) => {
-  const navigate = useNavigate();
+
+  const { navigateService } = useService();
 
   return (
     <Card
@@ -16,7 +17,7 @@ const CommentPreviewUser = ({ comment }) => {
       <CardBody
         className="p-0"
         onClick={() => {
-          navigate(`/servicio/${comment?.service?.id}`);
+          navigateService(comment?.service?.id);
         }}
       >
         <div className="flex sm:flex-row items-start justify-center gap-3 ">
