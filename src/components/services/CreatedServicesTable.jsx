@@ -18,7 +18,7 @@ import { deleteService } from "@/functions/serviceFunc";
 
 const CreatedServicesTable = ({ createdServices = [] , setCreatedServices }) => {
   const navigate = useNavigate();
-  const { setSelectedPreviewImage } = useService();
+  const { setSelectedPreviewImage,navigateService } = useService();
 
   const {
     isOpen: isDeleteModal,
@@ -91,7 +91,7 @@ const CreatedServicesTable = ({ createdServices = [] , setCreatedServices }) => 
                           size={20}
                           className="primary-stroke-class"
                           onClick={() => {
-                            navigate(`/servicio/${item.id}`);
+                            navigateService(item.id);
                           }}
                         />
                       </Button>

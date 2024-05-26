@@ -22,7 +22,6 @@ const Comment = ({
   };
 
   const { currentUser } = useAuth();
-  console.log(currentUser);
 
   const isUsersMessage = () => {
     return currentUser?.uid === author?.id; // Check if the current user is the author of the message

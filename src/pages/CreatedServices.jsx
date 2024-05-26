@@ -53,17 +53,16 @@ const CreatedServices = () => {
       <Tabs aria-label="Options" variant="underlined">
         {/* General View */}
         <Tab key="photos" title="General">
-          <div className="gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5">
-            <CreatedServicesList
-              createdServices={createdServices}
-              isLoading={isLoading}
-            />
-          </div>
+          <CreatedServicesList
+            className={"gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5"}
+            createdServices={createdServices}
+            isLoading={isLoading}
+          />
         </Tab>
         {/* Table View */}
         {createdServices.length && (
           <Tab key="tabla" title="Tabla" aria-labelledby="created-services-table">
-           <CreatedServicesTable createdServices={createdServices} setCreatedServices={setCreatedServices} />
+            <CreatedServicesTable createdServices={createdServices} setCreatedServices={setCreatedServices} />
           </Tab>
         )}
       </Tabs>

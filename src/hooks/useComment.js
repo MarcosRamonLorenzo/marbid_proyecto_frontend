@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { CommentContext } from "@/contexts/CommentProvider";
 
-const useAuth = () => {
+const useComment = () => {
   const commentContext = useContext(CommentContext);
 
   return commentContext;
 };
 
-export default useAuth;
+export default useComment;
