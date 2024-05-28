@@ -6,17 +6,34 @@ import {
   Tab,
   Button,
 } from "@nextui-org/react";
-import ServiceCard from "../components/services/ServiceCard";
-import LoadingCards from "@/components/shared-componentes/Loadings/LoadingCards";
 import { useNavigate } from "react-router-dom";
-import useService from "@/hooks/useService.js";
+import useAuth from "@/hooks/useAuth";
+import useDataFetch from "@/hooks/useDataFetch";
+import apiUrl from "@/config/apis.config";
+import useAlert from "@/hooks/useAlert";
+import CreatedServicesList from "@/components/services/CreatedServicesList";
+import CreatedServicesTable from "@/components/services/CreatedServicesTable";
 
 const CreatedServices = () => {
-  const { createdServices, isLoading, getServicesCreatedByUser } = useService();
+  const { currentUser } = useAuth();
+
+  const [createdServices, setCreatedServices] = useState([]);
+
+  const { data, error, isLoading } = useDataFetch(
+    "createdServices",
+    `${apiUrl}/service/created/${currentUser.uid}`
+  );
+
+  const { setError } = useAlert();
 
   useEffect(() => {
-    getServicesCreatedByUser();
-  }, [createdServices]);
+    if (data) {
+      setCreatedServices(data);
+    }
+    if (error) {
+      setError(error.message);
+    }
+  }, [data]);
   const navigate = useNavigate();
 
   return (

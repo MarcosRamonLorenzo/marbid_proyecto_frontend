@@ -1,18 +1,13 @@
-import React, { useEffect } from "react";
-import {
-  Autocomplete,
-  AutocompleteItem,
-  Select,
-  SelectItem,
-} from "@nextui-org/react";
-import useCategory from "@/hooks/useCategory.js";
+import React from "react";
+import {Select, SelectItem} from "@nextui-org/react";
+import useDataFetch from "@/hooks/useDataFetch.js";
+import configUrl from "@/config/apis.config.js";
 
 const SelectCateogries = ({ onChange, variant = "flat" }) => {
-  const { categories, getAllCategories } = useCategory();
-
-  useEffect(() => {
-    getAllCategories();
-  }, []);
+  const { data: categories, isLoading } = useDataFetch(
+    "categories",
+    `${configUrl}/categories`
+  );
 
   return (
     <Select
@@ -20,13 +15,14 @@ const SelectCateogries = ({ onChange, variant = "flat" }) => {
       label="Selecciona una categoría"
       className="max-w-xs"
       radius="sm"
+      name="category"
       onChange={onChange}
       
     >
       {categories &&
         categories.length &&
         categories.map((category) => (
-          <SelectItem key={category.id} value={category.name}>
+          <SelectItem  key={category.id} value={category.id}>
             {category.name}
           </SelectItem>
         ))}
