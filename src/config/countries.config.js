@@ -12,37 +12,37 @@ const countriesSettings = [
     "name": "Venezuela"
   },
   {
-    "key": "brazil",
+    "key": "brasil",
     "alt": "Brasil",
     "src": "https://flagcdn.com/br.svg",
     "name": "Brasil"
   },
   {
-    "key": "switzerland",
+    "key": "suiza",
     "alt": "Suiza",
     "src": "https://flagcdn.com/ch.svg",
     "name": "Suiza"
   },
   {
-    "key": "germany",
+    "key": "alemania",
     "alt": "Alemania",
     "src": "https://flagcdn.com/de.svg",
     "name": "Alemania"
   },
   {
-    "key": "spain",
+    "key": "espana",
     "alt": "España",
     "src": "https://flagcdn.com/es.svg",
     "name": "España"
   },
   {
-    "key": "france",
+    "key": "francia",
     "alt": "Francia",
     "src": "https://flagcdn.com/fr.svg",
     "name": "Francia"
   },
   {
-    "key": "italy",
+    "key": "italia",
     "alt": "Italia",
     "src": "https://flagcdn.com/it.svg",
     "name": "Italia"
@@ -54,7 +54,7 @@ const countriesSettings = [
     "name": "México"
   },
   {
-    "key": "united-states",
+    "key": "estados-unidos",
     "alt": "Estados Unidos",
     "src": "https://flagcdn.com/us.svg",
     "name": "Estados Unidos"
@@ -72,7 +72,7 @@ const countriesSettings = [
     "name": "Australia"
   },
   {
-    "key": "japan",
+    "key": "japon",
     "alt": "Japón",
     "src": "https://flagcdn.com/jp.svg",
     "name": "Japón"
@@ -90,11 +90,11 @@ const countriesSettings = [
     "name": "China"
   },
   {
-    "key": "russia",
+    "key": "rusia",
     "alt": "Rusia",
     "src": "https://flagcdn.com/ru.svg",
     "name": "Rusia"
   }
-]
+];
 
 export default countriesSettings;

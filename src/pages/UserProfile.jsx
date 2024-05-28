@@ -22,20 +22,16 @@ const UserProfile = ({ internal }) => {
   const [notFound, setNotFound] = useState(false);
 
   const fetchUser = async () => {
-    // If the 'internal' prop is true, this means we are dealing with the currently logged-in user
     if (internal) {
-      // If there is no currently logged-in user
-      if (!currentUser && !isLogin) {
-        // Set 'notFound' to true and 'loading' to false
+      if (!currentUser && !currentUser.userDB && !isLogin) {
         setNotFound(true);
         setLoading(false);
         return;
       }
-      // If there is a currently logged-in user, set 'userDB' to the user data of the currently logged-in user
+
       setUserDB(currentUser.userDB);
       setLoading(false);
     } else {
-      // If the 'internal' prop is false, this means we are dealing with a different user.
       const fetchedUser = await getUserDB(idUser);
       if (!fetchedUser) {
         setNotFound(true);
@@ -49,7 +45,7 @@ const UserProfile = ({ internal }) => {
 
   useEffect(() => {
     fetchUser();
-  }, [internal, idUser, currentUser]);
+  }, [ currentUser]);
 
   if (loading) {
     return <Loading />

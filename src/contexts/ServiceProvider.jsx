@@ -1,18 +1,16 @@
-import { createContext, useState } from "react";
-import {
-  createService,
-  getAllServices,
-  getAllServicesCreatedByUser,
-  updateService,
-} from "@/functions/serviceFunc";
+
+import { createContext, useState, useEffect } from "react";
+import { createService, getAllServices, getAllServicesCreatedByUser, updateService, validateService } from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
 import useAuth from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const ServiceContext = createContext();
 
 const ServiceProvider = ({ children }) => {
   const { setSuccessAlert, setErrorAlert } = useAlert();
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const nullValue = null;
 
@@ -25,15 +23,26 @@ const ServiceProvider = ({ children }) => {
     authorCreated: currentUser?.uid,
   };
 
+  
+
   const [formService, setFormService] = useState(initialFormState);
-  const [services, setServices] = useState(nullValue);
+  const [services, setServices] = useState([]);
+  const [filteredServices, setFilteredServices] = useState([]);
+  const [loadingServices,setLoadingServices] = useState(false);
   const [createdServices, setCreatedServices] = useState(nullValue);
+  const [ selectedPreviewImage,setSelectedPreviewImage] = useState(nullValue);
 
   const handleCreateService = async () => {
     try {
-      const response = await createService(formService);
-      if (condition) throw response.error;
-      setSuccessAlert("Servicio creado con éxito");
+      const validate = validateService(formService);
+      if (validate) {
+        setErrorAlert(validate)
+      } else {
+        const response = await createService(formService);
+        if (response.error) throw response.error;
+        setSuccessAlert("Servicio creado con éxito");
+        navigate(`/panel-control/servicios-creados`);
+      }
     } catch (error) {
       setErrorAlert(error.message);
     }
@@ -41,16 +50,23 @@ const ServiceProvider = ({ children }) => {
 
   const handleUpdateService = async () => {
     try {
-      await updateService(formService);
-      setSuccessAlert("Servicio editado con éxito");
+      const validate = validateService(formService);
+      if (validate) {
+        setErrorAlert(validate)
+      }
+      else {
+        const response = await updateService(formService);
+        if (response.error) throw response.error;
+        setSuccessAlert("Servicio editado con éxito");
+        navigate(`/panel-control/servicios-creados`);
+      }
     } catch (error) {
       setErrorAlert(error.message);
     }
   };
 
-  /* */
 
-  const getServicesCreatedByUser = async (idUser) => {
+  const servicesCreatedByUser = async (idUser) => {
     try {
       const { data, error } = await getAllServicesCreatedByUser(idUser);
       if (error) throw error;
@@ -59,26 +75,76 @@ const ServiceProvider = ({ children }) => {
       setErrorAlert(error.message);
     }
   };
-
+    
   const getServices = async () => {
     try {
+      setLoadingServices(true);
       const { error, data } = await getAllServices();
       if (error) throw error;
       setServices(data);
+      setFilteredServices(data);
     } catch (error) {
       setErrorAlert(error.message);
+    } finally {
+      setLoadingServices(false);
     }
   };
+  
+  const filterSearchServices = (filter) => {
+    if (!filter || !filter.trim()) {
+      setFilteredServices(services);
+      console.log("a");
+      return;
+    }
+    
+    const lowerCaseFilter = filter.toLowerCase().trim();
+    const newFilteredServices = services.filter((service) => {
+      return service.title.toLowerCase().startsWith(filter) || 
+             service.authorCreated.name.toLowerCase().startsWith(filter);
+    });
+        setFilteredServices(newFilteredServices);
+  }
+
+  useEffect(() => {
+    if (services) {
+      setFilteredServices(services)
+    }
+  }, [services])
+  
+  
+
+  const navigateService =(idService)=>{
+    navigate(`/servicio/${idService}`);
+  }
+
+  const filterByCategory = (category) => {
+    console.log(category);
+    if (category === 'clvbangvg0000s5qx1ltd9ene') {
+      setFilteredServices(services);
+      return;
+    }
+  
+    const newFilteredServices = services.filter((service) => {
+      return service.category.id === category;
+    });
+  
+    setFilteredServices(newFilteredServices);
+  }
 
   const value = {
+    filteredServices,
+    filterSearchServices,
+    filterByCategory,
     services,
-    createdServices,
+    loadingServices,
     formService,
-    getServicesCreatedByUser,
     getServices,
     setFormService,
     handleCreateService,
     handleUpdateService,
+    selectedPreviewImage,
+    setSelectedPreviewImage,
+    navigateService
   };
 
   return (

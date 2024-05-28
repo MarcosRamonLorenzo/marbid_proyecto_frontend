@@ -2,9 +2,11 @@ import React from "react";
 import { Input } from "@nextui-org/react";
 import { Search } from "lucide-react";
 
-const SearchComponent = () => {
+const SearchComponent = ({onChange,onClear}) => {
   return (
     <Input
+      onChange={onChange}
+      onClear={onClear}
       className="w-80"
       label="Search"
       isClearable

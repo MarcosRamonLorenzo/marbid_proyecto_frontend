@@ -6,10 +6,13 @@ import Loading from "@/components/shared-componentes/Loadings/Loading";
 import AlertError from "./components/shared-componentes/alerts_errors/AlertError";
 import AlertSuccess from "./components/shared-componentes/alerts_sucess/AlertSucess";
 import useAlert from "./hooks/useAlert";
+import useService from "./hooks/useService";
+import ModalOpenViewImage from "./components/shared-componentes/modals/ModalOpenViewImage";
 
 function App() {
   const { isLogin,currentUser, loading } = useAuth();
   const { alertError:{state:error}, alertSuccess:{state:success} } = useAlert();
+  const {selectedPreviewImage,setSelectedPreviewImage} = useService();
 
   if (loading) {
     return <Loading />; // Muestra el componente de carga mientras se verifica el estado de autenticación
@@ -36,6 +39,7 @@ function App() {
       {/* Alert components */}
       {error && <AlertError />}
       {success && <AlertSuccess />}
+      {selectedPreviewImage && <ModalOpenViewImage image={selectedPreviewImage} onClose={()=>{setSelectedPreviewImage(null)}} />}
     </>
   );
 }

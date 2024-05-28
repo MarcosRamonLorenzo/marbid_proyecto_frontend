@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react";
-import { CirclePlus, GripVertical } from "lucide-react";
+import { CirclePlus } from "lucide-react";
 import {
   Divider,
   Tabs,
   Tab,
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
   Button,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
 } from "@nextui-org/react";
 import ServiceCard from "../components/services/ServiceCard";
 import LoadingCards from "@/components/shared-componentes/Loadings/LoadingCards";
@@ -27,7 +17,6 @@ const CreatedServices = () => {
   useEffect(() => {
     getServicesCreatedByUser();
   }, [createdServices]);
-
   const navigate = useNavigate();
 
   return (
@@ -47,59 +36,16 @@ const CreatedServices = () => {
       <Tabs aria-label="Options" variant="underlined">
         {/* General View */}
         <Tab key="photos" title="General">
-          <div className="gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5">
-            {isLoading && <LoadingCards />}
-            {createdServices?.length ? (
-              createdServices.map((item, index) => (
-                <ServiceCard item={item} key={index} />
-              ))
-            ) : (
-              <h1>Aun no has creado ningún servicio</h1>
-            )}
-          </div>
+          <CreatedServicesList
+            className={"gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5"}
+            createdServices={createdServices}
+            isLoading={isLoading}
+          />
         </Tab>
         {/* Table View */}
-        {createdServices?.length && (
-          <Tab key="tabla" title="Tabla">
-            <Table
-              aria-label="Example static collection table"
-              className="w-[23em] sm:w-[30em] lg:w-[45em] xl:w-[50em] mt-5"
-            >
-              <TableHeader>
-                <TableColumn>Nombre</TableColumn>
-                <TableColumn>Precio</TableColumn>
-                <TableColumn>Estado</TableColumn>
-                <TableColumn>Acciones</TableColumn>
-              </TableHeader>
-              <TableBody>
-                {createdServices?.length &&
-                  createdServices.map((item, index) => {
-                    return (
-                      <TableRow key={index}>
-                        <TableCell>{item.title}</TableCell>
-                        <TableCell>{item.price}</TableCell>
-                        <TableCell>Active</TableCell>
-                        <TableCell className="w-20">
-                          <Dropdown>
-                            <DropdownTrigger>
-                              <Button isIconOnly size="sm" variant="light">
-                                <GripVertical />
-                              </Button>
-                            </DropdownTrigger>
-                            <DropdownMenu>
-                              <DropdownItem color="secondary">
-                                View
-                              </DropdownItem>
-                              <DropdownItem color="primary">Edit</DropdownItem>
-                              <DropdownItem color="danger">Delete</DropdownItem>
-                            </DropdownMenu>
-                          </Dropdown>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
+        {createdServices.length && (
+          <Tab key="tabla" title="Tabla" aria-labelledby="created-services-table">
+            <CreatedServicesTable createdServices={createdServices} setCreatedServices={setCreatedServices} />
           </Tab>
         )}
       </Tabs>

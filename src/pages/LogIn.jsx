@@ -34,15 +34,16 @@ const LogIn = ({ isRegister }) => {
     if (errorModal) {
       openModal();
     }
-  }, [errorModal]);
+    if (isLogin) {
+      navigate("/");
+    }
+  }, [errorModal,isLogin]);
 
-  if (isLogin) {
-    navigate("/");
-  }
+  
 
   return (
     <>
-      <div className=" login bg-[url('https://picsum.photos/1920/1080.jpg')] h-screen w-screen bg-cover bg-center">
+      <div id="login-container" className=" bg-[url('https://picsum.photos/1920/1080.jpg')] h-screen w-screen bg-cover bg-cente">
         <section className="fixed inset-0 flex items-center justify-center">
           <div className="absolute top-10 left-10">
             <Link to={"/"}>

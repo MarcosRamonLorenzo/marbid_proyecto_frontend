@@ -21,6 +21,7 @@ const SelectCateogries = ({ onChange, variant = "flat" }) => {
       className="max-w-xs"
       radius="sm"
       onChange={onChange}
+      
     >
       {categories &&
         categories.length &&
