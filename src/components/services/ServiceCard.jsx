@@ -23,24 +23,7 @@ const ServiceCard = ({ item, onClick }) => {
       </CardBody>
 
       <CardFooter className="text-small flex flex-col items-start gap-2">
-        <div
-          className="flex justify-start items-start cursor-pointer"
-          onClick={() => {
-            /*Si es el mismo que no vaya a su perfil*/
-            () => {
-              currentUser.uid !== item.user.id &&
-                navigate(`/user/${item.user.id}`);
-            };
-          }}
-        >
-          <User
-            name={item.authorCreated?.name}
-            description={item?.authorCreated?.label}
-            avatarProps={{
-              src: `${item?.authorCreated?.avatar_img}`,
-            }}
-          />
-        </div>
+        {item.authorCreated && <UserAvatarView user={item.authorCreated} /> }
         <h3 className="font-medium text-2xl">
           {item?.title?.length > 50
             ? item?.title.substring(0, 50) + "..."
