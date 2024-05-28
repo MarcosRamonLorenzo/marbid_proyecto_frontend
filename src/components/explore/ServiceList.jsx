@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
-import CardAnuncio from "../services/ServiceCard.jsx";
+import React from "react";
+import ServiceCard from "../services/ServiceCard.jsx";
+import useDataFetch from "@/hooks/useDataFetch.js";
 import Loading from "../shared-componentes/Loadings/Loading.jsx";
+import configUrl from "@/config/apis.config.js";
 import useService from "@/hooks/useService.js";
+import { useEffect } from "react";
 
 const ServiceList = () => {
-  const { services, isLoading, getServices } = useService();
-
-  useEffect(() => {
-    getServices();
-  }, [services]);
 
   const { filteredServices:services,loadingServices,getServices,navigateService } = useService();
 
@@ -21,10 +19,8 @@ const ServiceList = () => {
       <div className="gap-x-5 gap-y-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 ">
         {loadingServices ? (
           <Loading />
-        ) : services?.length ? (
-          services.map((item, index) => (
-            <CardAnuncio item={item} key={index} isLikeable />
-          ))
+        ) : services && services.length ? (
+          services.map((item, index) => <ServiceCard item={item} key={index} onClick={()=>{navigateService(item.id)}} isLikeable />)
         ) : (
           <h1>No se han encontrado anuncios</h1>
         )}
