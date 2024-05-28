@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="bg-gray-800 flex flex-col justify-center items-start md:items-center py-4 text-white pl-5 w-100 ">
       <div className="flex flex-col md:flex-row md:gap-20  gap-5 justify-start items-start my-5">
         <img
-          src="/src/assets/marbid.svg"
+          src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2Fmarbid.svg?alt=media&token=d7d1cd99-faf3-4542-84bf-ea24fbb8f025"
           loading="lazy"
           alt=""
           className=" md:h-14 h-10"

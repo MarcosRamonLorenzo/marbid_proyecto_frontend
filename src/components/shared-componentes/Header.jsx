@@ -45,7 +45,7 @@ const Header = () => {
         <NavbarContent className="sm:hidden pr-3" justify="center">
           <NavbarBrand>
             <Link to={"/"}>
-              <img src="\src\assets\marbid.svg" className="h-10" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2Fmarbid.svg?alt=media&token=d7d1cd99-faf3-4542-84bf-ea24fbb8f025" className="h-10" />
             </Link>
           </NavbarBrand>
         </NavbarContent>

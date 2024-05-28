@@ -21,7 +21,7 @@ const Sidebar = ({ children }) => {
         <div className="p-4 pb-2 flex  items-center ">
           <Link to="/">
             <img
-              src="/src/assets/marbid.svg "
+              src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2Fmarbid.svg?alt=media&token=d7d1cd99-faf3-4542-84bf-ea24fbb8f025 "
               className={`overflow-hidden transition-all ${expanded ? "w-10 mr-5" : "w-0"
                 }`}
               alt=""

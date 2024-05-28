@@ -47,7 +47,7 @@ const LogIn = ({ isRegister }) => {
         <section className="fixed inset-0 flex items-center justify-center">
           <div className="absolute top-10 left-10">
             <Link to={"/"}>
-              <img src="\src\assets\logoMarbidWeb.webp" className="h-8" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2FlogoMarbidWeb.webp?alt=media&token=3522c0e5-6a6a-415a-90c1-2c7782ecfe7a" className="h-8" />
             </Link>
           </div>
           <div className="flex items-center justify-center px-2 py-6 sm:px-6 sm:py-16 lg:px-8 lg:py-8">
