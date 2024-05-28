@@ -17,6 +17,7 @@ const SelectCateogries = ({ onChange, variant = "flat" }) => {
       radius="sm"
       name="category"
       onChange={onChange}
+      
     >
       {categories &&
         categories.length &&

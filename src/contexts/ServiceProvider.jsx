@@ -25,7 +25,9 @@ const ServiceProvider = ({ children }) => {
   
 
   const [formService, setFormService] = useState(initialFormState);
-  const [sevices, setServices] = useState(nullValue);
+  const [services, setServices] = useState([]);
+  const [filteredServices, setFilteredServices] = useState([]);
+  const [loadingServices,setLoadingServices] = useState(false);
   const [createdServices, setCreatedServices] = useState(nullValue);
   const [ selectedPreviewImage,setSelectedPreviewImage] = useState(nullValue);
 
@@ -72,23 +74,69 @@ const ServiceProvider = ({ children }) => {
       setErrorAlert(error.message);
     }
   };
-
   const getServices = async () => {
     try {
+      setLoadingServices(true);
       const { error, data } = await getAllServices();
       if (error) throw error;
       setServices(data);
+      setFilteredServices(data);
     } catch (error) {
       setErrorAlert(error.message);
+    } finally {
+      setLoadingServices(false);
     }
   };
+  
+  const filterSearchServices = (filter) => {
+    if (!filter || !filter.trim()) {
+      setFilteredServices(services);
+      console.log("a");
+      return;
+    }
+    
+    const lowerCaseFilter = filter.toLowerCase().trim();
+    const newFilteredServices = services.filter((service) => {
+      return service.title.toLowerCase().startsWith(filter) || 
+             service.authorCreated.name.toLowerCase().startsWith(filter);
+    });
+        setFilteredServices(newFilteredServices);
+  }
+
+  useEffect(() => {
+    if (services) {
+      setFilteredServices(services)
+    }
+  }, [services])
+  
+  
 
   const navigateService =(idService)=>{
     navigate(`/servicio/${idService}`);
   }
 
+  const filterByCategory = (category) => {
+    console.log(category);
+    if (category === 'clvbangvg0000s5qx1ltd9ene') {
+      setFilteredServices(services);
+      return;
+    }
+  
+    const newFilteredServices = services.filter((service) => {
+      return service.category.id === category;
+    });
+  
+    setFilteredServices(newFilteredServices);
+  }
+
   const value = {
+    filteredServices,
+    filterSearchServices,
+    filterByCategory,
+    services,
+    loadingServices,
     formService,
+    getServices,
     setFormService,
     handleCreateService,
     handleUpdateService,

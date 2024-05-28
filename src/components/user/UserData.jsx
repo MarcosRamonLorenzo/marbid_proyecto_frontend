@@ -1,11 +1,11 @@
 import { Tabs, Tab, Divider, Button, Image, avatar } from "@nextui-org/react";
 import { CalendarDays, MessageCircleMore, SettingsIcon } from "lucide-react";
-import { Avatar } from "@nextui-org/react";
 import { formatDate } from "@/functions/timeFunc";
 import useDataFetch from "@/hooks/useDataFetch";
 import CreatedServicesList from "../services/CreatedServicesList";
 import apiUrl from "@/config/apis.config";
 import UserCommentsList from "../comments/UserCommentsList";
+import { useState } from "react";
 
 const UserAvatar = ({ photoURL }) => (
   <Image
@@ -36,33 +36,45 @@ const UserDetails = ({ userDB }) => {
   );
 };
 
-const UserActions = ({ internal, openSetUser }) => (
-  <>
-    {!internal && (
-      <Button
-        radius="sm"
-        className="mt-5 primary-color-class text-white py-0 px-10"
-        startContent={
-          <MessageCircleMore size={20} color="#ffffff" strokeWidth={2} />
-        }
-      >
-        Contactar
-      </Button>
-    )}
-    {internal && (
-      <Button
-        radius="sm"
-        className="mt-5 secondary-color-class text-white py-0 px-10"
-        startContent={
-          <SettingsIcon size={20} color="#ffffff" strokeWidth={2} />
-        }
-        onClick={openSetUser}
-      >
-        Editar Perfil
-      </Button>
-    )}
-  </>
-);
+const UserActions = ({ internal, openSetUser, userDB }) => {
+  
+  const [to, setTo] = useState(userDB?.email || ''); // Asumiendo que `userDB` contiene el email del usuario
+
+  const handleContactClick = () => {
+    const subject = 'Marbid';
+    const mailtoLink = `mailto:${to}?subject=${encodeURIComponent(subject)}`;
+    window.location.href = mailtoLink;
+  };
+
+  return (
+    <>
+      {!internal && (
+        <Button
+          radius="sm"
+          className="mt-5 primary-color-class text-white py-0 px-10"
+          startContent={
+            <MessageCircleMore size={20} color="#ffffff" strokeWidth={2} />
+          }
+          onClick={handleContactClick}
+        >
+          Contactar
+        </Button>
+      )}
+      {internal && (
+        <Button
+          radius="sm"
+          className="mt-5 secondary-color-class text-white py-0 px-10"
+          startContent={
+            <SettingsIcon size={20} color="#ffffff" strokeWidth={2} />
+          }
+          onClick={openSetUser}
+        >
+          Editar Perfil
+        </Button>
+      )}
+    </>
+  );
+};
 
 const UserTabs = ({ idUser }) => {
   const { data, isLoading } = useDataFetch(
@@ -100,7 +112,7 @@ const UserData = ({ userDB, internal, openSetUser }) => (
       <p className="max-w-[20em] md:max-w-[55em] capitalize ">
         {userDB?.description}{" "}
       </p>
-      <UserActions internal={internal} openSetUser={openSetUser} />
+      <UserActions internal={internal} openSetUser={openSetUser} userDB={userDB} />
     </div>
     <div className="flex flex-col items-center ">
       <Divider className="w-[80%] mt-10" />

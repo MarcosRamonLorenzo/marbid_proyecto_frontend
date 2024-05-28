@@ -1,14 +1,28 @@
 import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
+import useService from "@/hooks/useService";
 const Cateogries = () => {
+
+  const navigate = useNavigate();
+  const { filterByCategory } = useService();
+  
+  const navigateToExplore = ()=>{
+    navigate("/explora")
+  }
+
+  const handleFilter = (id) =>{
+    filterByCategory(id);
+    navigateToExplore();
+  }
   return (
     <section className="flex flex-col justify-center items-center mt-20 m-5">
-      <h2 className="text-2xl">Categorias</h2>
+      <h2 className="text-2xl m-3">Categorias</h2>
       <div className="gap-2 grid grid-cols-2 sm:grid-cols-3 mt-2">
         <Card
           shadow="sm"
           isPressable
-          onPress={() => console.log("item pressed")}
+          onPress={() => handleFilter("clvbanh620008s5qx0er8h9g0")}
           className="card"
         >
           <CardBody className="overflow-visible p-0">
@@ -21,7 +35,7 @@ const Cateogries = () => {
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <b>Artes gráficas</b>
+            <b>Diseño Gráfico</b>
           </CardFooter>
         </Card>
         <Card
