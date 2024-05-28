@@ -5,6 +5,7 @@ import Explore from "@/pages/Explore";
 import ServicePage from "@/pages/ServicePage";
 import NotFound from "@/pages/NotFound";
 import UserProfile from "@/pages/UserProfile";
+import Conditions from "@/pages/Conditions";
 
 const publicRoutes = [
   { path: "/", element: <Home /> },
@@ -14,6 +15,7 @@ const publicRoutes = [
   { path: "/explora", element: <Explore /> },
   { path: "/*", element: <NotFound /> },
   { path: "/user/:idUser", element: <UserProfile /> },
+  { path: "/conditions", element: <Conditions /> },
 ];
 
 export default publicRoutes;
