@@ -53,7 +53,7 @@ const Header = () => {
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarBrand>
             <Link to={"/"}>
-              <img src="\src\assets\logoMarbidWeb.webp" className="h-8" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2FlogoMarbidWeb.webp?alt=media&token=3522c0e5-6a6a-415a-90c1-2c7782ecfe7a" className="h-8" />
             </Link>
           </NavbarBrand>
         </NavbarContent>
