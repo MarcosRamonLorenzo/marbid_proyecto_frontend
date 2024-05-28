@@ -1,3 +1,4 @@
+
 import { createContext, useState, useEffect } from "react";
 import { createService, getAllServices, getAllServicesCreatedByUser, updateService, validateService } from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
@@ -74,6 +75,7 @@ const ServiceProvider = ({ children }) => {
       setErrorAlert(error.message);
     }
   };
+    
   const getServices = async () => {
     try {
       setLoadingServices(true);
