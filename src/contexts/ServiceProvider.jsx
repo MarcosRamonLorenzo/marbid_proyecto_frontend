@@ -1,5 +1,11 @@
 import { createContext, useState, useEffect } from "react";
-import { createService, getAllServices, getAllServicesCreatedByUser, updateService, validateService } from "@/functions/serviceFunc";
+import {
+  createService,
+  getAllServices,
+  getAllServicesCreatedByUser,
+  updateService,
+  validateService,
+} from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
 import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -22,20 +28,18 @@ const ServiceProvider = ({ children }) => {
     authorCreated: currentUser?.uid,
   };
 
-  
-
   const [formService, setFormService] = useState(initialFormState);
   const [services, setServices] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
-  const [loadingServices,setLoadingServices] = useState(false);
+  const [loadingServices, setLoadingServices] = useState(false);
   const [createdServices, setCreatedServices] = useState(nullValue);
-  const [ selectedPreviewImage,setSelectedPreviewImage] = useState(nullValue);
+  const [selectedPreviewImage, setSelectedPreviewImage] = useState(nullValue);
 
   const handleCreateService = async () => {
     try {
       const validate = validateService(formService);
       if (validate) {
-        setErrorAlert(validate)
+        setErrorAlert(validate);
       } else {
         const response = await createService(formService);
         if (response.error) throw response.error;
@@ -51,9 +55,8 @@ const ServiceProvider = ({ children }) => {
     try {
       const validate = validateService(formService);
       if (validate) {
-        setErrorAlert(validate)
-      }
-      else {
+        setErrorAlert(validate);
+      } else {
         const response = await updateService(formService);
         if (response.error) throw response.error;
         setSuccessAlert("Servicio editado con éxito");
@@ -64,7 +67,6 @@ const ServiceProvider = ({ children }) => {
     }
   };
 
-
   const servicesCreatedByUser = async (idUser) => {
     try {
       const { data, error } = await getAllServicesCreatedByUser(idUser);
@@ -74,6 +76,7 @@ const ServiceProvider = ({ children }) => {
       setErrorAlert(error.message);
     }
   };
+
   const getServices = async () => {
     try {
       setLoadingServices(true);
@@ -87,47 +90,47 @@ const ServiceProvider = ({ children }) => {
       setLoadingServices(false);
     }
   };
-  
+
   const filterSearchServices = (filter) => {
     if (!filter || !filter.trim()) {
       setFilteredServices(services);
       console.log("a");
       return;
     }
-    
+
     const lowerCaseFilter = filter.toLowerCase().trim();
     const newFilteredServices = services.filter((service) => {
-      return service.title.toLowerCase().startsWith(filter) || 
-             service.authorCreated.name.toLowerCase().startsWith(filter);
+      return (
+        service.title.toLowerCase().startsWith(filter) ||
+        service.authorCreated.name.toLowerCase().startsWith(filter)
+      );
     });
-        setFilteredServices(newFilteredServices);
-  }
+    setFilteredServices(newFilteredServices);
+  };
 
   useEffect(() => {
     if (services) {
-      setFilteredServices(services)
+      setFilteredServices(services);
     }
-  }, [services])
-  
-  
+  }, [services]);
 
-  const navigateService =(idService)=>{
+  const navigateService = (idService) => {
     navigate(`/servicio/${idService}`);
-  }
+  };
 
   const filterByCategory = (category) => {
     console.log(category);
-    if (category === 'clvbangvg0000s5qx1ltd9ene') {
+    if (category === "clvbangvg0000s5qx1ltd9ene") {
       setFilteredServices(services);
       return;
     }
-  
+
     const newFilteredServices = services.filter((service) => {
       return service.category.id === category;
     });
-  
+
     setFilteredServices(newFilteredServices);
-  }
+  };
 
   const value = {
     filteredServices,
@@ -142,7 +145,7 @@ const ServiceProvider = ({ children }) => {
     handleUpdateService,
     selectedPreviewImage,
     setSelectedPreviewImage,
-    navigateService
+    navigateService,
   };
 
   return (

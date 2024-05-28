@@ -6,11 +6,11 @@ import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "@/contexts/AuthProvider.jsx";
 import AlertsProvider from "./contexts/AlertsProvider.jsx";
 import ThemeProvider from "./contexts/ThemeProvider.jsx";
+import LikeProvider from "./contexts/LikeProvider.jsx";
+import CategoryProvider from "./contexts/CategoryProvider.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "./index.scss";
 import { ServiceProvider } from "./contexts/ServiceProvider.jsx";
-import LikeProvider from "./contexts/LikeProvider.jsx";
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -22,7 +22,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <AuthProvider>
                 <ServiceProvider>
                   <LikeProvider>
-                    <App />
+                    <CategoryProvider>
+                      <App />
+                    </CategoryProvider>
                   </LikeProvider>
                 </ServiceProvider>
               </AuthProvider>
