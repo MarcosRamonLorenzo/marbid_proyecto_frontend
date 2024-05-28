@@ -18,13 +18,17 @@ const SelectCateogries = ({ onChange, variant = "flat" }) => {
       name="category"
       onChange={onChange}
     >
-      {categories &&
-        categories.length &&
+      {categories && categories.length > 0 ? (
         categories.map((category) => (
           <SelectItem key={category.id} value={category.name}>
             {category.name}
           </SelectItem>
-        ))}
+        ))
+      ) : (
+        <SelectItem value="" disabled>
+          No categories available
+        </SelectItem>
+      )}
     </Select>
   );
 };

@@ -1,5 +1,8 @@
 import { useState, createContext } from "react";
-import { getAllCategoriesResponse } from "@/functions/categoryFunc";
+import {
+  getAllCategoriesResponse,
+  getCategoryByIdResponse,
+} from "@/functions/categoryFunc";
 import useAlert from "@/hooks/useAlert";
 
 const CategoryContext = createContext();
@@ -10,6 +13,8 @@ const CategoryProvider = ({ children }) => {
   const nullValue = null;
 
   const [categories, setCategories] = useState(nullValue);
+  const [categoryById, setCategoryById] = useState(nullValue);
+  const [nameSelectedCategory, setNameSelectedCategory] = useState(nullValue);
 
   const getAllCategories = async () => {
     try {
@@ -17,13 +22,55 @@ const CategoryProvider = ({ children }) => {
 
       if (error) throw error;
 
-      setCategories(data);
+      // Sort categories alphabetically.
+      const sortedCategories = data.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+
+      setCategories(sortedCategories);
     } catch (error) {
       setErrorAlert(error.message);
     }
   };
 
-  const providerValues = { categories, getAllCategories };
+  const getCategoryById = async (category) => {
+    if (category) {
+      try {
+        const { error, data } = await getCategoryByIdResponse(category);
+
+        if (error) throw error;
+
+        setCategoryById(data);
+      } catch (error) {
+        setErrorAlert(error.message);
+      }
+    }
+    return null;
+  };
+
+  const getCategoryName = async (category) => {
+    if (category) {
+      try {
+        const { error, data } = await getCategoryByIdResponse(category);
+
+        if (error) throw error;
+
+        setNameSelectedCategory(data.name);
+      } catch (error) {
+        setErrorAlert(error.message);
+      }
+    }
+    return null;
+  };
+
+  const providerValues = {
+    categories,
+    categoryById,
+    nameSelectedCategory,
+    getAllCategories,
+    getCategoryById,
+    getCategoryName,
+  };
 
   return (
     <CategoryContext.Provider value={providerValues}>

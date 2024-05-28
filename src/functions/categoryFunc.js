@@ -5,3 +5,9 @@ export const getAllCategoriesResponse = async () => {
   const data = await response.json();
   return data;
 };
+
+export const getCategoryByIdResponse = async (categoryID) => {
+  const response = await fetch(`${configUrl}/categories/${categoryID}`);
+  const data = await response.json();
+  return data;
+};

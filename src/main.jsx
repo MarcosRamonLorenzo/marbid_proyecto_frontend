@@ -20,13 +20,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <BrowserRouter>
             <AlertsProvider>
               <AuthProvider>
-                <ServiceProvider>
-                  <LikeProvider>
-                    <CategoryProvider>
+                <CategoryProvider>
+                  <ServiceProvider>
+                    <LikeProvider>
                       <App />
-                    </CategoryProvider>
-                  </LikeProvider>
-                </ServiceProvider>
+                    </LikeProvider>
+                  </ServiceProvider>
+                </CategoryProvider>
               </AuthProvider>
             </AlertsProvider>
           </BrowserRouter>

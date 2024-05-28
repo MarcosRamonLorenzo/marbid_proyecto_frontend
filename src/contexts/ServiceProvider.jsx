@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import useCategory from "@/hooks/useCategory.js";
 import {
   createService,
   getAllServices,
@@ -13,6 +14,12 @@ import { useNavigate } from "react-router-dom";
 const ServiceContext = createContext();
 
 const ServiceProvider = ({ children }) => {
+  const {
+    nameSelectedCategory,
+    categoryById,
+    getCategoryName,
+    getCategoryById,
+  } = useCategory();
   const { setSuccessAlert, setErrorAlert } = useAlert();
   const { currentUser } = useAuth();
   const navigate = useNavigate();
@@ -94,7 +101,6 @@ const ServiceProvider = ({ children }) => {
   const filterSearchServices = (filter) => {
     if (!filter || !filter.trim()) {
       setFilteredServices(services);
-      console.log("a");
       return;
     }
 
@@ -119,14 +125,10 @@ const ServiceProvider = ({ children }) => {
   };
 
   const filterByCategory = (category) => {
-    console.log(category);
-    if (category === "clvbangvg0000s5qx1ltd9ene") {
-      setFilteredServices(services);
-      return;
-    }
+    getCategoryById(category);
 
-    const newFilteredServices = services.filter((service) => {
-      return service.category.id === category;
+    const newFilteredServices = services.filter((categoryById) => {
+      return categoryById.category.id === category;
     });
 
     setFilteredServices(newFilteredServices);

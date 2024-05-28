@@ -7,7 +7,7 @@ import SearchComponent from "../components/explore/SearchComponent.jsx";
 import useService from "@/hooks/useService.js";
 
 const Explore = () => {
-  const {filterSearchServices,filterByCategory} = useService();
+  const { filterSearchServices, filterByCategory } = useService();
   return (
     <div className="min-h-screen h-full">
       <Header />
@@ -16,8 +16,19 @@ const Explore = () => {
           Explora todas los anuncios.
         </h1>
         <div className=" flex gap-2 ">
-          <SelectCateogries onChange={(e)=>{filterByCategory(e.target.value)}} />
-          <SearchComponent onChange={(e)=>{filterSearchServices(e.target.value)}} onClear={()=>{filterSearchServices("")}} />
+          <SelectCateogries
+            onChange={(e) => {
+              filterByCategory(e.target.value);
+            }}
+          />
+          <SearchComponent
+            onChange={(e) => {
+              filterSearchServices(e.target.value);
+            }}
+            onClear={() => {
+              filterSearchServices("");
+            }}
+          />
         </div>
         <Divider className="my-4" />
         <ServiceList />
