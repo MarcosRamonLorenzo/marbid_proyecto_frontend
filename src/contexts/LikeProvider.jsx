@@ -1,12 +1,11 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import {
   likeService,
   getUserLikeServices,
   deleteLike,
   isServiceLikedByUser,
 } from "@/functions/likeFunct";
-import useAuth from "@/hooks/useAuth";
-import { Await } from "react-router-dom";
+
 
 const LikeContext = createContext();
 

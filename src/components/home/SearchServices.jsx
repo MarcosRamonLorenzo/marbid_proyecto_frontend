@@ -1,11 +1,7 @@
-import React from "react";
 import {
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
   Image,
-  Button,
 } from "@nextui-org/react";
 
 const SearchServices = () => {

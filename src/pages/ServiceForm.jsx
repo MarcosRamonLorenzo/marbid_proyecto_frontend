@@ -8,7 +8,6 @@ import {
   Button,
   Divider,
   Image,
-  user,
 } from "@nextui-org/react";
 import { EditIcon, ImageIcon, EyeIcon } from "lucide-react";
 import { useRef, useState, useEffect } from "react";

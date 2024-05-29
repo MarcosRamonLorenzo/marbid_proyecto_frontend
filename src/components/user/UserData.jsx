@@ -1,4 +1,4 @@
-import { Tabs, Tab, Divider, Button, Image, avatar } from "@nextui-org/react";
+import { Tabs, Tab, Divider, Button, Image } from "@nextui-org/react";
 import { CalendarDays, MessageCircleMore, SettingsIcon } from "lucide-react";
 import { formatDate } from "@/functions/timeFunc";
 import useDataFetch from "@/hooks/useDataFetch";

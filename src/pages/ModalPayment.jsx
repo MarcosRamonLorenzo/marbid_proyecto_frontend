@@ -4,10 +4,8 @@ import {
   ModalContent,
   ModalFooter,
   Button,
-  Tooltip,
 } from "@nextui-org/react";
-import { InfoIcon, Lock, ShieldCloseIcon } from "lucide-react";
-import React from "react";
+import {  Lock } from "lucide-react";
 
 const ModalPayment = ({ open, close,onConfirm }) => {
 
