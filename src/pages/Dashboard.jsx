@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Sidebar from "../components/dashboard/Sidebar.jsx";
 import SidebarItem from "../components/dashboard/SidebarItem.jsx";
 import { ScrollText, BookText, Heart, Settings } from "lucide-react";

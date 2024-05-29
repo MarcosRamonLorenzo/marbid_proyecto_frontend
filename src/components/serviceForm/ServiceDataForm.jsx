@@ -1,6 +1,5 @@
 import { Input, Textarea } from "@nextui-org/react";
 import { Euro   } from "lucide-react";
-import React from "react";
 import SelectCateogries from "../categories/SelectCateogries";
 import useService from "@/hooks/useService";
 import { handleFormChange } from "@/functions/formsFunc";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import useService from "@/hooks/useService";

@@ -1,4 +1,3 @@
-import React from "react";
 import XTwitterIcon from "../shared-componentes/icons/XTwitterIcon";
 import MetaIcon from "../shared-componentes/icons/MetaIcon";
 import GitHubIcon from "../shared-componentes/icons/GitHubIcon";

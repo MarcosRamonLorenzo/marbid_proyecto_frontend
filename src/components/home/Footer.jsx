@@ -1,9 +1,7 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Instagram, Facebook } from "lucide-react";
 
 const Footer = () => {
-  const navigate = useNavigate();
   return (
     <footer className="bg-gray-800 flex flex-col justify-center items-start md:items-center py-4 text-white pl-5 w-100 ">
       <div className="flex flex-col md:flex-row md:gap-20  gap-5 justify-start items-start my-5">

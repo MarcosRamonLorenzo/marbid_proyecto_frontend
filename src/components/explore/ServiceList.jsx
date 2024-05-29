@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ServiceCard from "../services/ServiceCard.jsx";
 import Loading from "../shared-componentes/Loadings/Loading.jsx";
 import useService from "@/hooks/useService.js";

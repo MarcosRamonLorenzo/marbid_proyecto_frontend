@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CommentPreviewUser from "./CommentPreviewUser";
 import { getCommentsByUserId } from "@/functions/commentsFunc";
 import useAuth from "@/hooks/useAuth";

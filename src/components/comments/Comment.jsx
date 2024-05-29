@@ -1,4 +1,3 @@
-import React from "react";
 import { formatDate } from "@/functions/timeFunc";
 import { Avatar, Divider } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";

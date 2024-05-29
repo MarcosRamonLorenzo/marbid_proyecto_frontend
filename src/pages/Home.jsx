@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "../components/shared-componentes/Header.jsx";
 import HeroSection from "../components/home/HeroSection.jsx";
 import Collaborators from "../components/home/Collaborators.jsx";

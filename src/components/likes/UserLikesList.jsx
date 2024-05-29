@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import ServiceCard from "../services/ServiceCard";
 import useLike from "@/hooks/useLike";
 import useAuth from "@/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 import useService from "@/hooks/useService";
 
 const UserLikesList = () => {
   const { userLikes, fetchUserLikes } = useLike();
   const { navigateService } = useService();
-  const navigate = useNavigate();
 
   const { currentUser } = useAuth();
 

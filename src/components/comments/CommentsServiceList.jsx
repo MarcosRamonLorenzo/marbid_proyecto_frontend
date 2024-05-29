@@ -1,4 +1,3 @@
-import React from "react";
 import useComment from "@/hooks/useComment";
 import Loading from "../shared-componentes/Loadings/Loading";
 import Comment from "./Comment";

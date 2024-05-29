@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardBody, Image } from "@nextui-org/react";
 import { formatDate } from "@/functions/timeFunc";
 import useService from "@/hooks/useService";
