@@ -124,8 +124,8 @@ const ServiceProvider = ({ children }) => {
     navigate(`/servicio/${idService}`);
   };
 
-  const filterByCategory = (category) => {
-    getCategoryById(category);
+  const filterByCategory = async (category) => {
+    await getCategoryById(category);
 
     const newFilteredServices = services.filter((categoryById) => {
       return categoryById.category.id === category;

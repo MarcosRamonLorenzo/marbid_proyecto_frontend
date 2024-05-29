@@ -11,6 +11,10 @@ const CategoryProvider = ({ children }) => {
   const { setErrorAlert } = useAlert();
 
   const nullValue = null;
+  const allCategories = {
+    id: "",
+    name: "Todas las categorías",
+  };
 
   const [categories, setCategories] = useState(nullValue);
   const [categoryById, setCategoryById] = useState(nullValue);
@@ -27,7 +31,9 @@ const CategoryProvider = ({ children }) => {
         a.name.localeCompare(b.name)
       );
 
-      setCategories(sortedCategories);
+      const addAllCategories = [...sortedCategories, allCategories];
+
+      setCategories(addAllCategories);
     } catch (error) {
       setErrorAlert(error.message);
     }

@@ -3,18 +3,17 @@ import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import useService from "@/hooks/useService";
 const Cateogries = () => {
-
   const navigate = useNavigate();
   const { filterByCategory } = useService();
-  
-  const navigateToExplore = ()=>{
-    navigate("/explora")
-  }
 
-  const handleFilter = (id) =>{
+  const navigateToExplore = () => {
+    navigate("/explora");
+  };
+
+  const handleFilter = (id) => {
     filterByCategory(id);
     navigateToExplore();
-  }
+  };
   return (
     <section className="flex flex-col justify-center items-center mt-20 m-5">
       <h2 className="text-2xl m-3">Categorias</h2>
@@ -41,7 +40,7 @@ const Cateogries = () => {
         <Card
           shadow="sm"
           isPressable
-          onPress={() => console.log("item pressed")}
+          onPress={() => handleFilter("clvbanhe1000fs5qxouoacrsc")}
           className="card"
         >
           <CardBody className="overflow-visible p-0">
@@ -60,7 +59,7 @@ const Cateogries = () => {
         <Card
           shadow="sm"
           isPressable
-          onPress={() => console.log("item pressed")}
+          onPress={() => handleFilter("clvbanhcw000es5qx1r7fcff8")}
           className="card"
         >
           <CardBody className="overflow-visible p-0">
@@ -73,13 +72,13 @@ const Cateogries = () => {
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <b> Escritura y traducción</b>
+            <b> Escritura Creativa</b>
           </CardFooter>
         </Card>
         <Card
           shadow="sm"
           isPressable
-          onPress={() => console.log("item pressed")}
+          onPress={() => handleFilter("clvbanh7a0009s5qxlrx4xt2d")}
           className="card"
         >
           <CardBody className="overflow-visible p-0">
@@ -92,13 +91,13 @@ const Cateogries = () => {
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <b>Video y animación</b>
+            <b>Edición de Video</b>
           </CardFooter>
         </Card>
         <Card
           shadow="sm"
           isPressable
-          onPress={() => console.log("item pressed")}
+          onPress={() => handleFilter("clvbanhan000cs5qx1669fsfa")}
           className="card"
         >
           <CardBody className="overflow-visible p-0">
@@ -117,7 +116,7 @@ const Cateogries = () => {
         <Card
           shadow="sm"
           isPressable
-          onPress={() => console.log("item pressed")}
+          onPress={() => handleFilter("clvbanh4z0007s5qx8pcq7jqz")}
           className="card"
         >
           <CardBody className="overflow-visible p-0">
@@ -130,7 +129,7 @@ const Cateogries = () => {
             />
           </CardBody>
           <CardFooter className="text-small justify-between">
-            <b>Programación y tecnología</b>
+            <b>Desarrollo Web</b>
           </CardFooter>
         </Card>
       </div>

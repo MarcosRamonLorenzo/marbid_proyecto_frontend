@@ -3,10 +3,15 @@ import React, { useEffect } from "react";
 import useCategory from "@/hooks/useCategory.js";
 
 const SelectCateogries = ({ onChange, variant = "flat" }) => {
-  const { categories, getAllCategories } = useCategory();
+  const { categories, getAllCategories, categoryById } = useCategory();
 
   useEffect(() => {
     getAllCategories();
+    onChange({
+      target: {
+        value: categoryById.id ? categoryById.id : "",
+      },
+    });
   }, []);
 
   return (
