@@ -6,6 +6,8 @@ import {
   getAllServicesCreatedByUser,
   updateService,
   validateService,
+  applyService,
+  acceptServiceRequest
 } from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
 import useAuth from "@/hooks/useAuth";
@@ -134,6 +136,27 @@ const ServiceProvider = ({ children }) => {
     setFilteredServices(newFilteredServices);
   };
 
+  const handleApplyService = (idService) => {
+    try {
+      const response = applyService(idService , currentUser?.uid);
+      if (response.error) throw response.error;
+      setSuccessAlert("Servicio aplicado con éxito");
+    } catch (error) {
+      setErrorAlert(error.message);
+    }
+  }
+
+  const handleAcceptServiceRequest = (idService,idUser) => {
+    try {
+      const response = acceptServiceRequest(idService,idUser);
+      if (response.error) throw response.error;
+      setSuccessAlert("Solicitud aceptada con éxito");
+      navigate(`/panel-control/servicios-creados`);
+    } catch (error) {
+      setErrorAlert(error.message);
+    }
+  }
+
   const value = {
     filteredServices,
     filterSearchServices,
@@ -148,6 +171,8 @@ const ServiceProvider = ({ children }) => {
     selectedPreviewImage,
     setSelectedPreviewImage,
     navigateService,
+    handleApplyService,
+    handleAcceptServiceRequest
   };
 
   return (

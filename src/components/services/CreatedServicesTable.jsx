@@ -11,7 +11,13 @@ import {
   Image,
   Chip,
 } from "@nextui-org/react";
-import { Edit2Icon, Eye, Trash2Icon } from "lucide-react";
+import {
+  BookOpenCheck,
+  ContactRound,
+  Edit2Icon,
+  Eye,
+  Trash2Icon,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import ModalAcceptCancel from "../shared-componentes/modals/ModalAcceptCancel";
 import { useState } from "react";
@@ -68,14 +74,16 @@ const CreatedServicesTable = ({ createdServices = [], setCreatedServices }) => {
                       src={item.image}
                       width={140}
                       aria-label="Imagen del servicio"
-                    />{" "}
+                    />
                   </TableCell>
+
                   <TableCell
                     className="hidden lg:table-cell"
                     aria-label="Categoría"
                   >
                     {item.category?.name}
                   </TableCell>
+
                   <TableCell
                     className="hidden lg:table-cell"
                     aria-label="Contenido"
@@ -85,17 +93,21 @@ const CreatedServicesTable = ({ createdServices = [], setCreatedServices }) => {
 
                   <TableCell aria-label="Estado">
                     {item?.status ? (
-                      <Chip color="success" variant="dot">Activo</Chip>
+                      <Chip color="success" variant="dot">
+                        Activo
+                      </Chip>
                     ) : (
-                      <Chip color="danger" variant="dot">Sin Contratar</Chip>
+                      <Chip color="danger" variant="dot">
+                        Sin Contratar
+                      </Chip>
                     )}
                   </TableCell>
 
                   <TableCell aria-label="Acciones">
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center ">
                       <Button isIconOnly size="sm" variant="light">
                         <Eye
-                          size={20}
+                          size={22}
                           className="primary-stroke-class"
                           onClick={() => {
                             navigateService(item.id);
@@ -113,7 +125,7 @@ const CreatedServicesTable = ({ createdServices = [], setCreatedServices }) => {
                         }}
                       >
                         <Edit2Icon
-                          size={20}
+                          size={22}
                           className="secondary-stroke-class"
                         />
                       </Button>
@@ -126,8 +138,25 @@ const CreatedServicesTable = ({ createdServices = [], setCreatedServices }) => {
                           setDeleteModal(true);
                         }}
                       >
-                        <Trash2Icon size={20} className="third-stroke-class" />
+                        <Trash2Icon size={22} className="third-stroke-class" />
                       </Button>
+                      {!item?.status && (
+                        <Button
+                          isIconOnly
+                          size="sm"
+                          variant="light"
+                          onClick={() => {
+                            navigate(
+                              `/panel-control/usuarios-aplicados/${item.id}`
+                            );
+                          }}
+                        >
+                          <BookOpenCheck
+                            size={22}
+                            className="stroke-green-400"
+                          />
+                        </Button>
+                      )}
                     </div>
                   </TableCell>
                 </TableRow>
