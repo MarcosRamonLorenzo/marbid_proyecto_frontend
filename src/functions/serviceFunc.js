@@ -113,3 +113,28 @@ export const validateService = (service) => {
   
     return null;
   }
+
+
+  export const applyService = async ( idService , idUser ) => {
+    const response = await fetch(`${apiUrl}/service/apply-service`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ idService,idUser }),
+    });
+
+    return response.json();
+  }
+
+  export const acceptServiceRequest = async ( idService, idUser ) => {
+    const response = await fetch(`${apiUrl}/service/accept-service-request`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ idService,idUser }),
+    });
+
+    return response.json();
+  }

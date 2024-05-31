@@ -2,30 +2,36 @@ import { useState, useEffect } from "react";
 import Header from "../components/shared-componentes/Header";
 import { Image, Button } from "@nextui-org/react";
 import {
-  MessageCircleMore,
   Feather,
   HeartIcon,
   Heart,
   HeartOff,
 } from "lucide-react";
 import { useParams } from "react-router-dom";
-import useDataFetch from "@/hooks/useDataFetch";
-import apiUrl from "@/config/apis.config";
-import UserAvatarView from "@/components/user/UserAvatarView";
-import { formatDate } from "@/functions/timeFunc";
-import Loading from "@/components/shared-componentes/Loadings/Loading";
-import CommentProvider from "@/contexts/CommentProvider";
-import CommentsServiceList from "@/components/comments/CommentsServiceList";
-import CommentInput from "@/components/comments/CommentInput";
 
+
+import apiUrl from "@/config/apis.config";
+
+import UserAvatarView from "@/components/user/UserAvatarView";
+import CommentInput from "@/components/comments/CommentInput";
+import CommentsServiceList from "@/components/comments/CommentsServiceList";
+import Loading from "@/components/shared-componentes/Loadings/Loading";
+
+import { formatDate } from "@/functions/timeFunc";
 import { getServiceLikes } from "@/functions/likeFunct";
+
+import CommentProvider from "@/contexts/CommentProvider";
+
+import useDataFetch from "@/hooks/useDataFetch";
 import useAuth from "@/hooks/useAuth";
 import useLike from "@/hooks/useLike";
+import useService from "@/hooks/useService";
 
 const ServicePage = () => {
   const { serviceId } = useParams();
   const { isServiceLiked, handleLikeService, handleDeleteLike } = useLike();
   const { currentUser } = useAuth();
+  const { handleApplyService } = useService();
 
   const { data: service, isLoading } = useDataFetch(
     "services",
@@ -52,7 +58,7 @@ const ServicePage = () => {
   useEffect(() => {
     getLikes();
   }, []);
-  
+
   useEffect(() => {
     handleIsLiked();
   }, [currentUser, serviceId]);
@@ -94,22 +100,19 @@ const ServicePage = () => {
           </div>
           <p className="text-sm md:w-[40em] ">{service?.content}</p>
           <div className="flex items-center justify-start gap-2 mt-10 ">
-            <Button
-              radius="sm"
-              className=" bg-pink-400 text-white py-0"
-              endContent={
-                <MessageCircleMore size={16} color="#ffffff" strokeWidth={2} />
-              }
-            >
-              Contactar
-            </Button>
-            <Button
-              radius="sm"
-              className="bg-[#4159A8] text-white py-0"
-              endContent={<Feather size={16} color="#ffffff" strokeWidth={2} />}
-            >
-              Aplicar Anuncio
-            </Button>
+            {currentUser?.uid !== service?.authorCreated?.id && !service?.status && (
+              <Button
+                radius="sm"
+                className="bg-[#4159A8] text-white py-0"
+                endContent={
+                  <Feather size={16} color="#ffffff" strokeWidth={2} />
+                }
+                onClick={()=>{ handleApplyService(service?.id) }}
+              >
+                Aplicar Anuncio
+              </Button>
+            )}
+
             {isLiked ? (
               <Button
                 color="danger"
@@ -121,7 +124,7 @@ const ServicePage = () => {
                 onClick={() => {
                   handleDeleteLike(currentUser?.uid, serviceId);
                   setIsLiked(false);
-                  setLikes(likes-1);
+                  setLikes(likes - 1);
                 }}
               >
                 Quitar de Favoritos
@@ -135,7 +138,7 @@ const ServicePage = () => {
                 onClick={() => {
                   handleLikeService(currentUser?.uid, service);
                   setIsLiked(true);
-                  setLikes(likes+1);
+                  setLikes(likes + 1);
                 }}
               >
                 Añadir a Favoritos
