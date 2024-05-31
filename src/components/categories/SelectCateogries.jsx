@@ -7,11 +7,13 @@ const SelectCateogries = ({ onChange, variant = "flat" }) => {
 
   useEffect(() => {
     getAllCategories();
-    onChange({
-      target: {
-        value: categoryById.id ? categoryById.id : "",
-      },
-    });
+    if (categoryById?.id) {
+      onChange({
+        target: {
+          value: categoryById.id ? categoryById.id : "",
+        },
+      });
+    }
   }, []);
 
   return (

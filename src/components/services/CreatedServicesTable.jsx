@@ -9,6 +9,7 @@ import {
   TableRow,
   TableCell,
   Image,
+  Chip,
 } from "@nextui-org/react";
 import { Edit2Icon, Eye, Trash2Icon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -16,9 +17,9 @@ import ModalAcceptCancel from "../shared-componentes/modals/ModalAcceptCancel";
 import { useState } from "react";
 import { deleteService } from "@/functions/serviceFunc";
 
-const CreatedServicesTable = ({ createdServices = [] , setCreatedServices }) => {
+const CreatedServicesTable = ({ createdServices = [], setCreatedServices }) => {
   const navigate = useNavigate();
-  const { setSelectedPreviewImage,navigateService } = useService();
+  const { setSelectedPreviewImage, navigateService } = useService();
 
   const {
     isOpen: isDeleteModal,
@@ -30,7 +31,7 @@ const CreatedServicesTable = ({ createdServices = [] , setCreatedServices }) => 
 
   const handleDeleteService = (id) => {
     deleteService(id);
-    const updatedServices = createdServices.filter(item => item.id !== id);
+    const updatedServices = createdServices.filter((item) => item.id !== id);
     setCreatedServices(updatedServices);
     setDeleteModal(false);
   };
@@ -82,7 +83,13 @@ const CreatedServicesTable = ({ createdServices = [] , setCreatedServices }) => 
                     {item?.content.substring(0, 30) + "..."}
                   </TableCell>
 
-                  <TableCell aria-label="Estado">Active</TableCell>
+                  <TableCell aria-label="Estado">
+                    {item?.status ? (
+                      <Chip color="success" variant="dot">Activo</Chip>
+                    ) : (
+                      <Chip color="danger" variant="dot">Sin Contratar</Chip>
+                    )}
+                  </TableCell>
 
                   <TableCell aria-label="Acciones">
                     <div className="flex items-center justify-center">
@@ -129,15 +136,15 @@ const CreatedServicesTable = ({ createdServices = [] , setCreatedServices }) => 
         </TableBody>
       </Table>
 
-        <ModalAcceptCancel
-          isOpen={isDeleteModal}
-          onClose={closeDeleteModal}
-          title="Eliminar Servicio"
-          text={`Estás seguro que quieres eliminar "${selectedDeleteService?.title}" ?`}
-          onConfirm={() => {
-            handleDeleteService(selectedDeleteService?.id);
-          }}
-        />
+      <ModalAcceptCancel
+        isOpen={isDeleteModal}
+        onClose={closeDeleteModal}
+        title="Eliminar Servicio"
+        text={`Estás seguro que quieres eliminar "${selectedDeleteService?.title}" ?`}
+        onConfirm={() => {
+          handleDeleteService(selectedDeleteService?.id);
+        }}
+      />
     </>
   );
 };
