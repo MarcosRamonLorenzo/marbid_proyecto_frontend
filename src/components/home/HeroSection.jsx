@@ -14,8 +14,8 @@ const HeroSection = () => {
             type="video/mp4"
           />
         </video>
-        <p className="md:text-6xl text-4xl flex items-center justify-center gap-4 font-bold my-5">
-          BE <span> FREELANCER</span>
+        <p className="md:text-6xl text-4xl flex items-center justify-center gap-4 font-bold my-5 ">
+          SÉ UN <span className="freelancer-span">  FREELANCER</span>
         </p>
       </div>
       <div className="hero-section-2 flex flex-col-reverse">
@@ -31,7 +31,7 @@ const HeroSection = () => {
           />
         </video>
         <p className="md:text-6xl text-4xl font-bold my-5 flex items-center justify-center gap-4">
-          SHOW YOUR VALUE
+          ENSEÑA TU VALOR 
         </p>
       </div>
     </section>

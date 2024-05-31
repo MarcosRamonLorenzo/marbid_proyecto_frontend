@@ -261,3 +261,29 @@ $color-third: #F25EA3;
     opacity: 0;
   }
 }
+
+/*FEELANCER SPAN ANIMATION */
+
+.freelancer-span {
+  background: linear-gradient(
+    to right,
+    $color-first 10%,
+    $color-third 50%,
+    $color-second 60%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
