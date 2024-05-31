@@ -9,8 +9,8 @@ const Cateogries = () => {
     navigate("/explora");
   };
 
-  const handleFilter = (id) => {
-    filterByCategory(id);
+  const handleFilter = async (id) => {
+    await filterByCategory(id);
     navigateToExplore();
   };
   return (

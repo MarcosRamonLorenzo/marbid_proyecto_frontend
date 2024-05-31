@@ -20,22 +20,30 @@ const CategoryProvider = ({ children }) => {
   const [categoryById, setCategoryById] = useState(nullValue);
   const [nameSelectedCategory, setNameSelectedCategory] = useState(nullValue);
 
-  const getAllCategories = async () => {
-    try {
-      const { error, data } = await getAllCategoriesResponse();
+  const getAllCategories = async (category) => {
+    if (!category) {
+      try {
+        const { error, data } = await getAllCategoriesResponse();
 
-      if (error) throw error;
+        if (error) throw error;
 
-      // Sort categories alphabetically.
-      const sortedCategories = data.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+        // Sort categories alphabetically.
+        const sortedCategories = data.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
 
-      const addAllCategories = [...sortedCategories, allCategories];
+        const addAllCategories = [...sortedCategories, allCategories];
 
-      setCategories(addAllCategories);
-    } catch (error) {
-      setErrorAlert(error.message);
+        setCategories(addAllCategories);
+      } catch (error) {
+        setErrorAlert(error.message);
+      }
+    } else {
+      try {
+        return getCategoryById(category);
+      } catch (error) {
+        setErrorAlert(error.message);
+      }
     }
   };
 

@@ -1,19 +1,12 @@
 import { Select, SelectItem } from "@nextui-org/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useCategory from "@/hooks/useCategory.js";
 
 const SelectCateogries = ({ onChange, variant = "flat" }) => {
-  const { categories, getAllCategories, categoryById } = useCategory();
+  const { categories, getAllCategories } = useCategory();
 
   useEffect(() => {
     getAllCategories();
-    if (categoryById?.id) {
-      onChange({
-        target: {
-          value: categoryById.id ? categoryById.id : "",
-        },
-      });
-    }
   }, []);
 
   return (
