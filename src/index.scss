@@ -3,22 +3,21 @@
 @import "tailwindcss/utilities";
 
 /*General Variables*/
-$color-first: #5271FF ;
-$color-second: #F26D3D ;
-$color-third: #F25EA3;
+$color-first: #5271ff;
+$color-second: #f26d3d;
+$color-third: #f25ea3;
 
-.primary-color-class{
+.primary-color-class {
   background-color: $color-first;
 }
 
-.secondary-color-class{
+.secondary-color-class {
   background-color: $color-second;
 }
 
-.third-color-class{
+.third-color-class {
   background-color: $color-third;
 }
-
 
 .primary-stroke-class {
   stroke: $color-first;
@@ -38,8 +37,19 @@ $color-third: #F25EA3;
 .dark h3,
 .dark h4,
 .dark table,
-.dark header li {
+.dark .home h2,
+.dark ul li,
+.dark ul li a,
+.dark ul a svg,
+.dark ul a span,
+.dark .created-services h2, // Applied services & Created Services.
+.dark .liked-services h2,
+.dark .settings h2 {
   color: #eee;
+}
+
+.dark .login-container h2 {
+  color: #000;
 }
 
 .dark .settings svg {

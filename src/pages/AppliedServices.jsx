@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
 import { CirclePlus } from "lucide-react";
-import {
-  Divider,
-  Tabs,
-  Tab,
-  Button,
-} from "@nextui-org/react";
+import { Divider, Tabs, Tab, Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import useDataFetch from "@/hooks/useDataFetch";
@@ -28,7 +23,7 @@ const AppliedServices = () => {
 
   useEffect(() => {
     if (data) {
-        setAppliedServices(data);
+      setAppliedServices(data);
     }
     if (error) {
       setError(error.message);
@@ -47,22 +42,31 @@ const AppliedServices = () => {
       >
         Crear Anuncio
       </Button>
-      <h2 className="text-3xl font-medium">Servicios Creados</h2>
+      <h2 className="text-3xl font-medium">Servicios Aplicados</h2>
       <Divider className="my-4" />
       <h3 className=" text-xl ml-3">Visualización</h3>
       <Tabs aria-label="Options" variant="underlined">
         {/* General View */}
         <Tab key="photos" title="General">
           <CreatedServicesList
-            className={"gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5"}
+            className={
+              "gap-x-5 gap-y-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-5"
+            }
             createdServices={appliedServices}
             isLoading={isLoading}
           />
         </Tab>
         {/* Table View */}
         {appliedServices.length && (
-          <Tab key="tabla" title="Tabla" aria-labelledby="created-services-table">
-            <CreatedServicesTable createdServices={appliedServices} setCreatedServices={setAppliedServices} />
+          <Tab
+            key="tabla"
+            title="Tabla"
+            aria-labelledby="created-services-table"
+          >
+            <CreatedServicesTable
+              createdServices={appliedServices}
+              setCreatedServices={setAppliedServices}
+            />
           </Tab>
         )}
       </Tabs>
