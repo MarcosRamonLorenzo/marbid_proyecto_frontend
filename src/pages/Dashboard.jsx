@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Sidebar from "../components/dashboard/Sidebar.jsx";
 import SidebarItem from "../components/dashboard/SidebarItem.jsx";
-import { ScrollText, BookText, Heart, Settings } from "lucide-react";
+import { ScrollText, BookText, Heart, Settings, HomeIcon } from "lucide-react";
 import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 const Dashboard = () => {
@@ -19,6 +19,11 @@ const Dashboard = () => {
     <div className="dashboard panel-control flex gap-20">
       <div className="">
         <Sidebar>
+        <SidebarItem
+            icon={<HomeIcon />}
+            text="Inicio"
+            path="/"
+          />
           <SidebarItem
             icon={<BookText />}
             text="Servicios Creados"

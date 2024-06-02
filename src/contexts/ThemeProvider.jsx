@@ -3,7 +3,7 @@ import { useState, useEffect, createContext } from 'react';
 const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
-  const defaultTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const defaultTheme = 'light';
   const [theme, setTheme] = useState(localStorage.getItem('theme') || defaultTheme);
 
   useEffect(() => {

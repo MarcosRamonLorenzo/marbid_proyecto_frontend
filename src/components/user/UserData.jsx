@@ -82,12 +82,12 @@ const UserTabs = ({ idUser }) => {
     `${apiUrl}/service/created/${idUser}`
   );
   return (
-    <Tabs aria-label="Options" variant="underlined">
+    <Tabs aria-label="Options" variant="underlined" >
       <Tab key="created-ofers" title="Servicios Creados">
           <CreatedServicesList
             createdServices={data}
             isLoading={isLoading}
-            className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"}
+            className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:px-20"}
             />
       </Tab>
       <Tab key="like-ofers" title="Comentarios">

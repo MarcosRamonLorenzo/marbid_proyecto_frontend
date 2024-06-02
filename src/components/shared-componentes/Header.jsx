@@ -37,7 +37,7 @@ const Header = () => {
     <div className="headerPrincipalDiv">
       <Navbar isBordered className="dark:bg-[#1c1c1c]">
         <NavbarContent className="sm:hidden" justify="start">
-          <NavbarMenuToggle />
+          <NavbarMenuToggle className="dark:text-white" />
         </NavbarContent>
 
         {/* desktop menu */}

@@ -119,7 +119,7 @@ const UserEditModal = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} placement="auto" size="2xl" backdrop="blur">
+      <Modal isOpen={isOpen} onClose={onClose} placement="auto" size="2xl" backdrop="blur" className="user-set-modal">
         <ModalContent>
           <>
             <ModalHeader className="flex flex-col gap-1">

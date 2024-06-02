@@ -16,7 +16,7 @@ const Settings = () => {
           <h3 className="text-xl ">Theme</h3>
 
           <Select
-            defaultSelectedKeys={[theme]}
+            defaultSelectedKeys={['light']}
             className="max-w-xs rounded-none md:w-96 mt-3"
             label="Selecciona un theme"
             radius="sm"
@@ -27,7 +27,7 @@ const Settings = () => {
             <SelectItem key="dark" value={"dark"} startContent={<Moon />}>
               Oscuro
             </SelectItem>
-            <SelectItem key="white" value={"white"} startContent={<Sun />}>
+            <SelectItem key="light" value={"light"} startContent={<Sun />}>
               Claro
             </SelectItem>
           </Select>

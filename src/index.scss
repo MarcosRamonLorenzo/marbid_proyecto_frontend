@@ -44,7 +44,9 @@ $color-third: #f25ea3;
 .dark ul a span,
 .dark .created-services h2, // Applied services & Created Services.
 .dark .liked-services h2,
-.dark .settings h2 {
+.dark .settings h2 ,
+.dark .user-set-modal input 
+{
   color: #eee;
 }
 

@@ -57,7 +57,7 @@ const UserProfile = ({ internal }) => {
 
   return (
     <>
-      <div className="user-profile h-screen">
+      <div className="user-profile min-h-screen h-full">
         {!internal && <Header />}
         <div className="mb-10 lg:mb-20 ">
           <UserData userDB={userDB} openSetUser={() => { setUserPopUp(true) }} internal={internal} />
