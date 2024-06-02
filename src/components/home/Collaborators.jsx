@@ -7,7 +7,7 @@ import MicrosoftIcon from "../shared-componentes/icons/MicrosoftIcon";
 const Collaborators = () => {
   return (
     <section className="flex flex-col items-center gap-10 mt-20 justify-center mx-5">
-      <h2 className="text-2xl">Collaborators</h2>
+      <h2 className="text-2xl font-bold">Colaboradores</h2>
       <div className="flex flex-row md:gap-20 gap-5  ">
         <button
           href="/"

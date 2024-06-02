@@ -16,7 +16,7 @@ const Settings = () => {
           <h3 className="text-xl ">Theme</h3>
 
           <Select
-            defaultSelectedKeys={['light']}
+            defaultSelectedKeys={[theme]}
             className="max-w-xs rounded-none md:w-96 mt-3"
             label="Selecciona un theme"
             radius="sm"

@@ -55,8 +55,8 @@ const LogIn = ({ isRegister }) => {
               <div className="mb-2 flex justify-center"></div>
               <h2 className="text-center text-2xl font-bold leading-tight text-black">
                 {isRegister
-                  ? "Sign Up for a new account"
-                  : "Sign in to your account "}
+                  ? "Registate en Marbid"
+                  : "Inicia Sesión en Marbid "}
               </h2>
               <div className="mt-8">
                 <div className="space-y-5">

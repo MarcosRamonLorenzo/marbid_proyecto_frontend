@@ -2,8 +2,9 @@ import Header from "../components/shared-componentes/Header.jsx";
 import HeroSection from "../components/home/HeroSection.jsx";
 import Collaborators from "../components/home/Collaborators.jsx";
 import Categories from "../components/home/Cateogries.jsx";
-import OfertasBuscadas from "../components/home/SearchServices.jsx";
 import Footer from "@/components/home/Footer.jsx";
+import InfoWeb from "@/components/home/InfoWeb.jsx";
+import CommentsSection from "@/components/home/CommentsSection.jsx";
 
 const Home = () => {
   return (
@@ -11,8 +12,9 @@ const Home = () => {
       <Header />
       <HeroSection />
       <Collaborators />
+      <InfoWeb/>
       <Categories />
-      <OfertasBuscadas />
+      <CommentsSection />
       <Footer/>
     </div>
   );

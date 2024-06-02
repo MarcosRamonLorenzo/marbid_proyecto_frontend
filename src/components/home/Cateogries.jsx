@@ -14,8 +14,8 @@ const Cateogries = () => {
     navigateToExplore();
   };
   return (
-    <section className="flex flex-col justify-center items-center mt-20 m-5">
-      <h2 className="text-2xl m-3">Categorias</h2>
+    <section className="flex flex-col justify-center items-center  mx-5 mb-5">
+      <h2 className="text-3xl font-bold m-3">Categorias</h2>
       <div className="gap-2 grid grid-cols-2 sm:grid-cols-3 mt-2">
         <Card
           shadow="sm"
