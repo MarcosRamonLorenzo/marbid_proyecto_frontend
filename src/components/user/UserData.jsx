@@ -99,7 +99,7 @@ const UserTabs = ({ idUser }) => {
 
 const UserData = ({ userDB, internal, openSetUser }) => (
   <>
-    <div className="flex flex-col justify-center items-center w-[full]">
+    <div className="flex flex-col justify-center items-center ">
       <Image
         src={userDB?.backround_img}
         radius="none"

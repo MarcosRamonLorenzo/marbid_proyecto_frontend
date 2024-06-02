@@ -41,9 +41,9 @@ const Comment = ({
         />
 
         <div className="flex flex-col">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-4 items-center">
             <p
-              className="text-md font-bold hover:underline cursor-pointer"
+              className="text-[0.7em] sm:text-[1em] font-bold hover:underline cursor-pointer"
               onClick={() => {
                 navigateUserPage(author?.id);
               }}
@@ -51,7 +51,7 @@ const Comment = ({
               {username?.substring(0, 15) + "..."}
             </p>
             <Divider orientation="vertical" />
-            <p className=" text-[0.8em] md:text-sm">{formatDate(date)}</p>
+            <p className=" text-[0.7em] sm:text-sm">{formatDate(date)}</p>
             {isUsersMessage() && (
               <XCircleIcon
                 className="cursor-pointer"

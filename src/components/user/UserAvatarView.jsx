@@ -9,13 +9,14 @@ const UserAvatarView = ({user}) => {
 
   return (
     <div
-          className="flex justify-start items-start cursor-pointer"
+          className="flex justify-start items-start cursor-pointer "
           onClick={() => {
             /*Si es el mismo que no vaya a su perfil*/
             (currentUser.uid != user.id) && navigate(`/user/${user.id}`);
           }}
         >
           <User
+            className="dark:text-white"
             name={user?.name || "Anónimo"}
             description={user?.label}
             avatarProps={{

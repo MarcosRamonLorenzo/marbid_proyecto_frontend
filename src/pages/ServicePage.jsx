@@ -66,7 +66,7 @@ const ServicePage = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className=" service lg:h-screen">
+    <div className=" service min-h-screen h-full">
       <Header />
       <div className="m-10 mb-0 flex flex-col md:flex-row justify-center gap-10 lg:gap-32">
         <div className="">
@@ -80,7 +80,7 @@ const ServicePage = () => {
           />
           <div></div>
           <div className="flex flex-row justify-between">
-            <div className="text-small flex flex-col items-start gap-1 mt-3">
+            <div className="text-small flex flex-col items-start justify-start gap-1 mt-3">
               <UserAvatarView user={service?.authorCreated} />
               <h3 className="font-medium text-2xl font-bold capitalize">
                 {service?.title}
@@ -89,12 +89,12 @@ const ServicePage = () => {
               <p className="text-xl font-bold">{service?.price}€</p>
             </div>
             <div className="flex flex-col items-end gap-5 mt-3">
-              <div className="flex items-center justify-center gap-5">
-                <div className="flex items-center justify-center gap-2 ">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-5 text-[0.7em] sm:text-sm">
+                <div className="flex items-center justify-center gap-2  ">
                   <p>Likes {likes}</p>
                   <HeartIcon color="red" fill="red" size={15} />
                 </div>
-                <p className="text-sm">{formatDate(service?.createdAt)}</p>
+                <p>{formatDate(service?.createdAt)}</p>
               </div>
             </div>
           </div>

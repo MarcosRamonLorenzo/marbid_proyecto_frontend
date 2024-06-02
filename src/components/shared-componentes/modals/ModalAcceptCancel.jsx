@@ -19,7 +19,7 @@ const ModalAcceptCancel = ({
   return ReactDOM.createPortal(
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
+        <ModalHeader className="flex flex-col gap-1 dark:text-white">{title}</ModalHeader>
         <ModalBody>
           <p>{text}</p>
         </ModalBody>

@@ -44,7 +44,10 @@ const Header = () => {
         <NavbarContent className="sm:hidden pr-3" justify="center">
           <NavbarBrand>
             <Link to={"/"}>
-              <img src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2Fmarbid.svg?alt=media&token=d7d1cd99-faf3-4542-84bf-ea24fbb8f025" className="h-10" />
+              <img
+                src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2Fmarbid.svg?alt=media&token=d7d1cd99-faf3-4542-84bf-ea24fbb8f025"
+                className="h-10"
+              />
             </Link>
           </NavbarBrand>
         </NavbarContent>
@@ -52,7 +55,17 @@ const Header = () => {
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           <NavbarBrand>
             <Link to={"/"}>
-              <img src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2FlogoMarbidWeb.webp?alt=media&token=3522c0e5-6a6a-415a-90c1-2c7782ecfe7a" className="h-8" />
+              {localStorage.getItem("theme") === "dark" ? (
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2FmarbidLight.webp?alt=media&token=fc217944-08ac-431b-a40d-7e5b51beed75"
+                  className="h-8"
+                />
+              ) : (
+                <img
+                  src="https://firebasestorage.googleapis.com/v0/b/marbid-69744.appspot.com/o/logos-icons%2FlogoMarbidWeb.webp?alt=media&token=3522c0e5-6a6a-415a-90c1-2c7782ecfe7a"
+                  className="h-8"
+                />
+              )}
             </Link>
           </NavbarBrand>
         </NavbarContent>

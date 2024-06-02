@@ -23,7 +23,7 @@ const HeroSection = () => {
           autoPlay={true}
           muted
           loop
-          className="rounded-tr-xl rounded-bl-xl md:h-96 h-56"
+          className="rounded-tr-xl rounded-bl-xl px-1 md:h-96 h-54"
         >
           <source
             src="https://bzbuptkwljynshsmyfgk.supabase.co/storage/v1/object/sign/Videos-Inicio/v2.mp4?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJWaWRlb3MtSW5pY2lvL3YyLm1wNCIsImlhdCI6MTcxMzc5Mjg3MywiZXhwIjoxNzQ1MzI4ODczfQ.211WMKzDY6Q2Si6c8p9AKKSHlr5tK-OQyucPaJIotiM&t=2024-04-22T13%3A34%3A10.723Z"

@@ -142,7 +142,8 @@ const LogIn = ({ isRegister }) => {
                   {isRegister ? "Sign up with Google" : "Sign in with Google"}
                 </button>
               </div>
-              <div className="mt-3 space-y-3">
+              {/* Aqui está el login con github y twitter pero al no prprcionar el email al hacer el reguister de moment  hemos decidido eliminarlos . */}
+             {/*  <div className="mt-3 space-y-3">
                 <button
                   className="relative inline-flex w-full items-center justify-center rounded-md border border-gray-400 bg-white px-3.5 py-2.5 font-semibold text-gray-700 transition-all duration-200 hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black focus:outline-none hover:scale-105"
                   type="button"
@@ -169,7 +170,7 @@ const LogIn = ({ isRegister }) => {
                   </span>
                   {isRegister ? "Sign up with X" : "Sign in with X"}
                 </button>
-              </div>
+              </div> */}
               <div className="mt-3 text-center text-sm text-gray-600">
                 {isRegister ? (
                   <p>
