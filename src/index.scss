@@ -70,6 +70,12 @@ $color-third: #f25ea3;
   }
 }
 
+/*This is for preventing the chat button to hace a backaround beacause a bug*/
+#hubspot-messages-iframe-container{
+  background-color: transparent !important;
+  color-scheme : light !important ;
+}
+
 /*Animación Corazón*/
 .ui-like {
   --icon-size: 24px;
