@@ -37,11 +37,10 @@ const UserDetails = ({ userDB }) => {
 };
 
 const UserActions = ({ internal, openSetUser, userDB }) => {
-  
-  const [to, setTo] = useState(userDB?.email || ''); // Asumiendo que `userDB` contiene el email del usuario
+  const [to, setTo] = useState(userDB?.email || ""); // Asumiendo que `userDB` contiene el email del usuario
 
   const handleContactClick = () => {
-    const subject = 'Marbid';
+    const subject = "Marbid";
     const mailtoLink = `mailto:${to}?subject=${encodeURIComponent(subject)}`;
     window.location.href = mailtoLink;
   };
@@ -82,16 +81,18 @@ const UserTabs = ({ idUser }) => {
     `${apiUrl}/service/created/${idUser}`
   );
   return (
-    <Tabs aria-label="Options" variant="underlined" >
+    <Tabs aria-label="Options" variant="underlined">
       <Tab key="created-ofers" title="Servicios Creados">
-          <CreatedServicesList
-            createdServices={data}
-            isLoading={isLoading}
-            className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:px-20"}
-            />
+        <CreatedServicesList
+          createdServices={data}
+          isLoading={isLoading}
+          className={
+            "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:px-20"
+          }
+        />
       </Tab>
       <Tab key="like-ofers" title="Comentarios">
-       <UserCommentsList className={""} />
+        <UserCommentsList idUser={idUser} />
       </Tab>
     </Tabs>
   );
@@ -112,7 +113,11 @@ const UserData = ({ userDB, internal, openSetUser }) => (
       <p className="max-w-[20em] md:max-w-[55em] capitalize ">
         {userDB?.description}{" "}
       </p>
-      <UserActions internal={internal} openSetUser={openSetUser} userDB={userDB} />
+      <UserActions
+        internal={internal}
+        openSetUser={openSetUser}
+        userDB={userDB}
+      />
     </div>
     <div className="flex flex-col items-center ">
       <Divider className="w-[80%] mt-10" />

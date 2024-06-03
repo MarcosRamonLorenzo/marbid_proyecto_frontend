@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
 import CommentPreviewUser from "./CommentPreviewUser";
 import { getCommentsByUserId } from "@/functions/commentsFunc";
-import useAuth from "@/hooks/useAuth";
 import { Spinner } from "@nextui-org/react";
 
-
-const UserCommentsList = () => {
-  const { currentUser } = useAuth();
-
+const UserCommentsList = (idUser) => {
   const [comments, setComments] = useState([]);
 
   const [loading, setLoading] = useState(false);
@@ -15,7 +11,7 @@ const UserCommentsList = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const comments = await getCommentsByUserId(currentUser.uid);
+      const comments = await getCommentsByUserId(idUser);
       setComments(comments.data);
     } catch (error) {
       console.log(error);
@@ -25,8 +21,8 @@ const UserCommentsList = () => {
   };
 
   useEffect(() => {
-    if (currentUser) {
-        fetchData()
+    if (idUser) {
+      fetchData();
     }
   }, []);
 

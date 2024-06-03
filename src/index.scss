@@ -42,11 +42,11 @@ $color-third: #f25ea3;
 .dark ul li a,
 .dark ul a svg,
 .dark ul a span,
+.dark .create-service h2, // Create service
 .dark .created-services h2, // Applied services & Created Services.
 .dark .liked-services h2,
 .dark .settings h2 ,
-.dark .user-set-modal input 
-{
+.dark .user-set-modal input {
   color: #eee;
 }
 
@@ -71,9 +71,9 @@ $color-third: #f25ea3;
 }
 
 /*This is for preventing the chat button to hace a backaround beacause a bug*/
-#hubspot-messages-iframe-container{
+#hubspot-messages-iframe-container {
   background-color: transparent !important;
-  color-scheme : light !important ;
+  color-scheme: light !important ;
 }
 
 /*Animación Corazón*/

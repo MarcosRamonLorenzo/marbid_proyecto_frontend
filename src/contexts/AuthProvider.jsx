@@ -105,6 +105,7 @@ const AuthProvider = ({ children }) => {
   const handleSignOut = async () => {
     try {
       await doSignOut();
+      setCurrentUser(nullDefaultValue);
       setSuccessAlert("Cerrado de sesión exitoso");
     } catch (error) {
       setErrorAlert("Error al cerrar sesión: " + error.message);
