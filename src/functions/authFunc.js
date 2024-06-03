@@ -116,15 +116,17 @@ export const validateFormUser = (formUser) => {
   } else if (formUser.password.length < 1) {
     return "Rellena el campo de contraseña";
   } else if (
-    formUser.repeatPassword == null ||
-    formUser.repeatPassword.length < 1
+    formUser.register &&
+    (formUser.repeatPassword == null || formUser.repeatPassword.length < 1)
   ) {
     return "Rellena el campo de contraseña auxiliar";
-  } else if (formUser.password !== formUser.repeatPassword) {
+  } else if (
+    formUser.register &&
+    formUser.password !== formUser.repeatPassword
+  ) {
     return "Las contraseñas no coinciden";
-  } else {
-    return null;
   }
+  return null;
 };
 
 export const validateEditedUser = (user) => {

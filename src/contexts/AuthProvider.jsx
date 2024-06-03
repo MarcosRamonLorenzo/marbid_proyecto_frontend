@@ -7,7 +7,7 @@ import {
   getUserDB,
   createUser,
   doSignOut,
-  validateFormUser
+  validateFormUser,
 } from "@/functions/authFunc";
 import LoadingMarbidLoad from "@/components/shared-componentes/Loadings/LoadingMarbidLoad";
 import useAlert from "@/hooks/useAlert";
@@ -29,6 +29,8 @@ const AuthProvider = ({ children }) => {
   const formObject = {
     email: "",
     password: "",
+    repeatPassword: "",
+    register: false,
   };
 
   const [formUser, setFormUser] = useState(formObject);
@@ -54,9 +56,11 @@ const AuthProvider = ({ children }) => {
           await doSignInWithEmailAndPassword(formUser.email, formUser.password);
           setSuccessAlert("Inicio de sesión exitoso");
         } else {
+          setFormUser({ ...formUser, register: true });
           await doCreateUserWithEmailAndPassword(
             formUser.email,
-            formUser.password
+            formUser.password,
+            formUser.true
           );
           setSuccessAlert("Cuenta creada con éxito");
         }
@@ -84,13 +88,13 @@ const AuthProvider = ({ children }) => {
         id: user.uid,
         email: user.email,
         name: user?.displayName || "Anónimo",
-        avatar_img: user.photoURL || undefined 
+        avatar_img: user.photoURL || undefined,
       });
       setCurrentUser({ ...user, userDB: newUserDB.data });
     } else {
       setCurrentUser({ ...user, userDB });
     }
-};
+  };
 
   const reloadUserDB = (user) => {
     if (user.id === currentUser.uid) {
@@ -127,7 +131,6 @@ const AuthProvider = ({ children }) => {
 
     setLoading(false);
   };
-
 
   const provideValues = {
     currentUser,
