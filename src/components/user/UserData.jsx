@@ -91,7 +91,7 @@ const UserTabs = ({ idUser }) => {
             />
       </Tab>
       <Tab key="like-ofers" title="Comentarios">
-       <UserCommentsList className={""} />
+       <UserCommentsList  idUser={idUser} />
       </Tab>
     </Tabs>
   );

@@ -5,7 +5,7 @@ import useAuth from "@/hooks/useAuth";
 import { Spinner } from "@nextui-org/react";
 
 
-const UserCommentsList = () => {
+const UserCommentsList = ({idUser}) => {
   const { currentUser } = useAuth();
 
   const [comments, setComments] = useState([]);
@@ -15,7 +15,7 @@ const UserCommentsList = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const comments = await getCommentsByUserId(currentUser.uid);
+      const comments = await getCommentsByUserId( idUser || currentUser?.uid);
       setComments(comments.data);
     } catch (error) {
       console.log(error);
