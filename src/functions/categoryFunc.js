@@ -11,3 +11,5 @@ export const getCategoryByIdResponse = async (categoryID) => {
   const data = await response.json();
   return data;
 };
+
+export const getCategorySelectedResponse = async () => {};

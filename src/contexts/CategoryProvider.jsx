@@ -2,6 +2,7 @@ import { useState, createContext } from "react";
 import {
   getAllCategoriesResponse,
   getCategoryByIdResponse,
+  getCategorySelectedResponse,
 } from "@/functions/categoryFunc";
 import useAlert from "@/hooks/useAlert";
 
@@ -11,6 +12,7 @@ const CategoryProvider = ({ children }) => {
   const { setErrorAlert } = useAlert();
 
   const nullValue = null;
+  const falseValue = false;
   const allCategories = {
     id: "",
     name: "Todas las categorías",
@@ -19,10 +21,12 @@ const CategoryProvider = ({ children }) => {
   const [categories, setCategories] = useState(nullValue);
   const [categoryById, setCategoryById] = useState(nullValue);
   const [nameSelectedCategory, setNameSelectedCategory] = useState(nullValue);
+  const [isLoading, setLoading] = useState(falseValue);
 
-  const getAllCategories = async (category) => {
+  const getAllCategories = async (category, create = false) => {
     if (!category) {
       try {
+        setLoading(true);
         const { error, data } = await getAllCategoriesResponse();
 
         if (error) throw error;
@@ -32,16 +36,26 @@ const CategoryProvider = ({ children }) => {
           a.name.localeCompare(b.name)
         );
 
-        const addAllCategories = [...sortedCategories, allCategories];
+        // If you are editing or creating a service allCa
+        if (create) {
+          const addAllCategories = [...sortedCategories, allCategories];
+          addAllCategories.pop();
+          setCategories(addAllCategories);
+        } else {
+          const addAllCategories = [...sortedCategories, allCategories];
+          setCategories(addAllCategories);
+        }
 
-        setCategories(addAllCategories);
+        setLoading(falseValue);
       } catch (error) {
+        setLoading(falseValue);
         setErrorAlert(error.message);
       }
     } else {
       try {
         return getCategoryById(category);
       } catch (error) {
+        setLoading(falseValue);
         setErrorAlert(error.message);
       }
     }
@@ -56,6 +70,7 @@ const CategoryProvider = ({ children }) => {
 
         setCategoryById(data);
       } catch (error) {
+        setLoading(falseValue);
         setErrorAlert(error.message);
       }
     }
@@ -65,12 +80,14 @@ const CategoryProvider = ({ children }) => {
   const getCategoryName = async (category) => {
     if (category) {
       try {
+        setLoading(true);
         const { error, data } = await getCategoryByIdResponse(category);
 
         if (error) throw error;
 
         setNameSelectedCategory(data.name);
       } catch (error) {
+        setLoading(falseValue);
         setErrorAlert(error.message);
       }
     }
@@ -81,6 +98,7 @@ const CategoryProvider = ({ children }) => {
     categories,
     categoryById,
     nameSelectedCategory,
+    isLoading,
     getAllCategories,
     getCategoryById,
     getCategoryName,

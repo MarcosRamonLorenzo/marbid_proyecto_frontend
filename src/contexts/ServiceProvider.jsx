@@ -3,11 +3,10 @@ import useCategory from "@/hooks/useCategory.js";
 import {
   createService,
   getAllServices,
-  getAllServicesCreatedByUser,
   updateService,
   validateService,
   applyService,
-  acceptServiceRequest
+  acceptServiceRequest,
 } from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
 import useAuth from "@/hooks/useAuth";
@@ -16,12 +15,7 @@ import { useNavigate } from "react-router-dom";
 const ServiceContext = createContext();
 
 const ServiceProvider = ({ children }) => {
-  const {
-    nameSelectedCategory,
-    categoryById,
-    getCategoryName,
-    getCategoryById,
-  } = useCategory();
+  const { getCategoryById } = useCategory();
   const { setSuccessAlert, setErrorAlert } = useAlert();
   const { currentUser } = useAuth();
   const navigate = useNavigate();
@@ -41,7 +35,6 @@ const ServiceProvider = ({ children }) => {
   const [services, setServices] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
   const [loadingServices, setLoadingServices] = useState(false);
-  const [createdServices, setCreatedServices] = useState(nullValue);
   const [selectedPreviewImage, setSelectedPreviewImage] = useState(nullValue);
 
   const handleCreateService = async () => {
@@ -72,18 +65,7 @@ const ServiceProvider = ({ children }) => {
         setSuccessAlert("Servicio editado con éxito");
         navigate(`/panel-control/servicios-creados`);
         setFormService(initialFormState);
-
       }
-    } catch (error) {
-      setErrorAlert(error.message);
-    }
-  };
-
-  const servicesCreatedByUser = async (idUser) => {
-    try {
-      const { data, error } = await getAllServicesCreatedByUser(idUser);
-      if (error) throw error;
-      setCreatedServices(data);
     } catch (error) {
       setErrorAlert(error.message);
     }
@@ -109,7 +91,6 @@ const ServiceProvider = ({ children }) => {
       return;
     }
 
-    const lowerCaseFilter = filter.toLowerCase().trim();
     const newFilteredServices = services.filter((service) => {
       return (
         service.title.toLowerCase().startsWith(filter) ||
@@ -141,24 +122,24 @@ const ServiceProvider = ({ children }) => {
 
   const handleApplyService = (idService) => {
     try {
-      const response = applyService(idService , currentUser?.uid);
+      const response = applyService(idService, currentUser?.uid);
       if (response.error) throw response.error;
       setSuccessAlert("Servicio aplicado con éxito");
     } catch (error) {
       setErrorAlert(error.message);
     }
-  }
+  };
 
-  const handleAcceptServiceRequest = (idService,idUser) => {
+  const handleAcceptServiceRequest = (idService, idUser) => {
     try {
-      const response = acceptServiceRequest(idService,idUser);
+      const response = acceptServiceRequest(idService, idUser);
       if (response.error) throw response.error;
       setSuccessAlert("Solicitud aceptada con éxito");
       navigate(`/panel-control/servicios-creados`);
     } catch (error) {
       setErrorAlert(error.message);
     }
-  }
+  };
 
   const value = {
     filteredServices,
@@ -175,7 +156,7 @@ const ServiceProvider = ({ children }) => {
     setSelectedPreviewImage,
     navigateService,
     handleApplyService,
-    handleAcceptServiceRequest
+    handleAcceptServiceRequest,
   };
 
   return (
