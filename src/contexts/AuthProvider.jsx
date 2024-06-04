@@ -133,11 +133,7 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (currentUser) {
-      localStorage.setItem('currentUser', JSON.stringify(currentUser));
-    } else {
-      localStorage.removeItem('currentUser');
-    }
+    console.log(currentUser);
   }, [currentUser]);
 
   const provideValues = {

@@ -19,6 +19,8 @@ const CommentProvider = ({ idService, children }) => {
     authorId: currentUser?.uid,
     serviceId: idService,
   };
+
+  
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState(initialValueMessage);
   const [loading, setLoading] = useState(false);
@@ -30,6 +32,7 @@ const CommentProvider = ({ idService, children }) => {
     } else {
       try {
         setLoading(true);
+        console.log(comment);
         const {error,data:newComment} = await createComment(comment);
         if (error) throw error; 
         setComments([newComment, ...comments]);
