@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   //To redirect beacuse panel-control page not exists.
   useEffect(() => {
-    if (pathname === "/panel-control") {
+    if (pathname === "/panel-control" || window.location.pathname === "/panel-control") {
       navigate("/panel-control/profile");
     }
   }, []);
