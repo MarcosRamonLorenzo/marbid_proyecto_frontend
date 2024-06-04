@@ -28,14 +28,17 @@ const ServiceProvider = ({ children }) => {
 
   const nullValue = null;
 
+
+
   const initialFormState = {
     title: "",
     price: "",
     content: "",
     category: "",
     image: "",
-    authorCreated: currentUser?.uid,
+    authorCreated: "",
   };
+
 
   const [formService, setFormService] = useState(initialFormState);
   const [services, setServices] = useState([]);
@@ -43,6 +46,15 @@ const ServiceProvider = ({ children }) => {
   const [loadingServices, setLoadingServices] = useState(false);
   const [createdServices, setCreatedServices] = useState(nullValue);
   const [selectedPreviewImage, setSelectedPreviewImage] = useState(nullValue);
+
+
+    //Add author create a value when there is a currentUser .
+    useEffect(() => {
+      if (currentUser) {
+        setFormService({ ...formService, authorCreated: currentUser.uid });
+      }
+    }, [currentUser])
+    
 
   const handleCreateService = async () => {
     try {
