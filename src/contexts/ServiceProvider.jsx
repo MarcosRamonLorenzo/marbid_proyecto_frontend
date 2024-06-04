@@ -44,15 +44,11 @@ const ServiceProvider = ({ children }) => {
   const [createdServices, setCreatedServices] = useState(nullValue);
   const [selectedPreviewImage, setSelectedPreviewImage] = useState(nullValue);
 
-  //Add author create a value when there is a currentUser .
-  useEffect(() => {
-    if (currentUser) {
-      setFormService({ ...formService, authorCreated: currentUser.uid });
-    }
-  }, [currentUser]);
 
   const handleCreateService = async () => {
     try {
+      formService.authorCreated = currentUser.uid;
+
       const validate = validateService(formService);
       if (validate) {
         setErrorAlert(validate);

@@ -16,7 +16,7 @@ const CommentProvider = ({ idService, children }) => {
 
   const initialValueMessage = {
     content: "",
-    authorId: currentUser?.uid,
+    authorId: "",
     serviceId: idService,
   };
 
@@ -26,13 +26,14 @@ const CommentProvider = ({ idService, children }) => {
   const [loading, setLoading] = useState(false);
 
   const handleCreateComment = async () => {
+    formService.authorCreated = currentUser.uid;
+
     const validate = validateMessage(comment.content);
     if (validate) {
       setErrorAlert(validate)
     } else {
       try {
         setLoading(true);
-        console.log(comment);
         const {error,data:newComment} = await createComment(comment);
         if (error) throw error; 
         setComments([newComment, ...comments]);

@@ -132,10 +132,6 @@ const AuthProvider = ({ children }) => {
     setLoading(false);
   };
 
-  useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
-
   const provideValues = {
     currentUser,
     isLogin,
