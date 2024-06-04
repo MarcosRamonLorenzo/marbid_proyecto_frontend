@@ -10,7 +10,7 @@ const UserAvatarView = ({ user }) => {
     <div
       className="flex justify-start items-start cursor-pointer "
       onClick={() => {
-        if (currentUser) {
+        if (user.id === currentUser) {
           navigate(`/panel-control`);
         } else {
           navigate(`/user/${user.id}`);
