@@ -26,7 +26,7 @@ const CommentProvider = ({ idService, children }) => {
   const [loading, setLoading] = useState(false);
 
   const handleCreateComment = async () => {
-    formService.authorCreated = currentUser.uid;
+    comment.authorCreated = currentUser.uid;
 
     const validate = validateMessage(comment.content);
     if (validate) {
