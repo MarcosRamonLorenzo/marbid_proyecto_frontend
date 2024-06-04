@@ -22,10 +22,12 @@ import { useNavigate } from "react-router-dom";
 import ModalAcceptCancel from "../shared-componentes/modals/ModalAcceptCancel";
 import { useState } from "react";
 import { deleteService } from "@/functions/serviceFunc";
+import useAlert from "@/hooks/useAlert";
 
 const CreatedServicesTable = ({ createdServices = [], setCreatedServices }) => {
   const navigate = useNavigate();
   const { setSelectedPreviewImage, navigateService } = useService();
+  const { setSuccessAlert, setErrorAlert } = useAlert();
 
   const {
     isOpen: isDeleteModal,
@@ -36,10 +38,16 @@ const CreatedServicesTable = ({ createdServices = [], setCreatedServices }) => {
   const [selectedDeleteService, setSelectedDelteService] = useState(null);
 
   const handleDeleteService = (id) => {
-    deleteService(id);
-    const updatedServices = createdServices.filter((item) => item.id !== id);
-    setCreatedServices(updatedServices);
-    setDeleteModal(false);
+    try {
+      deleteService(id);
+      const updatedServices = createdServices.filter((item) => item.id !== id);
+      setCreatedServices(updatedServices);
+      setSuccessAlert("Servicio elinado con exito")
+      setDeleteModal(false);
+    } catch (error) {
+      setErrorAlert("Error al eliminar un servicio");
+    }
+   
   };
 
   return (
