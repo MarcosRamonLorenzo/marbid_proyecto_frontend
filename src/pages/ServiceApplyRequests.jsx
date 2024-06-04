@@ -19,17 +19,17 @@ const ServiceApplyRequests = () => {
   }
   return (
     <div className="mx-5 my-10 2xl:mx-24 2xl:my-20">
-      <h2 className="text-3xl font-medium">Usarios Aplicados para el servicio.</h2>
+      <h2 className="dark:text-white  text-3xl font-medium">
+        Usarios Aplicados para el servicio.
+      </h2>
       <div className="my-3">
         {data && data.length > 0 ? (
           data.map((request) => (
-            
-           <ApplyRequest key={request.id} request={request}   />
-            
+            <ApplyRequest key={request.id} request={request} />
           ))
         ) : (
-          <div>
-            De momento no hay usuario que han aplicado para este servicio.
+          <div className="dark:text-white">
+            De momento no hay usuario que han aplicado para este servicio.&nbsp;
             <span
               className="cursor-pointer  font-bold underline color-blue-500 "
               onClick={() => {

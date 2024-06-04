@@ -7,7 +7,7 @@ import {
   updateService,
   validateService,
   applyService,
-  acceptServiceRequest
+  acceptServiceRequest,
 } from "@/functions/serviceFunc";
 import useAlert from "@/hooks/useAlert";
 import useAuth from "@/hooks/useAuth";
@@ -28,8 +28,6 @@ const ServiceProvider = ({ children }) => {
 
   const nullValue = null;
 
-
-
   const initialFormState = {
     title: "",
     price: "",
@@ -39,7 +37,6 @@ const ServiceProvider = ({ children }) => {
     authorCreated: "",
   };
 
-
   const [formService, setFormService] = useState(initialFormState);
   const [services, setServices] = useState([]);
   const [filteredServices, setFilteredServices] = useState([]);
@@ -47,14 +44,12 @@ const ServiceProvider = ({ children }) => {
   const [createdServices, setCreatedServices] = useState(nullValue);
   const [selectedPreviewImage, setSelectedPreviewImage] = useState(nullValue);
 
-
-    //Add author create a value when there is a currentUser .
-    useEffect(() => {
-      if (currentUser) {
-        setFormService({ ...formService, authorCreated: currentUser.uid });
-      }
-    }, [currentUser])
-    
+  //Add author create a value when there is a currentUser .
+  useEffect(() => {
+    if (currentUser) {
+      setFormService({ ...formService, authorCreated: currentUser.uid });
+    }
+  }, [currentUser]);
 
   const handleCreateService = async () => {
     try {
@@ -84,7 +79,6 @@ const ServiceProvider = ({ children }) => {
         setSuccessAlert("Servicio editado con éxito");
         navigate(`/panel-control/servicios-creados`);
         setFormService(initialFormState);
-
       }
     } catch (error) {
       setErrorAlert(error.message);
@@ -153,24 +147,24 @@ const ServiceProvider = ({ children }) => {
 
   const handleApplyService = (idService) => {
     try {
-      const response = applyService(idService , currentUser?.uid);
+      const response = applyService(idService, currentUser?.uid);
       if (response.error) throw response.error;
       setSuccessAlert("Servicio aplicado con éxito");
     } catch (error) {
       setErrorAlert(error.message);
     }
-  }
+  };
 
-  const handleAcceptServiceRequest = (idService,idUser) => {
+  const handleAcceptServiceRequest = (idService, idUser) => {
     try {
-      const response = acceptServiceRequest(idService,idUser);
+      const response = acceptServiceRequest(idService, idUser);
       if (response.error) throw response.error;
       setSuccessAlert("Solicitud aceptada con éxito");
       navigate(`/panel-control/servicios-creados`);
     } catch (error) {
       setErrorAlert(error.message);
     }
-  }
+  };
 
   const value = {
     filteredServices,
@@ -187,7 +181,8 @@ const ServiceProvider = ({ children }) => {
     setSelectedPreviewImage,
     navigateService,
     handleApplyService,
-    handleAcceptServiceRequest
+    handleAcceptServiceRequest,
+    initialFormState,
   };
 
   return (
