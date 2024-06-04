@@ -60,7 +60,6 @@ const AuthProvider = ({ children }) => {
           await doCreateUserWithEmailAndPassword(
             formUser.email,
             formUser.password,
-            formUser.true
           );
           setSuccessAlert("Cuenta creada con éxito");
         }
@@ -132,6 +131,14 @@ const AuthProvider = ({ children }) => {
 
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    } else {
+      localStorage.removeItem('currentUser');
+    }
+  }, [currentUser]);
 
   const provideValues = {
     currentUser,
