@@ -54,6 +54,7 @@ const ServiceProvider = ({ children }) => {
         if (response.error) throw response.error;
         setSuccessAlert("Servicio creado con éxito");
         navigate(`/panel-control/servicios-creados`);
+        setFormService(initialFormState);
       }
     } catch (error) {
       setErrorAlert(error.message);
@@ -70,6 +71,8 @@ const ServiceProvider = ({ children }) => {
         if (response.error) throw response.error;
         setSuccessAlert("Servicio editado con éxito");
         navigate(`/panel-control/servicios-creados`);
+        setFormService(initialFormState);
+
       }
     } catch (error) {
       setErrorAlert(error.message);
