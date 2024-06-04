@@ -1,14 +1,8 @@
 import { useState, useEffect } from "react";
 import Header from "../components/shared-componentes/Header";
 import { Image, Button } from "@nextui-org/react";
-import {
-  Feather,
-  HeartIcon,
-  Heart,
-  HeartOff,
-} from "lucide-react";
-import { useParams } from "react-router-dom";
-
+import { Feather, HeartIcon, Heart, HeartOff } from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
 
 import apiUrl from "@/config/apis.config";
 
@@ -41,6 +35,8 @@ const ServicePage = () => {
   // Likes Service
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+
+  const navigate = useNavigate();
 
   const getLikes = async () => {
     const likes = await getServiceLikes(serviceId);
@@ -100,18 +96,25 @@ const ServicePage = () => {
           </div>
           <p className="text-sm md:w-[40em] ">{service?.content}</p>
           <div className="flex items-center justify-start gap-2 mt-10 ">
-            {currentUser?.uid !== service?.authorCreated?.id && !service?.status && (
-              <Button
-                radius="sm"
-                className="bg-[#4159A8] text-white py-0"
-                endContent={
-                  <Feather size={16} color="#ffffff" strokeWidth={2} />
-                }
-                onClick={()=>{ handleApplyService(service?.id) }}
-              >
-                Aplicar Anuncio
-              </Button>
-            )}
+            {currentUser?.uid !== service?.authorCreated?.id &&
+              !service?.status && (
+                <Button
+                  radius="sm"
+                  className="bg-[#4159A8] text-white py-0"
+                  endContent={
+                    <Feather size={16} color="#ffffff" strokeWidth={2} />
+                  }
+                  onClick={() => {
+                    if (currentUser) {
+                      handleApplyService(service?.id);
+                    } else {
+                      navigate("/log-in");
+                    }
+                  }}
+                >
+                  Aplicar Anuncio
+                </Button>
+              )}
 
             {isLiked ? (
               <Button
@@ -136,9 +139,13 @@ const ServicePage = () => {
                 className=" text-white py-0"
                 endContent={<Heart size={16} color="#ffffff" strokeWidth={2} />}
                 onClick={() => {
-                  handleLikeService(currentUser?.uid, service);
-                  setIsLiked(true);
-                  setLikes(likes + 1);
+                  if (currentUser) {
+                    handleLikeService(currentUser.uid, service);
+                    setIsLiked(true);
+                    setLikes(likes + 1);
+                  } else {
+                    navigate("/log-in");
+                  }
                 }}
               >
                 Añadir a Favoritos

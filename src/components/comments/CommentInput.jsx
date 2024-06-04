@@ -4,11 +4,15 @@ import { Input } from "@nextui-org/react";
 import useComment from "@/hooks/useComment";
 import { handleFormChange } from "@/functions/formsFunc";
 import { useModal } from "@/hooks/useModal";
+import useAuth from "@/hooks/useAuth";
 import ModalAcceptCancel from "../shared-componentes/modals/ModalAcceptCancel";
+import { useNavigate } from "react-router-dom";
 
 const CommentInput = ({ className }) => {
-  const { setComment, comment , handleCreateComment } = useComment();
+  const navigate = useNavigate();
+  const { setComment, comment, handleCreateComment } = useComment();
   const { isOpen, openModal, closeModal } = useModal();
+  const { currentUser } = useAuth();
   return (
     <div className={className}>
       <Input
@@ -17,16 +21,30 @@ const CommentInput = ({ className }) => {
         label="Añade un cometario"
         value={comment.content}
         name="content"
-        onChange={(e)=>{handleFormChange(e,comment,setComment);}}
+        onChange={(e) => {
+          handleFormChange(e, comment, setComment);
+        }}
         endContent={
-          <Forward className=" cursor-pointer text-black dark:text-white" onClick={openModal} />
+          <Forward
+            className=" cursor-pointer text-black dark:text-white"
+            onClick={() => {
+              if (currentUser) {
+                openModal;
+              } else {
+                navigate("/log-in");
+              }
+            }}
+          />
         }
       />
 
-      <ModalAcceptCancel isOpen={isOpen} title="Quieres publicar este comentario ?" onClose={closeModal} onConfirm={handleCreateComment} />
+      <ModalAcceptCancel
+        isOpen={isOpen}
+        title="Quieres publicar este comentario ?"
+        onClose={closeModal}
+        onConfirm={handleCreateComment}
+      />
     </div>
-
-
   );
 };
 
