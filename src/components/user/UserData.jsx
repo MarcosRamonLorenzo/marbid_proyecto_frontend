@@ -6,6 +6,8 @@ import CreatedServicesList from "../services/CreatedServicesList";
 import apiUrl from "@/config/apis.config";
 import UserCommentsList from "../comments/UserCommentsList";
 import { useState } from "react";
+import useAuth from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const UserAvatar = ({ photoURL }) => (
   <Image
@@ -37,11 +39,13 @@ const UserDetails = ({ userDB }) => {
 };
 
 const UserActions = ({ internal, openSetUser, userDB }) => {
-  
-  const [to, setTo] = useState(userDB?.email || ''); // Asumiendo que `userDB` contiene el email del usuario
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+
+  const [to, setTo] = useState(userDB?.email || ""); // Asumiendo que `userDB` contiene el email del usuario
 
   const handleContactClick = () => {
-    const subject = 'Marbid';
+    const subject = "Marbid";
     const mailtoLink = `mailto:${to}?subject=${encodeURIComponent(subject)}`;
     window.location.href = mailtoLink;
   };
@@ -55,7 +59,13 @@ const UserActions = ({ internal, openSetUser, userDB }) => {
           startContent={
             <MessageCircleMore size={20} color="#ffffff" strokeWidth={2} />
           }
-          onClick={handleContactClick}
+          onClick={() => {
+            if (currentUser) {
+              handleContactClick();
+            } else {
+              navigate("/log-in");
+            }
+          }}
         >
           Contactar
         </Button>
@@ -82,16 +92,18 @@ const UserTabs = ({ idUser }) => {
     `${apiUrl}/service/created/${idUser}`
   );
   return (
-    <Tabs aria-label="Options" variant="underlined" >
+    <Tabs aria-label="Options" variant="underlined">
       <Tab key="created-ofers" title="Servicios Creados">
-          <CreatedServicesList
-            createdServices={data}
-            isLoading={isLoading}
-            className={"grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:px-20"}
-            />
+        <CreatedServicesList
+          createdServices={data}
+          isLoading={isLoading}
+          className={
+            "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:px-20"
+          }
+        />
       </Tab>
       <Tab key="like-ofers" title="Comentarios">
-       <UserCommentsList  idUser={idUser} />
+        <UserCommentsList idUser={idUser} />
       </Tab>
     </Tabs>
   );
@@ -112,7 +124,11 @@ const UserData = ({ userDB, internal, openSetUser }) => (
       <p className="max-w-[20em] md:max-w-[55em] capitalize ">
         {userDB?.description}{" "}
       </p>
-      <UserActions internal={internal} openSetUser={openSetUser} userDB={userDB} />
+      <UserActions
+        internal={internal}
+        openSetUser={openSetUser}
+        userDB={userDB}
+      />
     </div>
     <div className="flex flex-col items-center ">
       <Divider className="w-[80%] mt-10" />
