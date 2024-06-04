@@ -29,7 +29,7 @@ const CommentInput = ({ className }) => {
             className=" cursor-pointer text-black dark:text-white"
             onClick={() => {
               if (currentUser) {
-                openModal;
+                openModal();
               } else {
                 navigate("/log-in");
               }
