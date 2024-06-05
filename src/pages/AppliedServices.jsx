@@ -47,19 +47,6 @@ const AppliedServices = () => {
             isLoading={isLoading}
           />
         </Tab>
-        {/* Table View */}
-        {appliedServices.length && (
-          <Tab
-            key="tabla"
-            title="Tabla"
-            aria-labelledby="created-services-table"
-          >
-            <CreatedServicesTable
-              createdServices={appliedServices}
-              setCreatedServices={setAppliedServices}
-            />
-          </Tab>
-        )}
       </Tabs>
     </div>
   );

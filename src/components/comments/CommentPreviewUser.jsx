@@ -29,7 +29,7 @@ const CommentPreviewUser = ({ comment }) => {
           <div className="flex flex-col items-start gap-2 p-3 w-full">
             <h1 className="text-md sm:text-xl capitalize font-bold text-center sm:text-left">
               {" "}
-              {comment?.content.substring(0, 20)}...
+              {comment?.content.substring(0, 20)}
             </h1>
             <p className="text-gray-500 text-center sm:text-left">
               {formatDate(comment?.createdAt)}

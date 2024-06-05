@@ -16,14 +16,18 @@ const CommentProvider = ({ idService, children }) => {
 
   const initialValueMessage = {
     content: "",
-    authorId: currentUser?.uid,
+    authorId: "",
     serviceId: idService,
   };
+
+  
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState(initialValueMessage);
   const [loading, setLoading] = useState(false);
 
   const handleCreateComment = async () => {
+    comment.authorId = currentUser.uid;
+
     const validate = validateMessage(comment.content);
     if (validate) {
       setErrorAlert(validate)
