@@ -6,7 +6,7 @@ const isLocal = () => {
 
 const apisConfig = {
   protocol: isLocal() ? "http://" : "https://",
-  url: isLocal() ? "localhost" : "marbid-backed.onrender.com",
+  url: isLocal() ? "localhost" : "tragic-kaylee-marbidd-0359b211.koyeb.app",
   port: isLocal() ? `:${import.meta.env.VITE_PORT}` : "",
 };
 
